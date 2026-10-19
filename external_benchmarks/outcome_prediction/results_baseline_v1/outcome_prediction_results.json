@@ -1,0 +1,33 @@
+{
+  "model_algorithm": "Logistic Regression (C=2.5)",
+  "total_cases": 100,
+  "splits": {
+    "train": 70,
+    "validation": 15,
+    "test": 15
+  },
+  "held_out_test_accuracy": 69.2,
+  "validation_accuracy": 67.86,
+  "macro_precision": 0.6883,
+  "macro_recall": 0.6886,
+  "macro_f1": 0.6884,
+  "weighted_f1": 0.6921,
+  "class_distribution": {
+    "ALLOWED": 50,
+    "DISMISSED": 50
+  },
+  "confusion_matrix": [
+    [
+      7,
+      3
+    ],
+    [
+      2,
+      8
+    ]
+  ],
+  "unique_labels": [
+    "ALLOWED",
+    "DISMISSED"
+  ]
+}

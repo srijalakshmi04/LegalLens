@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Supreme Court Judgment PDF — Admin Console — Legal Lens{% endblock %}
+
+{% block content %}
+<div class="container admin-container" style="max-width: 880px; margin: 0 auto; padding: 0 15px;">
+    <div class="admin-header-bar" style="margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+        <div class="badge badge-ready" style="margin-bottom: 6px;">
+            LEGAL LENS ADMINISTRATION CONSOLE
+        </div>
+        <h1 class="page-title" style="font-family: 'Newsreader', Georgia, serif; font-size: 1.85rem; color: var(--text-primary); margin: 0 0 4px 0;">
+            Upload Supreme Court Judgment PDF
+        </h1>
+        <p class="results-meta" style="color: var(--text-secondary); font-size: 0.88rem; margin: 0;">
+            Automated PDF text extraction, metadata parsing, statutory reference identification, and legal categorization pipeline.
+        </p>
+    </div>
+    <div class="dashboard-panel" style="background: var(--bg-surface); padding: 28px; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-subtle);">
+        
+        <div style="margin-bottom: 20px;">
+            <h3 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.3rem; color: var(--text-primary); margin: 0 0 4px 0;">
+                Automated PDF Ingestion Workstation
+            </h3>
+            <p style="color: var(--text-secondary); font-size: 0.86rem; margin: 0;">
+                Select a Supreme Court Judgment PDF document below. The ingestion pipeline will extract text, parse citations, extract statutory provisions, and categorize the judgment.
+            </p>
+        </div>
+
+        <form method="POST" action="{% url 'cases:admin_add_case' %}" enctype="multipart/form-data" id="upload-form">
+            {% csrf_token %}
+
+            <!-- DRAG & DROP ZONE -->
+            <div id="drop-zone" style="border: 2px dashed var(--border-gold); border-radius: var(--radius-md); padding: 36px 20px; text-align: center; background: var(--bg-elevated); cursor: pointer; transition: border-color 0.15s ease; margin-bottom: 20px;" onclick="document.getElementById('id_pdf_file').click()">
+                
+                <div id="drop-zone-idle">
+                    <h4 style="font-size: 1.05rem; color: var(--text-primary); margin-bottom: 4px; font-weight: 600;">
+                        Select or Drop Judgment PDF Here
+                    </h4>
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 14px;">
+                        or click to browse your computer
+                    </p>
+                    <span class="btn btn-sm btn-outline" style="pointer-events: none; border-color: var(--accent-gold); color: var(--accent-gold-bright);">
+                        Choose PDF File
+                    </span>
+                    <div style="margin-top: 12px; font-size: 0.78rem; color: var(--text-muted);">
+                        Supported format: <strong>PDF (.pdf)</strong> | Maximum file size: <strong>25 MB</strong>
+                    </div>
+                </div>
+
+                <!-- FILE SELECTED STATE -->
+                <div id="drop-zone-selected" style="display: none;">
+                    <h4 id="selected-filename" style="font-size: 1rem; color: var(--accent-green); margin-bottom: 4px; word-break: break-all;">
+                        filename.pdf
+                    </h4>
+                    <p id="selected-filesize" style="color: var(--text-secondary); font-size: 0.82rem; margin-bottom: 12px;">
+                        0.0 MB • Ready for processing
+                    </p>
+                    <span class="btn btn-sm btn-outline" style="pointer-events: none; font-size: 0.78rem;">
+                        Change PDF File
+                    </span>
+                </div>
+
+                <input type="file" name="pdf_file" id="id_pdf_file" accept=".pdf,application/pdf" style="display: none;" onchange="handleFileSelected(this)">
+            </div>
+
+            <!-- PROCESSING STATUS CARD -->
+            <div id="processing-status-card" style="display: none; background: var(--bg-elevated); border: 1px solid var(--border-gold); border-radius: var(--radius-sm); padding: 16px; margin-bottom: 20px;">
+                <h4 style="font-size: 0.9rem; color: var(--accent-gold-bright); margin-bottom: 10px; font-weight: 600;">
+                    Processing Judgment Document...
+                </h4>
+                <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.84rem; color: var(--text-secondary);">
+                    <div id="step-1" style="color: var(--accent-green);">[✓] Uploading PDF document</div>
+                    <div id="step-2" style="color: var(--accent-gold-bright);">[...] Extracting judgment text & calculating checksum...</div>
+                    <div id="step-3" style="color: var(--text-muted);">[ ] Parsing metadata (Title, Citation, Dates, Judges)</div>
+                    <div id="step-4" style="color: var(--text-muted);">[ ] Identifying statutory provisions (Acts & Sections)</div>
+                    <div id="step-5" style="color: var(--text-muted);">[ ] Legal domain classification</div>
+                </div>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div style="display: flex; gap: 10px; justify-content: flex-end; align-items: center;">
+                <a href="{% url 'cases:admin_dashboard' %}" class="btn btn-outline">Cancel</a>
+                <button type="submit" id="btn-submit-process" class="btn btn-primary" style="padding: 10px 24px; font-weight: 700;" disabled>
+                    PROCESS JUDGMENT
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function handleFileSelected(input) {
+    if (input.files && input.files[0]) {
+        var file = input.files[0];
+        if (!file.name.toLowerCase().endsWith('.pdf')) {
+            alert('Invalid file format. Please select a PDF (.pdf) file.');
+            input.value = '';
+            return;
+        }
+        var sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+        document.getElementById('selected-filename').innerText = file.name;
+        document.getElementById('selected-filesize').innerText = sizeMB + ' MB • Ready for processing';
+        document.getElementById('drop-zone-idle').style.display = 'none';
+        document.getElementById('drop-zone-selected').style.display = 'block';
+        document.getElementById('btn-submit-process').disabled = false;
+    }
+}
+
+var dropZone = document.getElementById('drop-zone');
+['dragenter', 'dragover'].forEach(function(eventName) {
+    dropZone.addEventListener(eventName, function(e) {
+        e.preventDefault();
+        dropZone.style.borderColor = 'var(--accent-green)';
+    }, false);
+});
+['dragleave', 'drop'].forEach(function(eventName) {
+    dropZone.addEventListener(eventName, function(e) {
+        e.preventDefault();
+        dropZone.style.borderColor = 'var(--border-gold)';
+    }, false);
+});
+dropZone.addEventListener('drop', function(e) {
+    var dt = e.dataTransfer;
+    var files = dt.files;
+    if (files && files.length > 0) {
+        document.getElementById('id_pdf_file').files = files;
+        handleFileSelected(document.getElementById('id_pdf_file'));
+    }
+});
+
+document.getElementById('upload-form').addEventListener('submit', function() {
+    document.getElementById('btn-submit-process').disabled = true;
+    document.getElementById('btn-submit-process').innerText = 'Processing Judgment PDF...';
+    document.getElementById('processing-status-card').style.display = 'block';
+});
+</script>
+{% endblock %}

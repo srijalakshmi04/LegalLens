@@ -1,0 +1,46 @@
+{
+  "task": "Case-to-case binary similarity prediction (SIMILAR vs NOT SIMILAR)",
+  "benchmark_version": "v2.0.0",
+  "ground_truth_source": "FIRE AILA 2019 Task 1 Precedent Retrieval Ground Truth",
+  "split_strategy": "Query-level non-leaking split (35 Train, 7 Val, 8 Held-out Test)",
+  "total_test_pairs": 2000,
+  "similar_pairs": 26,
+  "not_similar_pairs": 1974,
+  "correct_predictions": 1135,
+  "incorrect_predictions": 865,
+  "similarity_prediction_accuracy": 56.75,
+  "target_accuracy": 95.0,
+  "target_status": "NOT ACHIEVED",
+  "balanced_accuracy": 57.21,
+  "roc_auc": 0.5689,
+  "precision": 0.0173,
+  "recall": 0.5769,
+  "f1_score": 0.0335,
+  "macro_f1": 0.3775,
+  "confusion_matrix": [
+    [
+      1120,
+      854
+    ],
+    [
+      11,
+      15
+    ]
+  ],
+  "decision_threshold": 61.0,
+  "evaluation_time_seconds": 18.11,
+  "retrieval_ranking_metrics": {
+    "precision_at_5": 0.2,
+    "precision_at_10": 0.1,
+    "recall_at_5": 0.3333,
+    "recall_at_10": 0.3333,
+    "mrr": 0.4375,
+    "ndcg_at_10": 0.4539
+  },
+  "balanced_subset_metrics": {
+    "total_pairs": 52,
+    "accuracy": 65.38,
+    "balanced_accuracy": 65.38,
+    "roc_auc": 0.7071
+  }
+}

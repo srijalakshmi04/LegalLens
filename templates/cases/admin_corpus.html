@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Corpus Management — Admin Console — Legal Lens{% endblock %}
+
+{% block content %}
+<div class="container admin-container">
+    <div class="admin-header-bar" style="margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-dark);">
+        <div class="badge badge-ready" style="margin-bottom: 8px; background: rgba(197, 155, 39, 0.2); color: var(--accent-gold-bright); border-color: var(--border-gold);">
+            ⚙ LEGAL LENS ADMINISTRATION CONSOLE
+        </div>
+        <h1 class="page-title">Corpus Management Workspace</h1>
+        <p class="results-meta">Manage indexed Supreme Court judgments, text extraction statuses, and document metadata.</p>
+    </div>
+
+    <div class="dashboard-panel" style="background: var(--bg-surface); padding: 28px; border-radius: var(--radius-lg); border: 1px solid var(--border-dark);">
+        <h3 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.4rem; margin-top: 0;">Corpus Overview & Storage Metrics</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
+            Legal Lens manages {{ statistics.total_cases|default:"26,688" }} Supreme Court judgment files spanning 1950 to 2025 in the SQLite backend database (3.77 GB).
+        </p>
+
+        <div class="console-metrics-grid" style="margin-bottom: 25px;">
+            <div class="console-card">
+                <div class="console-card-label">Total Judgments</div>
+                <div class="console-card-val">{{ statistics.total_cases|default:"26,688" }}</div>
+                <div class="console-card-sub">Indexed Document Records</div>
+            </div>
+            <div class="console-card">
+                <div class="console-card-label">Extraction Status</div>
+                <div class="console-card-val">26,647</div>
+                <div class="console-card-sub">Complete Raw Text</div>
+            </div>
+            <div class="console-card">
+                <div class="console-card-label">Partial / OCR</div>
+                <div class="console-card-val">41</div>
+                <div class="console-card-sub">Partial / Scanned</div>
+            </div>
+        </div>
+
+        <div class="alert alert-info">
+            📁 <strong>Corpus Administration Module Prepared:</strong> Full database record editing, citation updating, and batch re-indexing tools will be exposed in this module.
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{
+  "previous_baseline_test_accuracy": 69.49,
+  "new_validation_accuracy": 71.39,
+  "new_held_out_test_accuracy": 68.52,
+  "absolute_gain_percentage_points": -0.97,
+  "balanced_accuracy": 66.99,
+  "macro_precision": 0.6857,
+  "macro_recall": 0.6699,
+  "macro_f1": 0.6705,
+  "weighted_f1": 0.6783,
+  "confusion_matrix": [
+    [
+      585,
+      511
+    ],
+    [
+      266,
+      1106
+    ]
+  ],
+  "selected_model": "Gradient Boosting (n=150, depth=6)",
+  "target_79_to_80_achieved": false
+}

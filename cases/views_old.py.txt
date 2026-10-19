@@ -1,0 +1,143 @@
+from django.contrib import messages
+from django.db.models import Count, Max, Min
+from django.shortcuts import (
+    get_object_or_404,
+    render,
+)
+
+from .forms import CaseSearchForm
+from .models import (
+    LegalCase,
+    ModelTrainingRun,
+    SearchHistory,
+)
+from .services.similarity import find_similar_cases
+
+
+def home(request):
+    form = CaseSearchForm(request.POST or None)
+
+    statistics = LegalCase.objects.aggregate(
+        total_cases=Count("id"),
+        first_year=Min("judgment_year"),
+        last_year=Max("judgment_year"),
+    )
+
+    if request.method == "POST" and form.is_valid():
+        query_text = form.cleaned_data[
+            "case_description"
+        ]
+
+        result_count = (
+            form.cleaned_data.get("result_count") or 5
+        )
+
+        try:
+            results = find_similar_cases(
+                query_text=query_text,
+                top_k=result_count,
+            )
+        except (ValueError, FileNotFoundError) as error:
+            form.add_error(None, str(error))
+        else:
+            top_score = (
+                results[0]["percentage"]
+                if results
+                else None
+            )
+
+            SearchHistory.objects.create(
+                query_text=query_text,
+                results_count=len(results),
+                top_similarity_score=top_score,
+                user=(
+                    request.user
+                    if request.user.is_authenticated
+                    else None
+                ),
+            )
+
+            return render(
+                request,
+                "cases/results.html",
+                {
+                    "form": form,
+                    "query_text": query_text,
+                    "results": results,
+                    "statistics": statistics,
+                },
+            )
+
+    return render(
+        request,
+        "cases/home.html",
+        {
+            "form": form,
+            "statistics": statistics,
+        },
+    )
+
+
+def case_detail(request, case_id):
+    legal_case = get_object_or_404(
+        LegalCase,
+        id=case_id,
+    )
+
+    return render(
+        request,
+        "cases/case_detail.html",
+        {
+            "legal_case": legal_case,
+        },
+    )
+
+
+def dashboard(request):
+    statistics = LegalCase.objects.aggregate(
+        total_cases=Count("id"),
+        first_year=Min("judgment_year"),
+        last_year=Max("judgment_year"),
+    )
+
+    cases_by_year = (
+        LegalCase.objects
+        .values("judgment_year")
+        .annotate(total=Count("id"))
+        .order_by("judgment_year")
+    )
+
+    recent_searches = SearchHistory.objects.all()[:10]
+
+    latest_training = (
+        ModelTrainingRun.objects
+        .filter(status="completed")
+        .first()
+    )
+
+    context = {
+        "statistics": statistics,
+        "cases_by_year": list(cases_by_year),
+        "recent_searches": recent_searches,
+        "latest_training": latest_training,
+    }
+
+    return render(
+        request,
+        "cases/dashboard.html",
+        context,
+    )
+
+
+def legal_awareness(request):
+    return render(
+        request,
+        "cases/legal_awareness.html",
+    )
+
+
+def about(request):
+    return render(
+        request,
+        "cases/about.html",
+    )

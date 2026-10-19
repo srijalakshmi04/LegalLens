@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Saved Precedent Brief Collection — Legal Lens{% endblock %}
+
+{% block content %}
+<div class="container saved-container">
+    <div class="saved-header-bar" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+        <div>
+            <div class="badge badge-mode" style="margin-bottom: 8px;">PRECEDENT LIBRARY</div>
+            <h1 class="page-title" style="font-family: 'Newsreader', Georgia, serif; font-size: 1.8rem; color: var(--text-primary); margin: 0 0 4px 0;">Saved Precedent Collection</h1>
+            <p class="results-meta" style="color: var(--text-secondary); font-size: 0.88rem; margin: 0;">Bookmarked Supreme Court judgments saved for your active legal research brief.</p>
+        </div>
+        <div>
+            <a href="{% url 'cases:home' %}" class="btn btn-primary">Find Precedents</a>
+        </div>
+    </div>
+
+    {% if saved_cases %}
+    <div class="results-list">
+        {% for item in saved_cases %}
+        <div class="result-card">
+            <div class="result-card-header">
+                <div class="case-main-info">
+                    <span class="badge" style="background: var(--bg-secondary); color: var(--text-secondary); border: 1px solid var(--border-color); font-size: 0.72rem;">{{ item.legal_case.judgment_year }}</span>
+                    <span class="badge badge-ready" style="margin-left: 4px;">BOOKMARKED</span>
+
+                    <h2 class="case-title">
+                        <a href="{% url 'cases:case_detail' item.legal_case.id %}">{{ item.legal_case.title }}</a>
+                    </h2>
+                    {% if item.legal_case.citations %}
+                    <div style="font-size: 0.83rem; color: var(--text-secondary);">Citation: {{ item.legal_case.citations }} | Supreme Court of India</div>
+                    {% else %}
+                    <div style="font-size: 0.83rem; color: var(--text-secondary);">Supreme Court of India</div>
+                    {% endif %}
+                </div>
+
+                <div class="score-badge-box">
+                    <div class="score-label">SAVED PRECEDENT</div>
+                    <small style="color: var(--text-muted); display: block; margin-top: 4px; font-weight: 500;">{{ item.saved_at|date:"d M Y" }}</small>
+                </div>
+            </div>
+
+            <!-- CARD FOOTER ACTIONS -->
+            <div class="result-card-footer">
+                <a href="{% url 'cases:case_detail' item.legal_case.id %}" class="btn btn-sm btn-primary">
+                    Open Case File
+                </a>
+
+                <a href="{% url 'cases:toggle_save_case' item.legal_case.id %}" class="btn btn-sm btn-outline" style="color: var(--accent-red); border-color: var(--accent-red);">
+                    Remove from Saved
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="dashboard-panel" style="text-align: center; padding: 48px 24px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); box-shadow: var(--shadow-subtle);">
+        <div style="font-size: 1.1rem; margin-bottom: 8px; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">SAVED PRECEDENTS</div>
+        <h3 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.4rem; margin: 0 0 8px 0; color: var(--text-primary);">No saved precedents yet</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; max-width: 480px; margin: 0 auto 20px;">
+            Bookmark Supreme Court judgments during your research sessions to build your active precedent collection.
+        </p>
+        <a href="{% url 'cases:home' %}" class="btn btn-primary">Start Case Search</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

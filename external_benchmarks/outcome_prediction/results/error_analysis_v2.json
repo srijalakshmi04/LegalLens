@@ -1,0 +1,11 @@
+{
+  "total_test_samples": 2468,
+  "total_errors": 777,
+  "error_rate_pct": 31.48,
+  "error_categories": {
+    "lower_court_signal_conflict_pct": 34.2,
+    "factual_ambiguity_under_identical_statutes_pct": 28.5,
+    "procedural_posture_ambiguity_pct": 18.1,
+    "judicial_discretion_precedent_disagreement_pct": 19.2
+  }
+}

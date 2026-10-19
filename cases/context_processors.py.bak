@@ -1,0 +1,13 @@
+from django.conf import settings
+
+
+def admin_status(request):
+    """Context processor providing is_admin flag for template navigation."""
+    is_admin = bool(
+        settings.DEBUG
+        or (
+            request.user.is_authenticated
+            and (request.user.is_staff or request.user.is_superuser)
+        )
+    )
+    return {"is_admin": is_admin}

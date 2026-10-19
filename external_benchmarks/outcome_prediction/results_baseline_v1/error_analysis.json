@@ -1,0 +1,14 @@
+{
+  "total_test_samples": 2468,
+  "total_classification_errors": 802,
+  "error_rate_pct": 32.50,
+  "error_breakdown_by_class": {
+    "ALLOWED_predicted_as_DISMISSED": 392,
+    "DISMISSED_predicted_as_ALLOWED": 410
+  },
+  "root_cause_analysis": [
+    "Fact summaries for allowed vs dismissed appeals under identical statutory sections (e.g. Section 138 NI Act or Section 302 IPC) share high textual overlap.",
+    "Judicial outcome determination in appellate courts depends on evidentiary evaluations and judicial discretion that are not present in pre-trial fact text alone.",
+    "Excluding the final 3,000 characters (disposition section) prevents target outcome leakage, preserving valid machine-learning methodology."
+  ]
+}

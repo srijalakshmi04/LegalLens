@@ -1,0 +1,47 @@
+LegalLens NLP upgrade
+======================
+
+What changed
+------------
+1. Existing TF-IDF retrieves a shortlist of candidate judgments.
+2. Each candidate judgment is split into short overlapping passages.
+3. The best passage is selected using query-to-passage similarity.
+4. Article and Section overlap is normalized using Jaccard similarity.
+5. The final retrieval score combines document, passage and provision scores.
+6. Results now show why a case matched and the most relevant passage.
+
+No database migration is required.
+
+Files to copy into F:\jurismatch
+---------------------------------
+cases\services\passage_nlp.py
+cases\services\similarity.py
+cases\management\commands\train_model.py
+cases\management\commands\test_similarity.py
+cases\tests.py
+templates\cases\results.html
+static\css\style.css
+requirements.txt
+
+Before copying, back up the current files.
+
+Verification commands
+---------------------
+cd F:\jurismatch
+.\.venv\Scripts\Activate.ps1
+python manage.py check
+python manage.py test cases
+
+The search service automatically uses the existing v2 model files when they
+are available. Do not retrain immediately. First test the current v2 index:
+
+python manage.py test_similarity --query "The police detained me without a proper trial. I believe this violated my personal freedom and I want the detention order cancelled." --top 5
+
+Only run this later if the v2 model files are missing or the database content
+has changed:
+
+python manage.py train_model
+
+Then start the site:
+
+python manage.py runserver

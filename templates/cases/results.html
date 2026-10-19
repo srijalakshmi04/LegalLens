@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block title %}Retrieved Supreme Court Precedents — Legal Lens Search Results{% endblock %}
+
+{% block content %}
+<div class="container results-container">
+    <div class="results-header-bar">
+        <div>
+            <h1 class="page-title" style="font-family: 'Newsreader', Georgia, serif; font-size: 1.8rem; color: var(--text-primary); margin: 0 0 4px 0;">Retrieved Supreme Court Precedents</h1>
+            <p class="results-meta" style="color: var(--text-secondary); font-size: 0.88rem; margin: 0;">
+                Retrieved <strong>{{ results|length }}</strong> relevant Supreme Court precedents
+            </p>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+            {% if query_text %}
+            <a href="{% url 'cases:export_report' %}?q={{ query_text|urlencode }}&search_mode={{ search_mode }}" target="_blank" class="btn btn-secondary" style="border-color: var(--border-gold); color: var(--accent-gold);">
+                Export Research Report (PDF)
+            </a>
+            {% endif %}
+            <a href="{% url 'cases:home' %}" class="btn btn-outline">New Search</a>
+        </div>
+    </div>
+
+    <!-- SEARCH DIAGNOSTIC ANALYSIS PANEL -->
+    <div class="diagnostic-panel" style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 18px 22px; margin-bottom: 24px; box-shadow: var(--shadow-subtle);">
+        <div class="diagnostic-header" style="margin-bottom: 10px;">
+            <h3 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.15rem; color: var(--text-primary); margin: 0;">Search Analysis & Statutory Provision Match</h3>
+        </div>
+
+        <div class="diagnostic-expansion-box" style="display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: var(--text-secondary);">
+            {% if diagnostics.legal_references %}
+            <div class="expansion-group">
+                <strong>Legal Provisions Detected:</strong>
+                {% for ref in diagnostics.legal_references %}
+                <span class="badge" style="background: var(--accent-gold-bg); color: var(--accent-gold-bright); border: 1px solid var(--accent-gold); margin-left: 4px;">{{ ref }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="expansion-group">
+                <strong>Legal Provisions Detected:</strong>
+                <span class="badge badge-mode" style="margin-left: 4px;">No specific statutory sections detected in query</span>
+            </div>
+            {% endif %}
+
+            {% if diagnostics.expanded_terms %}
+            <div class="expansion-group">
+                <strong>Related Legal Concepts:</strong>
+                {% for term in diagnostics.expanded_terms %}
+                <span class="badge" style="background: var(--bg-secondary); color: var(--text-secondary); border: 1px solid var(--border-subtle); margin-left: 4px;">{{ term }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- SIMILAR CASES FOUND HEADING -->
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px; border-bottom: 1.5px solid var(--border-color); padding-bottom: 12px;">
+        <div>
+            <h2 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.6rem; color: var(--text-primary); margin: 0 0 4px 0;">
+                SIMILAR CASES FOUND
+            </h2>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0;">
+                Precedents classified as <strong>RELEVANT</strong> by the calibrated legal relevance model across 26,690 Supreme Court judgments.
+            </p>
+        </div>
+        <span style="font-size: 0.82rem; font-weight: 700; color: #10B981; background: rgba(16, 185, 129, 0.1); border: 1px solid #10B981; padding: 4px 10px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px;">
+            ✓ RELEVANT PRECEDENTS
+        </span>
+    </div>
+
+    <!-- COMPACT PROFESSIONAL RESULTS LIST -->
+    {% if results %}
+    <div class="results-list">
+        {% for item in results %}
+        <div class="result-card" style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 22px; margin-bottom: 22px; background: var(--bg-surface); box-shadow: var(--shadow-subtle);">
+            
+            <!-- TOP BAR: Case Title, Year & Prominent Similarity % -->
+            <div class="result-card-header" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 14px;">
+                <div class="case-main-info" style="flex: 1;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap;">
+                        <span class="badge" style="background: #10B981; color: #ffffff; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.5px;">
+                            {{ item.prediction|default:"RELEVANT PRECEDENT" }}
+                        </span>
+                        <span class="badge" style="background: var(--bg-secondary); color: var(--text-secondary); border: 1px solid var(--border-color); font-weight: 600;">
+                            Year: {{ item.case.judgment_year }}
+                        </span>
+                        <span class="badge" style="background: var(--bg-secondary); color: var(--accent-gold); border: 1px solid var(--border-gold); font-size: 0.72rem; font-weight: 600;">
+                            SUPREME COURT OF INDIA
+                        </span>
+                    </div>
+
+                    <h2 class="case-title" style="font-family: 'Newsreader', Georgia, serif; font-size: 1.35rem; color: var(--text-primary); margin: 0 0 4px 0; line-height: 1.3;">
+                        <a href="{% url 'cases:case_detail' item.case.id %}" style="color: inherit; text-decoration: none;">{{ item.case.title }}</a>
+                    </h2>
+                    
+                    <div class="case-meta-row" style="font-size: 0.82rem; color: var(--text-muted);">
+                        {% if item.case.bench %}Bench: {{ item.case.bench|truncatewords:8 }} | {% endif %}
+                        {% if item.sanitized_citations and item.sanitized_citations != 'Not available' %}Citations: {{ item.sanitized_citations }}{% else %}Reported Supreme Court Judgment{% endif %}
+                    </div>
+                </div>
+
+                <!-- PROMINENT SIMILARITY PERCENTAGE -->
+                <div class="score-badge-box" style="text-align: right; min-width: 150px; background: var(--bg-canvas); border: 1px solid var(--border-gold); border-radius: var(--radius-sm); padding: 10px 14px;">
+                    <div style="font-size: 0.72rem; font-weight: 700; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 2px;">CALIBRATED RELEVANCE SCORE</div>
+                    <div style="font-family: 'Newsreader', Georgia, serif; font-size: 1.8rem; font-weight: 700; color: var(--accent-gold-bright); line-height: 1.1;">
+                        {{ item.percentage }}%
+                    </div>
+                    <div style="font-size: 0.72rem; color: #10B981; font-weight: 600; margin-top: 3px;">
+                        ✓ Classified as Relevant
+                    </div>
+                </div>
+            </div>
+
+            <!-- WHY SIMILAR CHECKLIST -->
+            <div class="why-similar-box" style="background: var(--bg-canvas); border: 1px solid var(--border-color); border-left: 3px solid #10B981; border-radius: var(--radius-sm); padding: 12px 16px; margin-bottom: 14px;">
+                <div style="font-size: 0.76rem; font-weight: 700; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">
+                    WHY SIMILAR:
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 6px; font-size: 0.84rem; color: var(--text-primary); margin-bottom: 8px;">
+                    <div><span style="color: #10B981; font-weight: 700;">✓</span> <strong>Matched Legal Issue:</strong> {% if item.matched_issues %}{{ item.matched_issues|join:", " }}{% else %}Substantive Legal Overlap{% endif %}</div>
+                    <div><span style="color: #10B981; font-weight: 700;">✓</span> <strong>Matched Act:</strong> {% if item.matched_acts %}{{ item.matched_acts|join:", " }}{% else %}Corpus Statute Match{% endif %}</div>
+                    <div><span style="color: #10B981; font-weight: 700;">✓</span> <strong>Matched Section:</strong> {% if item.matched_sections %}{{ item.matched_sections|join:", " }}{% else %}Statutory Alignment{% endif %}</div>
+                    <div><span style="color: #10B981; font-weight: 700;">✓</span> <strong>Similar Facts:</strong> {% if item.matched_facts %}{{ item.matched_facts|join:", " }}{% else %}Fact Pattern Alignment{% endif %}</div>
+                    <div><span style="color: #10B981; font-weight: 700;">✓</span> <strong>Similar Procedure:</strong> {{ item.matched_procedural|default:"Supreme Court Jurisdiction" }}</div>
+                </div>
+                {% if item.why_similar %}
+                <ul style="margin: 0; padding-left: 18px; font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">
+                    {% for reason in item.why_similar %}
+                    <li>{{ reason }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+
+            <!-- RELEVANT EVIDENCE PASSAGE -->
+            {% if item.relevant_passage %}
+            <div class="evidence-passage-box" style="background: var(--bg-surface); border: 1px solid var(--border-subtle); padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 14px;">
+                <div style="font-size: 0.74rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;">
+                    RELEVANT EVIDENCE:
+                </div>
+                <blockquote style="margin: 0; font-family: 'Newsreader', Georgia, serif; font-size: 0.98rem; color: var(--text-primary); font-style: italic; line-height: 1.55;">
+                    "{{ item.relevant_passage|truncatewords:120 }}"
+                </blockquote>
+            </div>
+            {% endif %}
+
+            <!-- CARD FOOTER ACTIONS -->
+            <div class="result-card-footer" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-top: 10px;">
+                <a href="{% url 'cases:case_detail' item.case.id %}" class="btn btn-sm btn-primary" style="font-weight: 600;">
+                    View Judgment
+                </a>
+
+                <a href="{% url 'cases:related_cases' item.case.id %}" class="btn btn-sm btn-secondary">
+                    Find Related Precedents
+                </a>
+
+                <a href="{% url 'cases:toggle_save_case' item.case.id %}" class="btn btn-sm {% if item.is_saved %}btn-secondary{% else %}btn-outline{% endif %}">
+                    {% if item.is_saved %}Bookmarked in Brief{% else %}Save to Research Brief{% endif %}
+                </a>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-gold); padding: 24px; border-radius: var(--radius-md); text-align: center; margin-top: 20px;">
+        <h3 style="margin: 0 0 6px 0; color: var(--text-primary); font-family: 'Newsreader', Georgia, serif; font-size: 1.25rem;">No Sufficiently Relevant Precedent Found</h3>
+        <p style="margin: 0; color: var(--text-secondary); font-size: 0.88rem;">No indexed Supreme Court judgment met the minimum relevance threshold for this query. Try adding specific factual circumstances, legal issues, or applicable statutory references to refine your research.</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

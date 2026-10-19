@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}{{ legal_case.title }} ({{ legal_case.judgment_year }}) — Supreme Court Case File — Legal Lens{% endblock %}
+
+{% block content %}
+<div class="container case-detail-container">
+    <div class="detail-header-actions">
+        <a href="javascript:history.back()" class="btn btn-outline">← Back to Search Results</a>
+        <div class="header-action-group">
+            <button type="button" class="btn btn-outline" onclick="copyCitation('{{ legal_case.title|escapejs }} {% if legal_case.citations %}({{ legal_case.citations|escapejs }}){% endif %}')">
+                📋 Copy Citation
+            </button>
+            <a href="{% url 'cases:related_cases' legal_case.id %}" class="btn btn-secondary">
+                🔍 Find Related Judgments
+            </a>
+            <a href="{% url 'cases:toggle_save_case' legal_case.id %}" class="btn {% if is_saved %}btn-saved{% else %}btn-primary{% endif %}">
+                {% if is_saved %}★ Saved in Collection{% else %}☆ Save Case{% endif %}
+            </a>
+        </div>
+    </div>
+
+    <div class="case-detail-card">
+        <div class="case-detail-header">
+            <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
+                <span class="badge badge-mode">CASE FILE</span>
+                <span class="case-year-tag">{{ legal_case.judgment_year }}</span>
+                <span class="badge badge-ready">{{ legal_case.extraction_status|upper }}</span>
+            </div>
+            <h1 class="case-detail-title">{{ legal_case.title }}</h1>
+            
+            {% if legal_case.citations %}
+            <div class="detail-citation"><strong>Citation:</strong> {{ legal_case.citations }}</div>
+            {% endif %}
+        </div>
+
+        <div class="case-meta-grid">
+            {% if legal_case.judgment_date %}
+            <div class="meta-item">
+                <span class="meta-label">Judgment Date</span>
+                <span class="meta-value">{{ legal_case.judgment_date|date:"d F Y" }}</span>
+            </div>
+            {% endif %}
+
+            {% if legal_case.bench %}
+            <div class="meta-item">
+                <span class="meta-label">Bench</span>
+                <span class="meta-value">{{ legal_case.bench }}</span>
+            </div>
+            {% endif %}
+
+            {% if legal_case.petitioner %}
+            <div class="meta-item">
+                <span class="meta-label">Petitioner</span>
+                <span class="meta-value">{{ legal_case.petitioner }}</span>
+            </div>
+            {% endif %}
+
+            {% if legal_case.respondent %}
+            <div class="meta-item">
+                <span class="meta-label">Respondent</span>
+                <span class="meta-value">{{ legal_case.respondent }}</span>
+            </div>
+            {% endif %}
+
+            {% if legal_case.acts %}
+            <div class="meta-item">
+                <span class="meta-label">Acts Referenced</span>
+                <span class="meta-value">{{ legal_case.acts }}</span>
+            </div>
+            {% endif %}
+
+            {% if legal_case.legal_sections %}
+            <div class="meta-item">
+                <span class="meta-label">Legal Sections</span>
+                <span class="meta-value">{{ legal_case.legal_sections }}</span>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="judgment-text-section">
+            <h2>Complete Supreme Court Judgment Text</h2>
+            <div class="judgment-content-box">
+                {{ legal_case.cleaned_text|linebreaks }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyCitation(text) {
+    navigator.clipboard.writeText(text);
+    alert('Citation copied to clipboard:\n' + text);
+}
+</script>
+{% endblock %}

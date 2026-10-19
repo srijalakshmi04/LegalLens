@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Administrator Sign In — Legal Lens{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 440px; margin: 60px auto; padding: 0 15px;">
+    <div class="result-card" style="background: var(--bg-card); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 32px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        
+        <div style="text-align: center; margin-bottom: 28px;">
+            <div class="badge badge-mode" style="margin-bottom: 12px; display: inline-block;">ADMINISTRATOR CONSOLE</div>
+            <h1 style="font-family: 'Newsreader', serif; font-size: 1.8rem; color: var(--accent-gold-bright); margin-bottom: 6px;">
+                Legal Lens Administrator
+            </h1>
+            <p style="color: var(--text-muted); font-size: 0.88rem;">
+                Sign in with your staff or administrator credentials to access system management.
+            </p>
+        </div>
+
+        {% if error %}
+        <div class="alert alert-danger" style="margin-bottom: 20px; background: rgba(220, 53, 69, 0.15); border: 1px solid #dc3545; color: #ff6b6b; padding: 12px 16px; border-radius: 6px; font-size: 0.88rem;">
+            <strong>Authentication Error:</strong> {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="POST" action="{% url 'cases:admin_login' %}">
+            {% csrf_token %}
+            {% if next %}
+            <input type="hidden" name="next" value="{{ next }}">
+            {% endif %}
+
+            <div class="form-group" style="margin-bottom: 20px;">
+                <label for="id_username" style="display: block; font-weight: 600; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">
+                    Username
+                </label>
+                <input type="text" name="username" id="id_username" class="form-control" required autofocus placeholder="Enter administrator username" style="width: 100%; padding: 12px 14px; background: var(--bg-surface); border: 1px solid var(--border-dark); border-radius: 4px; color: var(--text-primary); font-size: 0.92rem;">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 24px;">
+                <label for="id_password" style="display: block; font-weight: 600; font-size: 0.82rem; color: var(--text-primary); margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">
+                    Password
+                </label>
+                <input type="password" name="password" id="id_password" class="form-control" required placeholder="Enter password" style="width: 100%; padding: 12px 14px; background: var(--bg-surface); border: 1px solid var(--border-dark); border-radius: 4px; color: var(--text-primary); font-size: 0.92rem;">
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px; text-transform: uppercase;">
+                Sign In to Admin Console
+            </button>
+        </form>
+
+        <div style="margin-top: 24px; text-align: center; border-top: 1px solid var(--border-dark); padding-top: 18px;">
+            <a href="{% url 'cases:home' %}" style="color: var(--text-muted); font-size: 0.85rem; text-decoration: none;">
+                Return to Public Case Search
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

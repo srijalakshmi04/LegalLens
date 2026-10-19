@@ -1,0 +1,2759 @@
+{
+  "headline": "CURRENT-CASE PRE-DECISION SIMILARITY PREDICTION ACCURACY = 60.78%",
+  "target_95_status": "NOT ACHIEVED",
+  "benchmark_summary": {
+    "total_test_cases": 2468,
+    "correct": 1500,
+    "incorrect": 968,
+    "required_correct_for_95": 2345,
+    "accuracy": 60.78,
+    "balanced_accuracy": 59.35,
+    "precision": 0.6031,
+    "recall": 0.6078,
+    "f1": 0.6013,
+    "macro_f1": 0.5925,
+    "coverage_pct": 100.0,
+    "abstention_rate_pct": 0.0,
+    "brier_score": 0.2374,
+    "confusion_matrix": {
+      "labels": [
+        "ALLOWED",
+        "DISMISSED"
+      ],
+      "matrix": [
+        [
+          511,
+          585
+        ],
+        [
+          383,
+          989
+        ]
+      ]
+    }
+  },
+  "retrieval_metrics": {
+    "precision_at_5": 0.9439,
+    "precision_at_10": 0.9137,
+    "recall_at_5": 0.3028,
+    "recall_at_10": 0.5528,
+    "mrr": 0.9804,
+    "ndcg_at_10": 0.978
+  },
+  "baseline_comparison": [
+    {
+      "code": "A",
+      "name": "Existing direct classifier",
+      "val_acc": 62.44,
+      "test_acc": 60.41,
+      "test_correct": 1491
+    },
+    {
+      "code": "B",
+      "name": "Existing retrieval-only (flat vote)",
+      "val_acc": 59.6,
+      "test_acc": 57.94,
+      "test_correct": 1430
+    },
+    {
+      "code": "C",
+      "name": "Semantic retrieval (Dense 128-dim SVD)",
+      "val_acc": 59.32,
+      "test_acc": 57.7,
+      "test_correct": 1424
+    },
+    {
+      "code": "D",
+      "name": "Hybrid hierarchical retrieval (Facts+Issues+Statute+Proc)",
+      "val_acc": 59.04,
+      "test_acc": 58.55,
+      "test_correct": 1445
+    },
+    {
+      "code": "E",
+      "name": "Outcome-aware CBR retrieval (Directional agreement)",
+      "val_acc": 59.04,
+      "test_acc": 58.51,
+      "test_correct": 1444
+    },
+    {
+      "code": "F",
+      "name": "Direct classifier + similarity evidence",
+      "val_acc": 63.05,
+      "test_acc": 60.78,
+      "test_correct": 1500
+    },
+    {
+      "code": "G",
+      "name": "Similarity + structured procedural features",
+      "val_acc": 62.4,
+      "test_acc": 61.83,
+      "test_correct": 1526
+    },
+    {
+      "code": "H",
+      "name": "Final combined model (CBR + Direct Stacking)",
+      "val_acc": 63.05,
+      "test_acc": 60.78,
+      "test_correct": 1500
+    }
+  ],
+  "selected_configuration": {
+    "profile_name": "Model H: Hierarchical CBR + Direct Probabilistic Stacking",
+    "weights": {
+      "facts": 0.25,
+      "dense_semantic_svd": 0.2,
+      "statutory": 0.2,
+      "legal_issues": 0.15,
+      "procedural": 0.2
+    },
+    "cbr_alpha": 0.8,
+    "top_k": 20,
+    "validation_accuracy": 63.05
+  },
+  "dataset_split": {
+    "total_cases": 16449,
+    "train_cases": 11513,
+    "validation_cases": 2468,
+    "test_cases": 2468,
+    "seed": 42
+  },
+  "execution_time_seconds": 36.29,
+  "explainability_sample": [
+    {
+      "target_case_id": 11253,
+      "target_title": "Dr. D.C. Wadhwa & Ors vs State Of Bihar & Ors on 20 December, 1986",
+      "target_year": 1986,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "ALLOWED",
+      "confidence_pct": 51.2,
+      "allowed_evidence": 5.1097,
+      "dismissed_evidence": 5.3616,
+      "outcome_margin": -0.0598,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 4,
+          "title": "Daya Ram Tripathi vs State Of Uttar Pradesh & Anr on 12 December, 1986",
+          "year": 1986,
+          "similarity": 0.5443,
+          "outcome": "ALLOWED",
+          "matched_issue": "Daya Ram Tripathi vs State Of Uttar Pradesh & Anr on 12 December, 1986 Equivalent citations: 1987 SCR (1) 574, 1986 SCC ",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 5,
+          "title": "Rudul Sah vs State Of Bihar And Another on 1 August, 1983",
+          "year": 1983,
+          "similarity": 0.5399,
+          "outcome": "ALLOWED",
+          "matched_issue": "Rudul Sah vs State Of Bihar And Another on 1 August, 1983 Equivalent citations: 1983 AIR 1086, 1983 SCR (3) 508, AIR 198",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 9,
+          "title": "Deokinandan Prasad vs State Of Bihar & Ors on 4 May, 1971",
+          "year": 1971,
+          "similarity": 0.5177,
+          "outcome": "ALLOWED",
+          "matched_issue": "Deokinandan Prasad vs State Of Bihar & Ors on 4 May, 1971 Equivalent citations: 1971 AIR 1409, 1971 SCR 634, AIR 1971 SU",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "Delhi Police Non-Gazettedkarmchari ... vs Union Of India & Ors on 20 November, 1986",
+          "year": 1986,
+          "similarity": 0.6041,
+          "outcome": "DISMISSED",
+          "matched_issue": "Delhi Police Non-Gazettedkarmchari ... vs Union Of India & Ors on 20 November, 1986 Equivalent citations: 1987 AIR 379, ",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "Ambica Quarry Works & Anr vs State Of Gujarat & Ors on 11 December, 1986",
+          "year": 1986,
+          "similarity": 0.5948,
+          "outcome": "DISMISSED",
+          "matched_issue": "Ambica Quarry Works & Anr vs State Of Gujarat & Ors on 11 December, 1986 Equivalent citations: 1987 AIR 1073, 1987 SCR (",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "Tejinder Singh And Another Etc vs M/S. Bharat Petroleum Corporation ... on 11 September, 1986",
+          "year": 1986,
+          "similarity": 0.5832,
+          "outcome": "DISMISSED",
+          "matched_issue": "Tejinder Singh And Another Etc vs M/S. Bharat Petroleum Corporation ... on 11 September, 1986 Equivalent citations: 1987",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Delhi Police Non-Gazettedkarmchari ... vs Union Of India & Ors on 20 November, 1986",
+          "year": 1986,
+          "similarity": 0.6041,
+          "candidate_outcome": "DISMISSED",
+          "target_outcome": "ALLOWED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Ambica Quarry Works & Anr vs State Of Gujarat & Ors on 11 December, 1986",
+          "year": 1986,
+          "similarity": 0.5948,
+          "candidate_outcome": "DISMISSED",
+          "target_outcome": "ALLOWED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 6402,
+      "target_title": "Mysore State Road Transport ... vs S.K. Athani And Anr. on 8 August, 1973",
+      "target_year": 1973,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "ALLOWED",
+      "confidence_pct": 66.05,
+      "allowed_evidence": 2.7266,
+      "dismissed_evidence": 5.3054,
+      "outcome_margin": -0.0473,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 4,
+          "title": "M. Selvaraj Daniel vs Management Of State Bank Of India on 22 April, 1963",
+          "year": 1963,
+          "similarity": 0.4234,
+          "outcome": "ALLOWED",
+          "matched_issue": "M. Selvaraj Daniel vs Management Of State Bank Of India on 22 April, 1963 PETITIONER: M. SELVARAJ DANIEL Vs. RESPONDENT:",
+          "matched_act": [],
+          "matched_section": [
+            "33"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 8,
+          "title": "Purshottam Lal & Ors vs Union Of India & Anr on 21 February, 1973",
+          "year": 1973,
+          "similarity": 0.4073,
+          "outcome": "ALLOWED",
+          "matched_issue": "Purshottam Lal & Ors vs Union Of India & Anr on 21 February, Equivalent citations: AIR 1973 SUPREME COURT 1088, (1973) 1",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": false
+        },
+        {
+          "rank": 9,
+          "title": "Niranjan Singh vs State Of Madhya-Pradesh on 18 July, 1972",
+          "year": 1972,
+          "similarity": 0.4068,
+          "outcome": "ALLOWED",
+          "matched_issue": "Niranjan Singh vs State Of Madhya-Pradesh on 18 July, 1972 Equivalent citations: 1972 AIR 2215, 1973 SCR (1) 691, AIR 19",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "Haji Lal Mohd. Biri Works Allahabad ... vs The State Of U.P. And Others on 23 April, 1973",
+          "year": 1973,
+          "similarity": 0.4707,
+          "outcome": "DISMISSED",
+          "matched_issue": "Haji Lal Mohd. Biri Works Allahabad ... vs The State Of U.P. And Others on 23 April, 1973 Equivalent citations: 1973 AIR",
+          "matched_act": [],
+          "matched_section": [
+            "33"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "Podar Mills Ltd. vs Bhagwan Singh And Anr. on 25 April, 1973",
+          "year": 1973,
+          "similarity": 0.4536,
+          "outcome": "DISMISSED",
+          "matched_issue": "Podar Mills Ltd. vs Bhagwan Singh And Anr. on 25 April, 1973 Equivalent citations: AIR1973SC2224, [1973(27)FLR71], 1973L",
+          "matched_act": [],
+          "matched_section": [
+            "33"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "The State Of Mysore vs H.L. Chablani on 3 December, 1957",
+          "year": 1957,
+          "similarity": 0.4236,
+          "outcome": "DISMISSED",
+          "matched_issue": "The State Of Mysore vs H.L. Chablani on 3 December, 1957 Equivalent citations: AIR1958SC325 Author: S.K. Das Bench: S.K.",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Haji Lal Mohd. Biri Works Allahabad ... vs The State Of U.P. And Others on 23 April, 1973",
+          "year": 1973,
+          "similarity": 0.4707,
+          "candidate_outcome": "DISMISSED",
+          "target_outcome": "ALLOWED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Podar Mills Ltd. vs Bhagwan Singh And Anr. on 25 April, 1973",
+          "year": 1973,
+          "similarity": 0.4536,
+          "candidate_outcome": "DISMISSED",
+          "target_outcome": "ALLOWED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 2108,
+      "target_title": "Bridge & Roof Co. (India) Ltd vs Union Of India on 11 September, 1962",
+      "target_year": 1962,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "ALLOWED",
+      "confidence_pct": 63.25,
+      "allowed_evidence": 2.932,
+      "dismissed_evidence": 5.0464,
+      "outcome_margin": 0.1602,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 1,
+          "title": "Adhyaksha Mathur Babu'S Sakti ... vs Union Of India on 7 September, 1962",
+          "year": 1962,
+          "similarity": 0.5783,
+          "outcome": "ALLOWED",
+          "matched_issue": "Adhyaksha Mathur Babu'S Sakti ... vs Union Of India on 7 September, 1962 Equivalent citations: 1963 AIR 622, 1962 SCR (3",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "M/S. Orissa Cement Ltd vs Union Of India on 14 March, 1962",
+          "year": 1962,
+          "similarity": 0.4554,
+          "outcome": "ALLOWED",
+          "matched_issue": "M/S. Orissa Cement Ltd vs Union Of India on 14 March, 1962 Equivalent citations: 1962 AIR 1402, 1962 SCR SUPL. (3) 837 B",
+          "matched_act": [],
+          "matched_section": [
+            "6"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 6,
+          "title": "Sakal Papers (P) Ltd., And Others vs The Union Of India on 25 September, 1961",
+          "year": 1961,
+          "similarity": 0.3947,
+          "outcome": "ALLOWED",
+          "matched_issue": "Sakal Papers (P) Ltd., And Others vs The Union Of India on 25 September, 1961 Equivalent citations: 1962 AIR 305, 1962 S",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 3,
+          "title": "Kali Pada Chowdhury vs Union Of India on 3 May, 1962",
+          "year": 1962,
+          "similarity": 0.4181,
+          "outcome": "DISMISSED",
+          "matched_issue": "Kali Pada Chowdhury vs Union Of India on 3 May, 1962 Equivalent citations: 1963 AIR 134, 1963 SCR (3) 904, AIR 1963 SUPR",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "Bokaro And Ramgur Ltd vs The State Of Bihar And Another on 14 March, 1962",
+          "year": 1962,
+          "similarity": 0.4181,
+          "outcome": "DISMISSED",
+          "matched_issue": "Bokaro And Ramgur Ltd vs The State Of Bihar And Another on 14 March, 1962 Equivalent citations: 1963 AIR 516, 1962 SCR S",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 5,
+          "title": "Orient Weaving Mills (P) Ltd vs The Union Of India on 28 February, 1962",
+          "year": 1962,
+          "similarity": 0.4102,
+          "outcome": "DISMISSED",
+          "matched_issue": "Orient Weaving Mills (P) Ltd vs The Union Of India on 28 February, 1962 Equivalent citations: 1963 AIR 98, 1962 SCR SUPL",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Kali Pada Chowdhury vs Union Of India on 3 May, 1962",
+          "year": 1962,
+          "similarity": 0.4181,
+          "candidate_outcome": "DISMISSED",
+          "target_outcome": "ALLOWED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Bokaro And Ramgur Ltd vs The State Of Bihar And Another on 14 March, 1962",
+          "year": 1962,
+          "similarity": 0.4181,
+          "candidate_outcome": "DISMISSED",
+          "target_outcome": "ALLOWED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 5778,
+      "target_title": "Tulsidas Paul vs The Second Labour Court, W.B. And Ors. on 3 February, 1971",
+      "target_year": 1971,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 84.76,
+      "allowed_evidence": 1.4282,
+      "dismissed_evidence": 7.9429,
+      "outcome_margin": -0.0694,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 3,
+          "title": "Union Of India vs Jyoti Prakash Mitter on 21 January, 1971",
+          "year": 1971,
+          "similarity": 0.4872,
+          "outcome": "ALLOWED",
+          "matched_issue": "Union Of India vs Jyoti Prakash Mitter on 21 January, 1971 Equivalent citations: 1971 AIR 1093, 1971 SCR (3) 483, AIR 19",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "Praga Tools Corporation vs Shri C. A. Imanual & Ors on 19 February, 1969",
+          "year": 1969,
+          "similarity": 0.4813,
+          "outcome": "ALLOWED",
+          "matched_issue": "Praga Tools Corporation vs Shri C. A. Imanual & Ors on 19 February, 1969 Equivalent citations: 1969 AIR 1306, 1969 SCR (",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 15,
+          "title": "Union Of India (Uoi) And Ors. And State Of ... vs Bhanamal Gulzarimal Ltd. And Ors. on 16 December, 1959",
+          "year": 1959,
+          "similarity": 0.4597,
+          "outcome": "ALLOWED",
+          "matched_issue": "Union Of India (Uoi) And Ors. And State Of ... vs Bhanamal Gulzarimal Ltd. And Ors. on 16 December, 1959 Equivalent cita",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "The Imperial Tobacco Company Of India ... vs Its Workmen on 16 March, 1961",
+          "year": 1961,
+          "similarity": 0.5566,
+          "outcome": "DISMISSED",
+          "matched_issue": "The Imperial Tobacco Company Of India ... vs Its Workmen on 16 March, 1961 Equivalent citations: AIR1962SC1348, [1961(3)",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "The Management Of The Express ... vs The Presiding Officer,Labour Court, ... on 18 December, 1963",
+          "year": 1963,
+          "similarity": 0.521,
+          "outcome": "DISMISSED",
+          "matched_issue": "The Management Of The Express ... vs The Presiding Officer,Labour Court, ... on 18 December, 1963 Equivalent citations: ",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 5,
+          "title": "Management, Chitavalsah Jute Mills Ltd vs Workmen Of Chitavalsah Jute Mills on 2 February, 1968",
+          "year": 1968,
+          "similarity": 0.4789,
+          "outcome": "DISMISSED",
+          "matched_issue": "whether the appellant could bear the additional burden.",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Union Of India vs Jyoti Prakash Mitter on 21 January, 1971",
+          "year": 1971,
+          "similarity": 0.4872,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Praga Tools Corporation vs Shri C. A. Imanual & Ors on 19 February, 1969",
+          "year": 1969,
+          "similarity": 0.4813,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 10895,
+      "target_title": "K. Kamala Jammanniavaru (Dead) By Lrs vs The Special Land Acquisition Officer ... on 14 February, 1985",
+      "target_year": 1985,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 79.8,
+      "allowed_evidence": 1.741,
+      "dismissed_evidence": 6.8766,
+      "outcome_margin": -0.0204,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 3,
+          "title": "Bangaru Narasingha Rao Naidu And Ors. vs Revenue Divisional Officer, ... on 8 October, 1979",
+          "year": 1979,
+          "similarity": 0.4703,
+          "outcome": "ALLOWED",
+          "matched_issue": "Bangaru Narasingha Rao Naidu And Ors. vs Revenue Divisional Officer, ... on 8 October, 1979 Equivalent citations: AIR198",
+          "matched_act": [
+            "land acquisition"
+          ],
+          "matched_section": [
+            "18"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 7,
+          "title": "The Punjabi University, Etc. vs Acharya Swami Ganesh And Anr. on 7 March, 1972",
+          "year": 1972,
+          "similarity": 0.436,
+          "outcome": "ALLOWED",
+          "matched_issue": "whether the High Court was justified in rejecting the application of the appellants in these appeals seeking condonation",
+          "matched_act": [
+            "land acquisition"
+          ],
+          "matched_section": [
+            "18"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 11,
+          "title": "Adusumilli Gopalakrishna vs Special Deputy Collector (Land ... on 17 April, 1980",
+          "year": 1980,
+          "similarity": 0.4229,
+          "outcome": "ALLOWED",
+          "matched_issue": "Adusumilli Gopalakrishna vs Special Deputy Collector (Land ... on 17 April, 1980 Equivalent citations: AIR1980SC1870, 19",
+          "matched_act": [
+            "land acquisition"
+          ],
+          "matched_section": [
+            "18"
+          ],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "Dilawarsab Babusab Mullasab And Ors. vs Special Land Acquisition Officer on 8 October, 1974",
+          "year": 1974,
+          "similarity": 0.4907,
+          "outcome": "DISMISSED",
+          "matched_issue": "Dilawarsab Babusab Mullasab And Ors. vs Special Land Acquisition Officer on 8 October, 1974 Equivalent citations: AIR197",
+          "matched_act": [
+            "land acquisition"
+          ],
+          "matched_section": [
+            "18"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "Special Land Acquisition Officer, ... vs K.S. Ramachandra Rao And Ors. on 26 April, 1972",
+          "year": 1972,
+          "similarity": 0.4888,
+          "outcome": "DISMISSED",
+          "matched_issue": "Special Land Acquisition Officer, ... vs K.S. Ramachandra Rao And Ors. on 26 April, 1972 Equivalent citations: AIR1972SC",
+          "matched_act": [
+            "land acquisition"
+          ],
+          "matched_section": [
+            "18"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "B.H.E.L. Workers' Association Hardwar ... vs Union Of India & Ors., Etc. Etc on 18 January, 1985",
+          "year": 1985,
+          "similarity": 0.4691,
+          "outcome": "DISMISSED",
+          "matched_issue": "B.H.E.L. Workers' Association Hardwar ... vs Union Of India & Ors., Etc. Etc on 18 January, 1985 Equivalent citations: 1",
+          "matched_act": [],
+          "matched_section": [
+            "30",
+            "28"
+          ],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Bangaru Narasingha Rao Naidu And Ors. vs Revenue Divisional Officer, ... on 8 October, 1979",
+          "year": 1979,
+          "similarity": 0.4703,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "The Punjabi University, Etc. vs Acharya Swami Ganesh And Anr. on 7 March, 1972",
+          "year": 1972,
+          "similarity": 0.436,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 17489,
+      "target_title": "Vinoy Kumar vs State Of U.P. & Ors on 16 April, 2001",
+      "target_year": 2001,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 85.13,
+      "allowed_evidence": 1.2104,
+      "dismissed_evidence": 6.9306,
+      "outcome_margin": -0.0745,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 3,
+          "title": "Uka Ram vs State Of Rajasthan on 10 April, 2001",
+          "year": 2001,
+          "similarity": 0.4769,
+          "outcome": "ALLOWED",
+          "matched_issue": "Uka Ram vs State Of Rajasthan on 10 April, 2001 Equivalent citations: AIR 2001 SUPREME COURT 1814, 2001 AIR SCW 1478, 20",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": false
+        },
+        {
+          "rank": 12,
+          "title": "Ragu Thilak D. John vs S.Rayappan & Others on 23 January, 2001",
+          "year": 2001,
+          "similarity": 0.4217,
+          "outcome": "ALLOWED",
+          "matched_issue": "Ragu Thilak D. John vs S.Rayappan & Others on 23 January, Equivalent citations: AIR 2001 SUPREME COURT 699, 2001 AIR SCW",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": false
+        },
+        {
+          "rank": 19,
+          "title": "State Of Punjab And Ors. vs Gurdeep Kumar Uppal And Ors. on 20 February, 2001",
+          "year": 2001,
+          "similarity": 0.3926,
+          "outcome": "ALLOWED",
+          "matched_issue": "State Of Punjab And Ors. vs Gurdeep Kumar Uppal And Ors. on 20 February, 2001 Equivalent citations: AIR2001SC2691, [2001",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "Indian Banks Association vs Workmen Of Syndicate Bank And Ors on 13 February, 2001",
+          "year": 2001,
+          "similarity": 0.5515,
+          "outcome": "DISMISSED",
+          "matched_issue": "Indian Banks Association vs Workmen Of Syndicate Bank And Ors on 13 February, 2001 Equivalent citations: AIR 2001 SUPREM",
+          "matched_act": [],
+          "matched_section": [
+            "30"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "Babua @ Tazmul Hossain vs The State Of Orissa on 30 January, 2001",
+          "year": 2001,
+          "similarity": 0.4946,
+          "outcome": "DISMISSED",
+          "matched_issue": "Babua @ Tazmul Hossain vs The State Of Orissa on 30 January, Equivalent citations: AIR 2001 SUPREME COURT 1052, 2001 (2)",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "Suresh And Anr vs State Of U.P on 2 March, 2001",
+          "year": 2001,
+          "similarity": 0.4721,
+          "outcome": "DISMISSED",
+          "matched_issue": "Suresh And Anr vs State Of U.P on 2 March, 2001 Equivalent citations: AIR 2001 SUPREME COURT 1344, 2001 AIR SCW 1051, 20",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": false
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Uka Ram vs State Of Rajasthan on 10 April, 2001",
+          "year": 2001,
+          "similarity": 0.4769,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Ragu Thilak D. John vs S.Rayappan & Others on 23 January, 2001",
+          "year": 2001,
+          "similarity": 0.4217,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 9617,
+      "target_title": "Rameshchandra Kachardas Porwal & Ors vs State Of Maharashtra & Ors. Etc on 17 February, 1981",
+      "target_year": 1981,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 60.88,
+      "allowed_evidence": 3.3964,
+      "dismissed_evidence": 5.2847,
+      "outcome_margin": -0.0303,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 4,
+          "title": "Accountant General & Anr. Etc. Etc vs S. Doraiswamy & Ors. Etc. Etc on 13 November, 1980",
+          "year": 1980,
+          "similarity": 0.4553,
+          "outcome": "ALLOWED",
+          "matched_issue": "Accountant General & Anr. Etc. Etc vs S. Doraiswamy & Ors. Etc. Etc on 13 November, 1980 Equivalent citations: 1981 AIR ",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 5,
+          "title": "Shankarlal Gyarasilal Dixit vs State Of Maharashtra on 17 December, 1980",
+          "year": 1980,
+          "similarity": 0.4482,
+          "outcome": "ALLOWED",
+          "matched_issue": "Shankarlal Gyarasilal Dixit vs State Of Maharashtra on 17 December, 1980 Equivalent citations: 1981 AIR 765, 1981 SCR (2",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 7,
+          "title": "Ranjit Singh Etc. Etc vs Union Of India on 26 September, 1980",
+          "year": 1980,
+          "similarity": 0.4398,
+          "outcome": "ALLOWED",
+          "matched_issue": "Ranjit Singh Etc. Etc vs Union Of India on 26 September, 1980 Equivalent citations: 1981 AIR 461, 1981 SCR (1) 847, AIR ",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "S S. Sharma & Ors vs Union Of India & Ors on 10 November, 1980",
+          "year": 1980,
+          "similarity": 0.4856,
+          "outcome": "DISMISSED",
+          "matched_issue": "S S. Sharma & Ors vs Union Of India & Ors on 10 November, Equivalent citations: 1981 AIR 588, 1981 SCR (1)1184, AIR 1981",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "D.L.F. United Private Ltd. vs Pr. Prem Raj And Ors. on 12 August, 1980",
+          "year": 1980,
+          "similarity": 0.4853,
+          "outcome": "DISMISSED",
+          "matched_issue": "D.L.F. United Private Ltd. vs Pr. Prem Raj And Ors. on 12 August, 1980 Equivalent citations: AIR1981SC805, (1981)1SCC433",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "Malak Singh Etc vs State Of Punjab & Haryana & Ors on 5 December, 1980",
+          "year": 1980,
+          "similarity": 0.4851,
+          "outcome": "DISMISSED",
+          "matched_issue": "Malak Singh Etc vs State Of Punjab & Haryana & Ors on 5 December, 1980 Equivalent citations: 1981 AIR 760, 1981 SCR (2) ",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Accountant General & Anr. Etc. Etc vs S. Doraiswamy & Ors. Etc. Etc on 13 November, 1980",
+          "year": 1980,
+          "similarity": 0.4553,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Shankarlal Gyarasilal Dixit vs State Of Maharashtra on 17 December, 1980",
+          "year": 1980,
+          "similarity": 0.4482,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 14222,
+      "target_title": "State Bank Of India vs Yumnam Gouramani Singh on 20 July, 1993",
+      "target_year": 1993,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 79.51,
+      "allowed_evidence": 1.0303,
+      "dismissed_evidence": 3.9982,
+      "outcome_margin": -0.0848,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 3,
+          "title": "Smt. Kamla vs State Of Punjab on 18 November, 1992",
+          "year": 1992,
+          "similarity": 0.3676,
+          "outcome": "ALLOWED",
+          "matched_issue": "Smt. Kamla vs State Of Punjab on 18 November, 1992 Equivalent citations: AIR1993SC374, 1993(1)ALT(CRI)484, 1993CRILJ68, ",
+          "matched_act": [],
+          "matched_section": [
+            "34"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "Smt. Chandrakantaben, Wife Of ... vs Vadilal Sapalal Modi And Ors. on 30 March, 1989",
+          "year": 1989,
+          "similarity": 0.3572,
+          "outcome": "ALLOWED",
+          "matched_issue": "Smt. Chandrakantaben, Wife Of ... vs Vadilal Sapalal Modi And Ors. on 30 March, 1989 Equivalent citations: AIR1989SC1269",
+          "matched_act": [],
+          "matched_section": [
+            "34"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 8,
+          "title": "Shaikh Nabab Shaikh Babu Musalman And ... vs State Of Maharashtra on 12 August, 1992",
+          "year": 1992,
+          "similarity": 0.3278,
+          "outcome": "ALLOWED",
+          "matched_issue": "Shaikh Nabab Shaikh Babu Musalman And ... vs State Of Maharashtra on 12 August, 1992 Equivalent citations: AIR1993SC169,",
+          "matched_act": [],
+          "matched_section": [
+            "34"
+          ],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "Indian Airlines Corporation vs Capt. K.C. Shukla And Ors. on 23 September, 1992",
+          "year": 1992,
+          "similarity": 0.4524,
+          "outcome": "DISMISSED",
+          "matched_issue": "Indian Airlines Corporation vs Capt. K.C. Shukla And Ors. on 23 September, 1992 Equivalent citations: [1992(65)FLR934], ",
+          "matched_act": [],
+          "matched_section": [
+            "34"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "State Of Maharashtra vs Mishri Lal Tarachand Lodha And Ors. on 24 October, 1963",
+          "year": 1963,
+          "similarity": 0.3719,
+          "outcome": "DISMISSED",
+          "matched_issue": "State Of Maharashtra vs Mishri Lal Tarachand Lodha And Ors. on 24 October, 1963 Equivalent citations: AIR1964SC457, (196",
+          "matched_act": [],
+          "matched_section": [
+            "34"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 5,
+          "title": "Ramdas And Another vs State Of M.P. on 25 September, 1992",
+          "year": 1992,
+          "similarity": 0.3442,
+          "outcome": "DISMISSED",
+          "matched_issue": "Ramdas And Another vs State Of M.P. on 25 September, 1992 Equivalent citations: AIR1993SC946, 1993CRILJ164, 1992(3)CRIME",
+          "matched_act": [],
+          "matched_section": [
+            "34"
+          ],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": []
+    },
+    {
+      "target_case_id": 11745,
+      "target_title": "Municipal Corporation Of Greater ... vs Dr. Hakimwadi Tenants Association & Ors on 24 November, 1987",
+      "target_year": 1987,
+      "predicted_outcome": "ALLOWED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 56.03,
+      "allowed_evidence": 4.1025,
+      "dismissed_evidence": 3.2198,
+      "outcome_margin": 0.0277,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 1,
+          "title": "State Of Gujarat And Ors. Etc vs Parshottamdas Ramdas Patel & Ors on 12 November, 1987",
+          "year": 1987,
+          "similarity": 0.4099,
+          "outcome": "ALLOWED",
+          "matched_issue": "State Of Gujarat And Ors. Etc vs Parshottamdas Ramdas Patel & Ors on 12 November, 1987 Equivalent citations: 1988 AIR 22",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "M.S.Jagadambal vs Southern Indian Education Trust & Ors on 2 November, 1987",
+          "year": 1987,
+          "similarity": 0.4069,
+          "outcome": "ALLOWED",
+          "matched_issue": "M.S.Jagadambal vs Southern Indian Education Trust & Ors on 2 November, 1987 Equivalent citations: 1988 AIR 103, 1988 SCR",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "Bank Of India vs Vijay Transport And Others on 11 November, 1987",
+          "year": 1987,
+          "similarity": 0.3972,
+          "outcome": "ALLOWED",
+          "matched_issue": "Bank Of India vs Vijay Transport And Others on 11 November, Equivalent citations: 1988 SCR (1) 961, 1988 AIR 151, AIR 19",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 4,
+          "title": "M.P.E.B. & Others vs Smt. Basantibai on 10 November, 1987",
+          "year": 1987,
+          "similarity": 0.3822,
+          "outcome": "DISMISSED",
+          "matched_issue": "M.P.E.B. & Others vs Smt. Basantibai on 10 November, 1987 Equivalent citations: 1988 AIR 71, 1988 SCR (1) 890, AIR 1988 ",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 5,
+          "title": "Union Of India Through Major ... vs Major S.K. Sharma on 29 June, 1987",
+          "year": 1987,
+          "similarity": 0.3789,
+          "outcome": "DISMISSED",
+          "matched_issue": "Union Of India Through Major ... vs Major S.K. Sharma on 29 June, 1987 Equivalent citations: 1987 AIR 1878, 1987 SCR (3)",
+          "matched_act": [],
+          "matched_section": [
+            "127"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 6,
+          "title": "Thakore Shri Vinayasinhji (Dead) By Lrs vs Kumar Shri Natwarsinhji & Ors on 18 November, 1987",
+          "year": 1987,
+          "similarity": 0.3783,
+          "outcome": "DISMISSED",
+          "matched_issue": "Thakore Shri Vinayasinhji (Dead) By Lrs vs Kumar Shri Natwarsinhji & Ors on 18 November, 1987 Equivalent citations: 1988",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "State Of Gujarat And Ors. Etc vs Parshottamdas Ramdas Patel & Ors on 12 November, 1987",
+          "year": 1987,
+          "similarity": 0.4099,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "M.S.Jagadambal vs Southern Indian Education Trust & Ors on 2 November, 1987",
+          "year": 1987,
+          "similarity": 0.4069,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 12473,
+      "target_title": "India Carat Pvt. Ltd vs State Of Karnataka & Anr on 15 February, 1989",
+      "target_year": 1989,
+      "predicted_outcome": "ALLOWED",
+      "actual_outcome": "ALLOWED",
+      "confidence_pct": 59.5,
+      "allowed_evidence": 2.4693,
+      "dismissed_evidence": 1.6806,
+      "outcome_margin": -0.0037,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 2,
+          "title": "Mafatlal Fine Spinning & Mfg. Co. Ltd vs Collector Of Central Excise, Bombay on 17 January, 1989",
+          "year": 1989,
+          "similarity": 0.3041,
+          "outcome": "ALLOWED",
+          "matched_issue": "Mafatlal Fine Spinning & Mfg. Co. Ltd vs Collector Of Central Excise, Bombay on 17 January, 1989 Equivalent citations: 1",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 6,
+          "title": "Rajatha Enterprises vs S.K. Sharma & Ors on 3 February, 1989",
+          "year": 1989,
+          "similarity": 0.2816,
+          "outcome": "ALLOWED",
+          "matched_issue": "Rajatha Enterprises vs S.K. Sharma & Ors on 3 February, 1989 Equivalent citations: 1989 AIR 860, 1989 SCR (1) 457, AIR 1",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 7,
+          "title": "P.L. Shah vs Union Of India & Anr on 18 January, 1989",
+          "year": 1989,
+          "similarity": 0.2813,
+          "outcome": "ALLOWED",
+          "matched_issue": "P.L. Shah vs Union Of India & Anr on 18 January, 1989 Equivalent citations: 1989 AIR 985, 1989 SCR (1) 224, AIR 1989 SUP",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "I.T.C. Limited vs George Joseph Fernandes & Anr on 6 February, 1989",
+          "year": 1989,
+          "similarity": 0.3079,
+          "outcome": "DISMISSED",
+          "matched_issue": "I.T.C. Limited vs George Joseph Fernandes & Anr on 6 February, Equivalent citations: 1989 AIR 839, 1989 SCR (1) 469, AIR",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "Lalji & Ors vs State Of U.P on 17 January, 1989",
+          "year": 1989,
+          "similarity": 0.2925,
+          "outcome": "DISMISSED",
+          "matched_issue": "Lalji & Ors vs State Of U.P on 17 January, 1989 Equivalent citations: 1989 AIR 754, 1989 SCR (1) 130, AIR 1989 SUPREME C",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "P.M. Ashwathanarayana Setty & Ors. Etc. ... vs State Of Karnataka & Ors on 22 September, 1988",
+          "year": 1988,
+          "similarity": 0.2921,
+          "outcome": "DISMISSED",
+          "matched_issue": "P.M. Ashwathanarayana Setty & Ors. Etc. ... vs State Of Karnataka & Ors on 22 September, 1988 Equivalent citations: 1989",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": []
+    },
+    {
+      "target_case_id": 22463,
+      "target_title": "Maya Devi & Anr vs State Of Haryana on 7 December, 2015",
+      "target_year": 2015,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 65.43,
+      "allowed_evidence": 2.4779,
+      "dismissed_evidence": 4.69,
+      "outcome_margin": -0.0013,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 2,
+          "title": "Manohar Lal vs State Of Haryana on 1 July, 2014",
+          "year": 2014,
+          "similarity": 0.4958,
+          "outcome": "ALLOWED",
+          "matched_issue": "Manohar Lal vs State Of Haryana on 1 July, 2014 Equivalent citations: AIR 2014 SUPREME COURT 2555, 2014 (9) SCC 645, 201",
+          "matched_act": [],
+          "matched_section": [
+            "113",
+            "2",
+            "304b"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "Major Singh & Anr vs State Of Punjab on 9 March, 2015",
+          "year": 2015,
+          "similarity": 0.4617,
+          "outcome": "ALLOWED",
+          "matched_issue": "Major Singh & Anr vs State Of Punjab on 9 March, 2015 Author: R. Banumathi Bench: Amitava Roy, R. Banumathi, T. S. Thaku",
+          "matched_act": [],
+          "matched_section": [
+            "113",
+            "304b",
+            "113b"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "Makhan Singh vs State Of Haryana on 21 April, 2015",
+          "year": 2015,
+          "similarity": 0.4565,
+          "outcome": "ALLOWED",
+          "matched_issue": "Makhan Singh vs State Of Haryana on 21 April, 2015 Equivalent citations: 2015 AIR SCW 3557, 2015 (12) SCC 247, AIR 2015 ",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "Dinesh vs State Of Haryana on 25 April, 2014",
+          "year": 2014,
+          "similarity": 0.4971,
+          "outcome": "DISMISSED",
+          "matched_issue": "Dinesh vs State Of Haryana on 25 April, 2014 Equivalent citations: 2014 AIR SCW 3400, 2014 (3) AJR 511, 2014 CRI. L. J. ",
+          "matched_act": [
+            "penal code"
+          ],
+          "matched_section": [
+            "113",
+            "2",
+            "304b"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 6,
+          "title": "Ramakant Mishra @ Lalu Etc vs State Of U.P on 27 February, 2015",
+          "year": 2015,
+          "similarity": 0.4473,
+          "outcome": "DISMISSED",
+          "matched_issue": "Ramakant Mishra @ Lalu Etc vs State Of U.P on 27 February, Equivalent citations: 2015 AIR SCW 1674, 2015 (8) SCC 299, AI",
+          "matched_act": [],
+          "matched_section": [
+            "304b",
+            "113b"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 8,
+          "title": "Mustafa Shahadal Shaikh vs State Of Maharashtra on 14 September, 2012",
+          "year": 2012,
+          "similarity": 0.4351,
+          "outcome": "DISMISSED",
+          "matched_issue": "Mustafa Shahadal Shaikh vs State Of Maharashtra on 14 September, 2012 Equivalent citations: 2012 AIR SCW 5308, 2012 (11)",
+          "matched_act": [
+            "penal code"
+          ],
+          "matched_section": [
+            "34",
+            "2",
+            "304b"
+          ],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Manohar Lal vs State Of Haryana on 1 July, 2014",
+          "year": 2014,
+          "similarity": 0.4958,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'CITIZEN_AS_APPELLANT__LOWER_ORDER_AFFIRMED' vs candidate 'CITIZEN_AS_APPELLANT__LOWER_ORDER_AFFIRMED'; lower court posture: 'LOWER_ORDER_AFFIRMED' vs 'LOWER_ORDER_AFFIRMED'."
+        },
+        {
+          "title": "Major Singh & Anr vs State Of Punjab on 9 March, 2015",
+          "year": 2015,
+          "similarity": 0.4617,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'CITIZEN_AS_APPELLANT__LOWER_ORDER_AFFIRMED' vs candidate 'CITIZEN_AS_APPELLANT__LOWER_ORDER_AFFIRMED'; lower court posture: 'LOWER_ORDER_AFFIRMED' vs 'LOWER_ORDER_AFFIRMED'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 2642,
+      "target_title": "Raj Kishore Tewari vs Govindaram Bhansali on 10 October, 1963",
+      "target_year": 1963,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 79.28,
+      "allowed_evidence": 1.6623,
+      "dismissed_evidence": 6.3615,
+      "outcome_margin": -0.0532,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 3,
+          "title": "Neta Ram vs Jiwan Lal on 17 January, 1962",
+          "year": 1962,
+          "similarity": 0.4729,
+          "outcome": "ALLOWED",
+          "matched_issue": "Neta Ram vs Jiwan Lal on 17 January, 1962 Equivalent citations: 1963 AIR 499, 1962 SCR SUPL. (2) 623, AIR 1963 SUPREME C",
+          "matched_act": [],
+          "matched_section": [
+            "13"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 7,
+          "title": "Pandit Kishan Lal vs Ganpat Ram Khosla And Another on 17 April, 1961",
+          "year": 1961,
+          "similarity": 0.4221,
+          "outcome": "ALLOWED",
+          "matched_issue": "Pandit Kishan Lal vs Ganpat Ram Khosla And Another on 17 April, 1961 Equivalent citations: 1961 AIR 1554, 1962 SCR (2) 1",
+          "matched_act": [],
+          "matched_section": [
+            "13"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 11,
+          "title": "Ram Nath And Another vs M/S. Ram Nath Chhittar Mal And Others on 8 September, 1960",
+          "year": 1960,
+          "similarity": 0.4056,
+          "outcome": "ALLOWED",
+          "matched_issue": "Ram Nath And Another vs M/S. Ram Nath Chhittar Mal And Others on 8 September, 1960 Equivalent citations: 1961 AIR 104, 1",
+          "matched_act": [],
+          "matched_section": [
+            "13"
+          ],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "Maharaj Jagat Bahadur Singh vs Badri Prasad Seth on 20 March, 1962",
+          "year": 1962,
+          "similarity": 0.5261,
+          "outcome": "DISMISSED",
+          "matched_issue": "Maharaj Jagat Bahadur Singh vs Badri Prasad Seth on 20 March, Equivalent citations: AIRONLINE 1962 SC 16 PETITIONER: MAH",
+          "matched_act": [],
+          "matched_section": [
+            "13"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "Dr. Gopal Dass Verma vs Dr. S. K. Bhardwaj And Another on 2 May, 1961",
+          "year": 1961,
+          "similarity": 0.4731,
+          "outcome": "DISMISSED",
+          "matched_issue": "Dr. Gopal Dass Verma vs Dr. S. K. Bhardwaj And Another on 2 May, 1961 Equivalent citations: 1963 AIR 337, 1962 SCR (2) 6",
+          "matched_act": [],
+          "matched_section": [
+            "13"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "Hari Narain vs Badri Das on 4 March, 1963",
+          "year": 1963,
+          "similarity": 0.4414,
+          "outcome": "DISMISSED",
+          "matched_issue": "Hari Narain vs Badri Das on 4 March, 1963 Equivalent citations: 1963 AIR 1558, 1964 SCR (2) 203, AIR 1963 SUPREME COURT ",
+          "matched_act": [],
+          "matched_section": [
+            "13"
+          ],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Neta Ram vs Jiwan Lal on 17 January, 1962",
+          "year": 1962,
+          "similarity": 0.4729,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'CITIZEN_AS_APPELLANT__LOWER_EVICTION_ORDER' vs candidate 'CITIZEN_AS_APPELLANT__LOWER_EVICTION_ORDER'; lower court posture: 'LOWER_EVICTION_ORDER' vs 'LOWER_EVICTION_ORDER'."
+        },
+        {
+          "title": "Pandit Kishan Lal vs Ganpat Ram Khosla And Another on 17 April, 1961",
+          "year": 1961,
+          "similarity": 0.4221,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'CITIZEN_AS_APPELLANT__LOWER_EVICTION_ORDER' vs candidate 'CITIZEN_AS_APPELLANT__LOWER_EVICTION_ORDER'; lower court posture: 'LOWER_EVICTION_ORDER' vs 'LOWER_EVICTION_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 20066,
+      "target_title": "Mukul Saikia & Ors vs State Of Assam & Ors on 18 November, 2008",
+      "target_year": 2008,
+      "predicted_outcome": "ALLOWED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 59.61,
+      "allowed_evidence": 4.5635,
+      "dismissed_evidence": 3.0922,
+      "outcome_margin": 0.0064,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 1,
+          "title": "State Of U.P. & Anr vs U.P. Rajya Khanij Vikas Nigam S.S. & Ors on 2 May, 2008",
+          "year": 2008,
+          "similarity": 0.4138,
+          "outcome": "ALLOWED",
+          "matched_issue": "State Of U.P. & Anr vs U.P. Rajya Khanij Vikas Nigam S.S. & Ors on 2 May, 2008 Equivalent citations: 2008 AIR SCW 6086, ",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "Steel Authority Of India Ltd vs Madhusudan Das & Ors on 20 October, 2008",
+          "year": 2008,
+          "similarity": 0.4103,
+          "outcome": "ALLOWED",
+          "matched_issue": "Steel Authority Of India Ltd vs Madhusudan Das & Ors on 20 October, 2008 Equivalent citations: AIR 2009 SUPREME COURT 11",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 5,
+          "title": "Union Of India vs Y.S.Sadhu.Ex-Inspector on 22 September, 2008",
+          "year": 2008,
+          "similarity": 0.3957,
+          "outcome": "ALLOWED",
+          "matched_issue": "Union Of India vs Y.S.Sadhu.Ex-Inspector on 22 September, Equivalent citations: AIR 2009 SUPREME COURT 161, 2008 (12) SC",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 3,
+          "title": "Ranganayakamma & Anr vs K.S. Prakash (D) By Lrs. & Ors on 16 May, 2008",
+          "year": 2008,
+          "similarity": 0.4074,
+          "outcome": "DISMISSED",
+          "matched_issue": "Ranganayakamma & Anr vs K.S. Prakash (D) By Lrs. & Ors on 16 May, 2008 Equivalent citations: (2008) 4 ICC 13, 2008 AIR S",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "Ramesh Chandra Sankla Etc vs Vikram Cement Etc on 8 July, 2008",
+          "year": 2008,
+          "similarity": 0.4006,
+          "outcome": "DISMISSED",
+          "matched_issue": "Ramesh Chandra Sankla Etc vs Vikram Cement Etc on 8 July, Equivalent citations: AIR 2009 SUPREME COURT 713, 2008 AIR SCW",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 7,
+          "title": "Karnataka State Financial Corporation vs N. Narasimahaiah & Ors on 13 March, 2008",
+          "year": 2008,
+          "similarity": 0.3924,
+          "outcome": "DISMISSED",
+          "matched_issue": "Karnataka State Financial Corporation vs N. Narasimahaiah & Ors on 13 March, 2008 Equivalent citations: AIR 2008 SUPREME",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "State Of U.P. & Anr vs U.P. Rajya Khanij Vikas Nigam S.S. & Ors on 2 May, 2008",
+          "year": 2008,
+          "similarity": 0.4138,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Steel Authority Of India Ltd vs Madhusudan Das & Ors on 20 October, 2008",
+          "year": 2008,
+          "similarity": 0.4103,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 8373,
+      "target_title": "Manager Govt. Branch Press &. Anr vs D. B. Belliawpa on 30 November, 1978",
+      "target_year": 1978,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 54.42,
+      "allowed_evidence": 4.1676,
+      "dismissed_evidence": 4.9751,
+      "outcome_margin": 0.0498,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 1,
+          "title": "Rt. Rev. Magr. Mark Netto vs Govt. Of Kerala & Ors on 11 September, 1978",
+          "year": 1978,
+          "similarity": 0.574,
+          "outcome": "ALLOWED",
+          "matched_issue": "Rt. Rev. Magr. Mark Netto vs Govt. Of Kerala & Ors on 11 September, 1978 Equivalent citations: 1979 AIR 83, 1979 SCR (1)",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "Ashadevi, Wife Of Gopal Ghermal Mehta ... vs K. Shiveraj,Addl. Chief Secretary To ... on 3 November, 1978",
+          "year": 1978,
+          "similarity": 0.5129,
+          "outcome": "ALLOWED",
+          "matched_issue": "Ashadevi, Wife Of Gopal Ghermal Mehta ... vs K. Shiveraj,Addl. Chief Secretary To ... on 3 November, 1978 Equivalent cit",
+          "matched_act": [],
+          "matched_section": [
+            "16"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 7,
+          "title": "B. L. Goel vs State Of U.P. & Ors on 17 October, 1978",
+          "year": 1978,
+          "similarity": 0.4629,
+          "outcome": "ALLOWED",
+          "matched_issue": "B. L. Goel vs State Of U.P. & Ors on 17 October, 1978 Equivalent citations: 1979 AIR 228, 1979 SCR (2) 82, AIR 1979 SUPR",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 2,
+          "title": "General Manager, South Central ... vs A.V.R. Siddhanti And Ors. Etc on 30 January, 1974",
+          "year": 1974,
+          "similarity": 0.5242,
+          "outcome": "DISMISSED",
+          "matched_issue": "General Manager, South Central ... vs A.V.R. Siddhanti And Ors. Etc on 30 January, 1974 Equivalent citations: 1974 AIR 1",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "Lilly Kurian vs Sr. Lewina And Ors on 15 September, 1978",
+          "year": 1978,
+          "similarity": 0.4954,
+          "outcome": "DISMISSED",
+          "matched_issue": "Lilly Kurian vs Sr. Lewina And Ors on 15 September, 1978 Equivalent citations: 1979 AIR 52, 1979 SCR (1) 820, AIR 1979 S",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 5,
+          "title": "Om Prakash vs Delhi Administration & Anr on 10 December, 1975",
+          "year": 1975,
+          "similarity": 0.4716,
+          "outcome": "DISMISSED",
+          "matched_issue": "Om Prakash vs Delhi Administration & Anr on 10 December, Equivalent citations: 1976 AIR 195, 1976 SCR (2) 981, AIR 1976 ",
+          "matched_act": [],
+          "matched_section": [
+            "16"
+          ],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Rt. Rev. Magr. Mark Netto vs Govt. Of Kerala & Ors on 11 September, 1978",
+          "year": 1978,
+          "similarity": 0.574,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Ashadevi, Wife Of Gopal Ghermal Mehta ... vs K. Shiveraj,Addl. Chief Secretary To ... on 3 November, 1978",
+          "year": 1978,
+          "similarity": 0.5129,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 11863,
+      "target_title": "State Of Haryana vs Shri P.C. Wadhwa, Ips Inspector General ... on 16 April, 1987",
+      "target_year": 1987,
+      "predicted_outcome": "ALLOWED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 81.03,
+      "allowed_evidence": 4.2582,
+      "dismissed_evidence": 0.9969,
+      "outcome_margin": 0.0475,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 1,
+          "title": "Union Of India vs A.R. Shinde & Anr on 19 February, 1987",
+          "year": 1987,
+          "similarity": 0.3913,
+          "outcome": "ALLOWED",
+          "matched_issue": "Union Of India vs A.R. Shinde & Anr on 19 February, 1987 Equivalent citations: 1987 AIR 1004, 1987 SCR (2) 339, AIR 1987",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "Union Of India & Ors vs Smt. Charanjit Kaur on 20 January, 1987",
+          "year": 1987,
+          "similarity": 0.3725,
+          "outcome": "ALLOWED",
+          "matched_issue": "Union Of India & Ors vs Smt. Charanjit Kaur on 20 January, 1987 Equivalent citations: 1987 AIR 1057, 1987 SCR (1)1080, A",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "Union Of India &Anr vs R.C.D.' Souza on 20 February, 1987",
+          "year": 1987,
+          "similarity": 0.3701,
+          "outcome": "ALLOWED",
+          "matched_issue": "Union Of India &Anr vs R.C.D.' Souza on 20 February, 1987 Equivalent citations: 1987 AIR 1172, 1987 SCR (2) 382, (1987) ",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 13,
+          "title": "Dev Singh & Ors vs Registrar, Punjab & Haryana High Court & ... on 15 April, 1987",
+          "year": 1987,
+          "similarity": 0.3438,
+          "outcome": "DISMISSED",
+          "matched_issue": "Dev Singh & Ors vs Registrar, Punjab & Haryana High Court & ... on 15 April, 1987 Equivalent citations: 1987 AIR 1629, 1",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 17,
+          "title": "Punjab State Electricity ... vs Ravinder Kumar Sharma & Ors., Etc on 27 October, 1986",
+          "year": 1986,
+          "similarity": 0.3314,
+          "outcome": "DISMISSED",
+          "matched_issue": "Punjab State Electricity ... vs Ravinder Kumar Sharma & Ors., Etc on 27 October, 1986 Equivalent citations: 1987 AIR 367",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 18,
+          "title": "Capt. Rachpal Singh vs Union Of India (Uoi) on 4 December, 1986",
+          "year": 1986,
+          "similarity": 0.3259,
+          "outcome": "DISMISSED",
+          "matched_issue": "Capt. Rachpal Singh vs Union Of India (Uoi) on 4 December, Equivalent citations: AIR1987SC212, [1987(54)FLR30], 1987LABL",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": []
+    },
+    {
+      "target_case_id": 2638,
+      "target_title": "Rai Ramkrishna & Others vs The State Of Bihar on 11 February, 1963",
+      "target_year": 1963,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 75.48,
+      "allowed_evidence": 2.1948,
+      "dismissed_evidence": 6.7548,
+      "outcome_margin": -0.1411,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 3,
+          "title": "Anant Prasad Lakshminivas Generiwal vs State Of Andhra Pradesh And Others(With ... on 2 November, 1962",
+          "year": 1962,
+          "similarity": 0.4706,
+          "outcome": "ALLOWED",
+          "matched_issue": "Anant Prasad Lakshminivas Generiwal vs State Of Andhra Pradesh And Others(With ... on 2 November, 1962 Equivalent citati",
+          "matched_act": [],
+          "matched_section": [
+            "4",
+            "7",
+            "11"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 8,
+          "title": "Gazula Dasaratha Rama Rao vs The State Of Andhra Pradesh & Others on 6 December, 1960",
+          "year": 1960,
+          "similarity": 0.45,
+          "outcome": "ALLOWED",
+          "matched_issue": "Gazula Dasaratha Rama Rao vs The State Of Andhra Pradesh & Others on 6 December, 1960 Equivalent citations: 1961 AIR 564",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [
+            "14",
+            "7",
+            "20"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 12,
+          "title": "Firm A. T. B. Mehtabmajid And Co vs State Of Madras And Another on 22 November, 1962",
+          "year": 1962,
+          "similarity": 0.4421,
+          "outcome": "ALLOWED",
+          "matched_issue": "Firm A. T. B. Mehtabmajid And Co vs State Of Madras And Another on 22 November, 1962 Equivalent citations: 1963 AIR 928,",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [
+            "19",
+            "3"
+          ],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "Tilkayat Shri Govindlalji Maharaj vs The State Of Rajasthan And Others on 21 January, 1963",
+          "year": 1963,
+          "similarity": 0.6117,
+          "outcome": "DISMISSED",
+          "matched_issue": "Tilkayat Shri Govindlalji Maharaj vs The State Of Rajasthan And Others on 21 January, 1963 Equivalent citations: 1963 AI",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [
+            "4",
+            "14",
+            "9"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "Mohmedalli And Others vs Union Of India And Another on 9 November, 1962",
+          "year": 1962,
+          "similarity": 0.4727,
+          "outcome": "DISMISSED",
+          "matched_issue": "Mohmedalli And Others vs Union Of India And Another on 9 November, 1962 Equivalent citations: 1964 AIR 980, 1963 SCR SUP",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [
+            "4",
+            "7",
+            "1"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "M/S. Bhikusa Yamasa Kahatriya vs Sangamner Akola Taluka Bidikamgar ... on 10 October, 1962",
+          "year": 1962,
+          "similarity": 0.4682,
+          "outcome": "DISMISSED",
+          "matched_issue": "M/S. Bhikusa Yamasa Kahatriya vs Sangamner Akola Taluka Bidikamgar ... on 10 October, 1962 Equivalent citations: 1963 AI",
+          "matched_act": [],
+          "matched_section": [
+            "7",
+            "9",
+            "3"
+          ],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Anant Prasad Lakshminivas Generiwal vs State Of Andhra Pradesh And Others(With ... on 2 November, 1962",
+          "year": 1962,
+          "similarity": 0.4706,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Gazula Dasaratha Rama Rao vs The State Of Andhra Pradesh & Others on 6 December, 1960",
+          "year": 1960,
+          "similarity": 0.45,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 12081,
+      "target_title": "Indian Rayon Corpn. Ltd vs Raunaq & Company Pvt. Ltd on 4 August, 1988",
+      "target_year": 1988,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 73.65,
+      "allowed_evidence": 2.3751,
+      "dismissed_evidence": 6.6389,
+      "outcome_margin": -0.0222,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 2,
+          "title": "Major (Retd.) Inder Singh Rekhi vs Delhi Development Authority on 24 March, 1988",
+          "year": 1988,
+          "similarity": 0.5781,
+          "outcome": "ALLOWED",
+          "matched_issue": "Major (Retd.) Inder Singh Rekhi vs Delhi Development Authority on 24 March, 1988 Equivalent citations: 1988 AIR 1007, 19",
+          "matched_act": [
+            "arbitration",
+            "limitation act"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "Raj Kumar Dey And Others vs Tarapada Dey And Others on 14 September, 1987",
+          "year": 1987,
+          "similarity": 0.4973,
+          "outcome": "ALLOWED",
+          "matched_issue": "Raj Kumar Dey And Others vs Tarapada Dey And Others on 14 September, 1987 Equivalent citations: 1987 AIR 2195, 1988 SCR ",
+          "matched_act": [
+            "arbitration",
+            "limitation act"
+          ],
+          "matched_section": [
+            "14"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 8,
+          "title": "Odyssey Communications Pvt. Ltd vs Lokvidayan Sanghatana & Ors on 19 July, 1988",
+          "year": 1988,
+          "similarity": 0.4652,
+          "outcome": "ALLOWED",
+          "matched_issue": "Odyssey Communications Pvt. Ltd vs Lokvidayan Sanghatana & Ors on 19 July, 1988 Equivalent citations: 1988 AIR 1642, 198",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "Food Corporation Of India & Anr vs Great Eastern Shipping Co. Ltd on 28 March, 1988",
+          "year": 1988,
+          "similarity": 0.6003,
+          "outcome": "DISMISSED",
+          "matched_issue": "Food Corporation Of India & Anr vs Great Eastern Shipping Co. Ltd on 28 March, 1988 Equivalent citations: 1988 AIR 1198,",
+          "matched_act": [
+            "arbitration"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "Indian Oil Corporation vs Indian Carbon Ltd on 6 April, 1988",
+          "year": 1988,
+          "similarity": 0.5723,
+          "outcome": "DISMISSED",
+          "matched_issue": "Indian Oil Corporation vs Indian Carbon Ltd on 6 April, 1988 Equivalent citations: 1988 AIR 1340, 1988 SCR (3) 426, AIR ",
+          "matched_act": [
+            "arbitration"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 5,
+          "title": "International Airport Authority Of ... vs K.D. Bali & Another on 29 March, 1988",
+          "year": 1988,
+          "similarity": 0.4905,
+          "outcome": "DISMISSED",
+          "matched_issue": "International Airport Authority Of ... vs K.D. Bali & Another on 29 March, 1988 Equivalent citations: 1988 AIR 1099, 198",
+          "matched_act": [
+            "arbitration"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Major (Retd.) Inder Singh Rekhi vs Delhi Development Authority on 24 March, 1988",
+          "year": 1988,
+          "similarity": 0.5781,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Raj Kumar Dey And Others vs Tarapada Dey And Others on 14 September, 1987",
+          "year": 1987,
+          "similarity": 0.4973,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 3069,
+      "target_title": "State Of Gujarat vs Vora Fiddali Badruddin Mithibarwala on 30 January, 1964",
+      "target_year": 1964,
+      "predicted_outcome": "ALLOWED",
+      "actual_outcome": "ALLOWED",
+      "confidence_pct": 61.03,
+      "allowed_evidence": 5.4254,
+      "dismissed_evidence": 3.4644,
+      "outcome_margin": 0.093,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 1,
+          "title": "State Of Orissa vs M. A. Tulloch And Co.(And Connected ... on 16 August, 1963",
+          "year": 1963,
+          "similarity": 0.5543,
+          "outcome": "ALLOWED",
+          "matched_issue": "State Of Orissa vs M. A. Tulloch And Co.(And Connected ... on 16 August, 1963 Equivalent citations: 1964 AIR 1284, 1964 ",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "State Of Punjab vs Joginder Singh on 16 November, 1962",
+          "year": 1962,
+          "similarity": 0.4879,
+          "outcome": "ALLOWED",
+          "matched_issue": "State Of Punjab vs Joginder Singh on 16 November, 1962 Equivalent citations: 1963 AIR 913, 1963 SCR SUPL. (2) 169, AIR 1",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "S. Pratap Singh vs The State Of Punjab on 2 September, 1963",
+          "year": 1963,
+          "similarity": 0.4836,
+          "outcome": "ALLOWED",
+          "matched_issue": "S. Pratap Singh vs The State Of Punjab on 2 September, 1963 Equivalent citations: 1964 AIR 72, 1964 SCR (4) 733 Author: ",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 5,
+          "title": "State Of Mysore vs K. Manche Gowda on 22 August, 1963",
+          "year": 1963,
+          "similarity": 0.4613,
+          "outcome": "DISMISSED",
+          "matched_issue": "State Of Mysore vs K. Manche Gowda on 22 August, 1963 Equivalent citations: 1964 AIR 506, 1964 SCR (4) 540, AIR 1964 SUP",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 6,
+          "title": "Al. Vr. St. Veerappa Chettiar vs State Of Madras And Anr. on 5 February, 1954",
+          "year": 1954,
+          "similarity": 0.4528,
+          "outcome": "DISMISSED",
+          "matched_issue": "Al. Vr. St. Veerappa Chettiar vs State Of Madras And Anr. on 5 February, 1954 Equivalent citations: AIR1954SC605, AIR 19",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [
+            "299"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 8,
+          "title": "Vidyacharan Shukla vs Khubchand Baghel And Others on 20 December, 1963",
+          "year": 1963,
+          "similarity": 0.4522,
+          "outcome": "DISMISSED",
+          "matched_issue": "Vidyacharan Shukla vs Khubchand Baghel And Others on 20 December, 1963 Equivalent citations: 1964 AIR 1099, 1964 SCR (6)",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "State Of Mysore vs K. Manche Gowda on 22 August, 1963",
+          "year": 1963,
+          "similarity": 0.4613,
+          "candidate_outcome": "DISMISSED",
+          "target_outcome": "ALLOWED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Al. Vr. St. Veerappa Chettiar vs State Of Madras And Anr. on 5 February, 1954",
+          "year": 1954,
+          "similarity": 0.4528,
+          "candidate_outcome": "DISMISSED",
+          "target_outcome": "ALLOWED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 959,
+      "target_title": "The Newspapers Ltd vs The State Industrial Tribunal, U.P on 20 March, 1957",
+      "target_year": 1957,
+      "predicted_outcome": "ALLOWED",
+      "actual_outcome": "ALLOWED",
+      "confidence_pct": 60.81,
+      "allowed_evidence": 4.7982,
+      "dismissed_evidence": 3.0922,
+      "outcome_margin": -0.0044,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 2,
+          "title": "Punjab National Bank Ltd vs Sri Ram Kanwar, Industrial ... on 20 December, 1956",
+          "year": 1956,
+          "similarity": 0.4701,
+          "outcome": "ALLOWED",
+          "matched_issue": "Punjab National Bank Ltd vs Sri Ram Kanwar, Industrial ... on 20 December, 1956 Equivalent citations: 1957 AIR 276, 1957",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "Banaras Ice Factory Limited vs Its Workmen on 28 November, 1956",
+          "year": 1956,
+          "similarity": 0.4584,
+          "outcome": "ALLOWED",
+          "matched_issue": "Banaras Ice Factory Limited vs Its Workmen on 28 November, Equivalent citations: 1957 AIR 168, 1957 SCR 143, AIR 1957 SU",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "Sri Monohar Das Mohanta vs Charu Chandra Pal And Others on 20 December, 1954",
+          "year": 1954,
+          "similarity": 0.4303,
+          "outcome": "ALLOWED",
+          "matched_issue": "Sri Monohar Das Mohanta vs Charu Chandra Pal And Others on 20 December, 1954 Equivalent citations: 1955 AIR 228, 1955 SC",
+          "matched_act": [],
+          "matched_section": [
+            "36"
+          ],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "Niemla Textile Finishing. Mills Ltd vs The 2Nd Punjab Industrial ... on 10 January, 1957",
+          "year": 1957,
+          "similarity": 0.4745,
+          "outcome": "DISMISSED",
+          "matched_issue": "Niemla Textile Finishing. Mills Ltd vs The 2Nd Punjab Industrial ... on 10 January, 1957 Equivalent citations: 1957 AIR ",
+          "matched_act": [],
+          "matched_section": [
+            "2"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 8,
+          "title": "Srimati Ashalata Debi And Others vs Sri Jadu Nath Roy And Others on 26 April, 1954",
+          "year": 1954,
+          "similarity": 0.4004,
+          "outcome": "DISMISSED",
+          "matched_issue": "Srimati Ashalata Debi And Others vs Sri Jadu Nath Roy And Others on 26 April, 1954 Equivalent citations: 1954 AIR 409, 1",
+          "matched_act": [],
+          "matched_section": [
+            "36",
+            "2"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 11,
+          "title": "Bhatnagars And Co. Ltd vs The Union Of India(And Connected ... on 21 February, 1957",
+          "year": 1957,
+          "similarity": 0.3803,
+          "outcome": "DISMISSED",
+          "matched_issue": "Bhatnagars And Co. Ltd vs The Union Of India(And Connected ... on 21 February, 1957 Equivalent citations: 1957 AIR 478, ",
+          "matched_act": [],
+          "matched_section": [
+            "2",
+            "3"
+          ],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Niemla Textile Finishing. Mills Ltd vs The 2Nd Punjab Industrial ... on 10 January, 1957",
+          "year": 1957,
+          "similarity": 0.4745,
+          "candidate_outcome": "DISMISSED",
+          "target_outcome": "ALLOWED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Srimati Ashalata Debi And Others vs Sri Jadu Nath Roy And Others on 26 April, 1954",
+          "year": 1954,
+          "similarity": 0.4004,
+          "candidate_outcome": "DISMISSED",
+          "target_outcome": "ALLOWED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 10389,
+      "target_title": "A. C. Jose vs Sivan Pillai & Ors on 5 March, 1984",
+      "target_year": 1984,
+      "predicted_outcome": "ALLOWED",
+      "actual_outcome": "ALLOWED",
+      "confidence_pct": 64.93,
+      "allowed_evidence": 5.8262,
+      "dismissed_evidence": 3.1468,
+      "outcome_margin": -0.0008,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 2,
+          "title": "Rajendra Singh & Ors. Etc vs Smt. Usha Rani & Ors. Etc on 27 February, 1984",
+          "year": 1984,
+          "similarity": 0.5479,
+          "outcome": "ALLOWED",
+          "matched_issue": "Rajendra Singh & Ors. Etc vs Smt. Usha Rani & Ors. Etc on 27 February, 1984 Equivalent citations: 1984 AIR 956, 1984 SCR",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "Corporation Of The City Of Nagpur Civil ... vs Ramchandra S/O Gurunath Modak & Ors on 26 February, 1981",
+          "year": 1981,
+          "similarity": 0.5331,
+          "outcome": "ALLOWED",
+          "matched_issue": "Corporation Of The City Of Nagpur Civil ... vs Ramchandra S/O Gurunath Modak & Ors on 26 February, 1981 Equivalent citat",
+          "matched_act": [],
+          "matched_section": [
+            "59"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 6,
+          "title": "Biharilal Dobray vs Roshan Lal Dobray on 23 November, 1983",
+          "year": 1983,
+          "similarity": 0.4736,
+          "outcome": "ALLOWED",
+          "matched_issue": "Biharilal Dobray vs Roshan Lal Dobray on 23 November, 1983 Equivalent citations: 1984 AIR 385, 1984 SCR (1) 877, AIR 198",
+          "matched_act": [
+            "constitution"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "A. Madan Mohan vs Kalavakunta Chandrasekhara on 14 February, 1984",
+          "year": 1984,
+          "similarity": 0.5487,
+          "outcome": "DISMISSED",
+          "matched_issue": "A. Madan Mohan vs Kalavakunta Chandrasekhara on 14 February, 1984 Equivalent citations: 1984 AIR 871, 1984 SCR (2) 894, ",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "Azmat Khan vs Khillan Singh & Others on 8 November, 1983",
+          "year": 1983,
+          "similarity": 0.5133,
+          "outcome": "DISMISSED",
+          "matched_issue": "Azmat Khan vs Khillan Singh & Others on 8 November, 1983 Equivalent citations: 1984 AIR 304, 1984 SCR (1) 795, AIR 1984 ",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 5,
+          "title": "S. Anbalagan vs B. Devarajan & Ors on 5 December, 1983",
+          "year": 1983,
+          "similarity": 0.4745,
+          "outcome": "DISMISSED",
+          "matched_issue": "S. Anbalagan vs B. Devarajan & Ors on 5 December, 1983 Equivalent citations: 1984 AIR 411, 1984 SCR (1) 973, AIR 1984 SU",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "A. Madan Mohan vs Kalavakunta Chandrasekhara on 14 February, 1984",
+          "year": 1984,
+          "similarity": 0.5487,
+          "candidate_outcome": "DISMISSED",
+          "target_outcome": "ALLOWED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Azmat Khan vs Khillan Singh & Others on 8 November, 1983",
+          "year": 1983,
+          "similarity": 0.5133,
+          "candidate_outcome": "DISMISSED",
+          "target_outcome": "ALLOWED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 2863,
+      "target_title": "D. C. Dewan Mohideen Sahib And Sons vs The Industrial Tribunal, Madras on 6 April, 1964",
+      "target_year": 1964,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 64.87,
+      "allowed_evidence": 2.9026,
+      "dismissed_evidence": 5.3593,
+      "outcome_margin": -0.0562,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 2,
+          "title": "Workmen Of Dewan Tea Estate And Ors vs The Management on 25 November, 1963",
+          "year": 1963,
+          "similarity": 0.4495,
+          "outcome": "ALLOWED",
+          "matched_issue": "Workmen Of Dewan Tea Estate And Ors vs The Management on 25 November, 1963 Equivalent citations: 1964 AIR 1458, 1964 SCR",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "Workmen Of Subong Tea Estate vs The Outgoing Management Of Subongtea ... on 2 December, 1963",
+          "year": 1963,
+          "similarity": 0.4205,
+          "outcome": "ALLOWED",
+          "matched_issue": "Workmen Of Subong Tea Estate vs The Outgoing Management Of Subongtea ... on 2 December, 1963 Equivalent citations: 1967 ",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 5,
+          "title": "M/S. Bengal Bhatdee Coal Co vs Shri Ram Prabesh Singh & Ors on 23 January, 1963",
+          "year": 1963,
+          "similarity": 0.4149,
+          "outcome": "ALLOWED",
+          "matched_issue": "M/S. Bengal Bhatdee Coal Co vs Shri Ram Prabesh Singh & Ors on 23 January, 1963 Equivalent citations: 1964 AIR 486, 1964",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "Hochtief Gammon vs Industrial Tribunal, Bhubaneshwar, ... on 1 April, 1964",
+          "year": 1964,
+          "similarity": 0.5057,
+          "outcome": "DISMISSED",
+          "matched_issue": "Hochtief Gammon vs Industrial Tribunal, Bhubaneshwar, ... on 1 April, 1964 Equivalent citations: 1964 AIR 1746, 1964 SCR",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "P. H. Kalyani vs M/S. Air France Calcutta on 15 February, 1963",
+          "year": 1963,
+          "similarity": 0.4446,
+          "outcome": "DISMISSED",
+          "matched_issue": "P. H. Kalyani vs M/S. Air France Calcutta on 15 February, 1963 Equivalent citations: 1963 AIR 1756, 1964 SCR (2) 104, AI",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 6,
+          "title": "G. S. Ramaswamy & Ors vs Inspector-General Of Police, Mysore on 21 January, 1964",
+          "year": 1964,
+          "similarity": 0.4107,
+          "outcome": "DISMISSED",
+          "matched_issue": "G. S. Ramaswamy & Ors vs Inspector-General Of Police, Mysore on 21 January, 1964 Equivalent citations: 1966 AIR 175, 196",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Workmen Of Dewan Tea Estate And Ors vs The Management on 25 November, 1963",
+          "year": 1963,
+          "similarity": 0.4495,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Workmen Of Subong Tea Estate vs The Outgoing Management Of Subongtea ... on 2 December, 1963",
+          "year": 1963,
+          "similarity": 0.4205,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 25293,
+      "target_title": "National High Speed Rail Corporation ... vs Montecarlo Limited on 31 January, 2022",
+      "target_year": 2022,
+      "predicted_outcome": "ALLOWED",
+      "actual_outcome": "ALLOWED",
+      "confidence_pct": 77.95,
+      "allowed_evidence": 6.2613,
+      "dismissed_evidence": 1.7715,
+      "outcome_margin": 0.0626,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 1,
+          "title": "Steel Authority Of India Limited vs Gouri Devi on 18 November, 2021",
+          "year": 2021,
+          "similarity": 0.513,
+          "outcome": "ALLOWED",
+          "matched_issue": "Steel Authority Of India Limited vs Gouri Devi on 18 November, Author: M.R. Shah Bench: Sanjiv Khanna, M.R. Shah REPORTA",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "The Rajasthan Marudhara Gramin Bank ... vs Ramesh Chandra Meena on 4 January, 2022",
+          "year": 2022,
+          "similarity": 0.4875,
+          "outcome": "ALLOWED",
+          "matched_issue": "The Rajasthan Marudhara Gramin Bank ... vs Ramesh Chandra Meena on 4 January, 2022 Author: M. R. Shah Bench: Sanjiv Khan",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "Maharashtra State Road Transport ... vs Dilip Uttam Jayabhay on 3 January, 2022",
+          "year": 2022,
+          "similarity": 0.4797,
+          "outcome": "ALLOWED",
+          "matched_issue": "Maharashtra State Road Transport ... vs Dilip Uttam Jayabhay on 3 January, 2022 Author: M. R. Shah Bench: B. V. Nagarath",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 6,
+          "title": "Bhadar Ram (D) Thr. Lrs. vs Jassa Ram . on 5 January, 2022",
+          "year": 2022,
+          "similarity": 0.4504,
+          "outcome": "DISMISSED",
+          "matched_issue": "Bhadar Ram (D) Thr. Lrs. vs Jassa Ram . on 5 January, 2022 Author: M. R. Shah Bench: A.S. Bopanna, M. R. Shah [REPORTABL",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 11,
+          "title": "Sadakat Kotwar vs The State Of Jharkhand on 12 November, 2021",
+          "year": 2021,
+          "similarity": 0.4006,
+          "outcome": "DISMISSED",
+          "matched_issue": "Sadakat Kotwar vs The State Of Jharkhand on 12 November, Author: M. R. Shah Bench: A.S. Bopanna, M. R. Shah [REPORTABLE]",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": false
+        },
+        {
+          "rank": 13,
+          "title": "The Director Of Treasuries In Karnataka vs V. Somyashree on 13 September, 2021",
+          "year": 2021,
+          "similarity": 0.3988,
+          "outcome": "DISMISSED",
+          "matched_issue": "The Director Of Treasuries In Karnataka vs V. Somyashree on 13 September, 2021 Author: M. R. Shah Bench: Aniruddha Bose,",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Bhadar Ram (D) Thr. Lrs. vs Jassa Ram . on 5 January, 2022",
+          "year": 2022,
+          "similarity": 0.4504,
+          "candidate_outcome": "DISMISSED",
+          "target_outcome": "ALLOWED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Sadakat Kotwar vs The State Of Jharkhand on 12 November, 2021",
+          "year": 2021,
+          "similarity": 0.4006,
+          "candidate_outcome": "DISMISSED",
+          "target_outcome": "ALLOWED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 25318,
+      "target_title": "Pr. Commissioner Of Income Tax 1 vs M/S Abc Papers Limited on 18 August, 2022",
+      "target_year": 2022,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 60.95,
+      "allowed_evidence": 2.6782,
+      "dismissed_evidence": 4.18,
+      "outcome_margin": 0.0387,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 1,
+          "title": "Commissioner Of Income Tax ... vs Batanagar Education And Research Trust on 2 August, 2021",
+          "year": 2021,
+          "similarity": 0.5009,
+          "outcome": "ALLOWED",
+          "matched_issue": "Commissioner Of Income Tax ... vs Batanagar Education And Research Trust on 2 August, 2021 Equivalent citations: AIR 202",
+          "matched_act": [
+            "income tax"
+          ],
+          "matched_section": [
+            "260a"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 5,
+          "title": "The Principal Commissioner Of Income ... vs M/S S.G. Asia Holdings (India) Pvt. Ltd. on 13 August, 2019",
+          "year": 2019,
+          "similarity": 0.4154,
+          "outcome": "ALLOWED",
+          "matched_issue": "The Principal Commissioner Of Income ... vs M/S S.G. Asia Holdings (India) Pvt. Ltd. on 13 August, 2019 Equivalent citat",
+          "matched_act": [
+            "income tax"
+          ],
+          "matched_section": [
+            "120",
+            "143"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 6,
+          "title": "Jt.Commr.Of Income Tax,Surat vs Saheli Leasing & Industries Ltd on 7 May, 2010",
+          "year": 2010,
+          "similarity": 0.4049,
+          "outcome": "ALLOWED",
+          "matched_issue": "Jt.Commr.Of Income Tax,Surat vs Saheli Leasing & Industries Ltd on 7 May, 2010 Author: Deepak Verma Bench: B.S. Chauhan,",
+          "matched_act": [
+            "income tax"
+          ],
+          "matched_section": [
+            "260",
+            "143",
+            "260a"
+          ],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 2,
+          "title": "M/S Apex Laboratories P. Ltd. vs The Deputy Commissioner Of Income Tax ... on 22 February, 2022",
+          "year": 2022,
+          "similarity": 0.4623,
+          "outcome": "DISMISSED",
+          "matched_issue": "M/S Apex Laboratories P. Ltd. vs The Deputy Commissioner Of Income Tax ... on 22 February, 2022 Author: S. Ravindra Bhat",
+          "matched_act": [
+            "income tax"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "Commissioner Of Income Tax-I vs M/S Reliance Energy Ltd (Formerly Bses ... on 28 April, 2021",
+          "year": 2021,
+          "similarity": 0.4416,
+          "outcome": "DISMISSED",
+          "matched_issue": "Commissioner Of Income Tax-I vs M/S Reliance Energy Ltd (Formerly Bses ... on 28 April, 2021 Equivalent citations: AIR 2",
+          "matched_act": [
+            "income tax"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "Acg Associated Capsules P.Ltd vs C.I.T Central-Iv Mumbai on 8 February, 2012",
+          "year": 2012,
+          "similarity": 0.417,
+          "outcome": "DISMISSED",
+          "matched_issue": "Acg Associated Capsules P.Ltd vs C.I.T Central-Iv Mumbai on 8 February, 2012 Author: A. K. Patnaik Bench: S.H. Kapadia, ",
+          "matched_act": [
+            "income tax"
+          ],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Commissioner Of Income Tax ... vs Batanagar Education And Research Trust on 2 August, 2021",
+          "year": 2021,
+          "similarity": 0.5009,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'TAX_AUTHORITY_AS_APPELLANT__LOWER_TAX_ASSESSMENT' vs candidate 'TAX_AUTHORITY_AS_APPELLANT__LOWER_TAX_ASSESSMENT'; lower court posture: 'LOWER_TAX_ASSESSMENT' vs 'LOWER_TAX_ASSESSMENT'."
+        },
+        {
+          "title": "The Principal Commissioner Of Income ... vs M/S S.G. Asia Holdings (India) Pvt. Ltd. on 13 August, 2019",
+          "year": 2019,
+          "similarity": 0.4154,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'TAX_AUTHORITY_AS_APPELLANT__LOWER_TAX_ASSESSMENT' vs candidate 'UNKNOWN'; lower court posture: 'LOWER_TAX_ASSESSMENT' vs 'LOWER_TAX_ASSESSMENT'."
+        }
+      ]
+    },
+    {
+      "target_case_id": 10839,
+      "target_title": "Dr. Karan Singh vs State Of Jammu & Kashmir & Anr on 20 December, 1985",
+      "target_year": 1985,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "ALLOWED",
+      "confidence_pct": 75.52,
+      "allowed_evidence": 1.7196,
+      "dismissed_evidence": 5.3052,
+      "outcome_margin": 0.0075,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 1,
+          "title": "H. Anraj Etc vs Government Of Tamilnadu Etc on 4 October, 1985",
+          "year": 1985,
+          "similarity": 0.4018,
+          "outcome": "ALLOWED",
+          "matched_issue": "H. Anraj Etc vs Government Of Tamilnadu Etc on 4 October, Equivalent citations: 1986 AIR 63, 1985 SCR SUPL. (3) 342, AIR",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 11,
+          "title": "Nepal Singh vs State Of U. P. Ors on 9 November, 1984",
+          "year": 1984,
+          "similarity": 0.3443,
+          "outcome": "ALLOWED",
+          "matched_issue": "Nepal Singh vs State Of U. P. Ors on 9 November, 1984 Equivalent citations: 1985 AIR 84, 1985 SCR (2) 1, AIR 1985 SUPREM",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 12,
+          "title": "Forward Construction Co. & Ors. Etc. Etc vs Prabhat Mandal (Regd.) Andheri & Ors. ... on 26 November, 1985",
+          "year": 1985,
+          "similarity": 0.3403,
+          "outcome": "ALLOWED",
+          "matched_issue": "Forward Construction Co. & Ors. Etc. Etc vs Prabhat Mandal (Regd.) Andheri & Ors. ... on 26 November, 1985 Equivalent ci",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 2,
+          "title": "Satyavir Singh And Others vs Union Of India And Others Etc. Etc on 12 September, 1985",
+          "year": 1985,
+          "similarity": 0.3942,
+          "outcome": "DISMISSED",
+          "matched_issue": "Satyavir Singh And Others vs Union Of India And Others Etc. Etc on 12 September, 1985 Equivalent citations: 1986 AIR 555",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "Soosai Etc vs Union Of India And Others on 30 September, 1985",
+          "year": 1985,
+          "similarity": 0.3835,
+          "outcome": "DISMISSED",
+          "matched_issue": "Soosai Etc vs Union Of India And Others on 30 September, 1985 Equivalent citations: 1986 AIR 733, 1985 SCR SUPL. (3) 242",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 4,
+          "title": "Messrs. P.M. Patel & Sons And Others, Etc vs Union Of India And Others, Etc on 25 September, 1985",
+          "year": 1985,
+          "similarity": 0.3778,
+          "outcome": "DISMISSED",
+          "matched_issue": "Messrs. P.M. Patel & Sons And Others, Etc vs Union Of India And Others, Etc on 25 September, 1985 Equivalent citations: ",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": []
+    },
+    {
+      "target_case_id": 1106,
+      "target_title": "S. M. Jakati & Another vs S. M. Borkar & Others on 24 September, 1958",
+      "target_year": 1958,
+      "predicted_outcome": "DISMISSED",
+      "actual_outcome": "DISMISSED",
+      "confidence_pct": 51.19,
+      "allowed_evidence": 4.0481,
+      "dismissed_evidence": 4.2459,
+      "outcome_margin": -0.1556,
+      "most_supportive_allowed_cases": [
+        {
+          "rank": 4,
+          "title": "Bai Hira Devi And Others vs The Official Assignee Of Bombay on 20 February, 1958",
+          "year": 1958,
+          "similarity": 0.4442,
+          "outcome": "ALLOWED",
+          "matched_issue": "Bai Hira Devi And Others vs The Official Assignee Of Bombay on 20 February, 1958 Equivalent citations: 1958 AIR 448, 195",
+          "matched_act": [],
+          "matched_section": [
+            "55"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 5,
+          "title": "Anant Gopal Sheorey vs The State Of Bombay on 22 May, 1958",
+          "year": 1958,
+          "similarity": 0.444,
+          "outcome": "ALLOWED",
+          "matched_issue": "Anant Gopal Sheorey vs The State Of Bombay on 22 May, 1958 Equivalent citations: 1958 AIR 915, 1959 SCR 919, AIR 1958 SU",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 6,
+          "title": "The Central India Spinning Andweaving ... vs The Municipal Committee, Wardha on 18 December, 1957",
+          "year": 1957,
+          "similarity": 0.4212,
+          "outcome": "ALLOWED",
+          "matched_issue": "The Central India Spinning Andweaving ... vs The Municipal Committee, Wardha on 18 December, 1957 Equivalent citations: ",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "most_supportive_dismissed_cases": [
+        {
+          "rank": 1,
+          "title": "Razia Begum vs Sahebzadi Anwar Begum & Others on 23 May, 1958",
+          "year": 1958,
+          "similarity": 0.5997,
+          "outcome": "DISMISSED",
+          "matched_issue": "Razia Begum vs Sahebzadi Anwar Begum & Others on 23 May, Equivalent citations: 1958 AIR 886, 1959 SCR 1111, AIR 1958 SUP",
+          "matched_act": [],
+          "matched_section": [
+            "43"
+          ],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 2,
+          "title": "Dr. Sailendra Nath Sinha And Another vs Jasoda Dulal Adhikari And Another on 11 September, 1958",
+          "year": 1958,
+          "similarity": 0.5166,
+          "outcome": "DISMISSED",
+          "matched_issue": "Dr. Sailendra Nath Sinha And Another vs Jasoda Dulal Adhikari And Another on 11 September, 1958 Equivalent citations: 19",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        },
+        {
+          "rank": 3,
+          "title": "Ram Prakash vs The State Of Punjab on 2 September, 1958",
+          "year": 1958,
+          "similarity": 0.4475,
+          "outcome": "DISMISSED",
+          "matched_issue": "Ram Prakash vs The State Of Punjab on 2 September, 1958 Equivalent citations: 1959 AIR, 1 1959 SCR 1210, AIR 1959 SUPREM",
+          "matched_act": [],
+          "matched_section": [],
+          "procedural_agreement": true
+        }
+      ],
+      "contradictory_precedents": [
+        {
+          "title": "Bai Hira Devi And Others vs The Official Assignee Of Bombay on 20 February, 1958",
+          "year": 1958,
+          "similarity": 0.4442,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        },
+        {
+          "title": "Anant Gopal Sheorey vs The State Of Bombay on 22 May, 1958",
+          "year": 1958,
+          "similarity": 0.444,
+          "candidate_outcome": "ALLOWED",
+          "target_outcome": "DISMISSED",
+          "distinction_reason": "Directional role difference: target is 'UNKNOWN' vs candidate 'UNKNOWN'; lower court posture: 'UNKNOWN_LOWER_ORDER' vs 'UNKNOWN_LOWER_ORDER'."
+        }
+      ]
+    }
+  ]
+}

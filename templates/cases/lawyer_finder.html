@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Tamil Nadu Legal Help Directory — Legal Services — Legal Lens{% endblock %}
+
+{% block content %}
+<div class="container directory-container">
+    <div class="directory-header-bar" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+        <div>
+            <h1 class="page-title" style="font-family: 'Newsreader', Georgia, serif; font-size: 1.8rem; color: var(--text-primary); margin: 0 0 4px 0;">Tamil Nadu Legal Assistance Directory</h1>
+            <p class="results-meta" style="color: var(--text-secondary); font-size: 0.88rem; margin: 0;">Verified District Legal Services Authorities (DLSA/TNSLSA) and official eCourts portals across all 38 Tamil Nadu districts.</p>
+        </div>
+        <div>
+            <span class="badge badge-ready">38 DISTRICTS CONFIGURED</span>
+        </div>
+    </div>
+
+    <!-- DIRECTORY SEARCH FORM (Select District) -->
+    <div class="dashboard-panel" style="background: var(--bg-surface); border: 1px solid var(--border-color); padding: 20px 24px; border-radius: var(--radius-md); margin-bottom: 24px; box-shadow: var(--shadow-subtle);">
+        <form method="get" action="{% url 'cases:lawyer_finder' %}" class="directory-form-grid" style="display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: flex-end;">
+            <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label">Select Tamil Nadu District (All 38 Districts):</label>
+                {{ form.district }}
+            </div>
+            <div class="form-group filter-btn-group" style="margin-bottom: 0;">
+                <button type="submit" class="btn btn-primary" style="padding: 12px 24px;">Find Legal Help</button>
+            </div>
+        </form>
+    </div>
+
+    {% if directory_results %}
+    <div class="directory-results-section" style="margin-top: 20px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
+            <h2 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.4rem; color: var(--text-primary); margin: 0;">Legal Services & Judiciary Information for {{ directory_results.district|default:"Selected District" }}</h2>
+            {% if directory_results.district_info and directory_results.district_info.official_district_website %}
+            <a href="{{ directory_results.district_info.official_district_website }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                Official District Portal ({{ directory_results.district_info.district }}.nic.in) ↗
+            </a>
+            {% endif %}
+        </div>
+        
+        <div class="directory-split-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+            <!-- OFFICIAL LEGAL AID OFFICES -->
+            <div class="dashboard-panel" style="background: var(--bg-surface); border: 1px solid var(--border-color); padding: 24px; border-radius: var(--radius-md); box-shadow: var(--shadow-subtle);">
+                <h3 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.25rem; margin-top: 0; color: var(--text-primary);">Official Legal Aid (TNSLSA / DLSA)</h3>
+                {% for office in directory_results.offices %}
+                <div style="background: var(--bg-elevated); border: 1px solid var(--border-color); padding: 16px; border-radius: var(--radius-sm); margin-bottom: 14px;">
+                    <span class="badge badge-ready">{{ office.authority_type }}</span>
+                    <h4 style="margin: 8px 0 4px; color: var(--text-primary); font-family: 'Newsreader', Georgia, serif; font-size: 1.1rem;">{{ office.authority_name }}</h4>
+                    <p style="margin: 3px 0; font-size: 0.85rem; color: var(--text-secondary);"><strong>District HQ:</strong> {{ directory_results.district_info.district_headquarters|default:directory_results.district }}</p>
+                    <p style="margin: 3px 0; font-size: 0.85rem; color: var(--text-secondary);"><strong>Address:</strong> {{ office.address|default:"District Court Campus" }}</p>
+                    {% if office.phone %}
+                    <p style="margin: 3px 0; font-size: 0.85rem; color: var(--text-secondary);"><strong>Official Phone:</strong> {{ office.phone }}</p>
+                    {% endif %}
+                    {% if office.email %}
+                    <p style="margin: 3px 0; font-size: 0.85rem; color: var(--text-secondary);"><strong>Official Email:</strong> {{ office.email }}</p>
+                    {% endif %}
+                    
+                    <div style="margin-top: 12px;">
+                        <a href="{{ office.verification_url|default:'https://tamilnadu.nalsa.gov.in/' }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                            Verify on Official TNSLSA Portal ↗
+                        </a>
+                    </div>
+                </div>
+                {% empty %}
+                <div style="background: var(--bg-elevated); border: 1px solid var(--border-color); padding: 14px; border-radius: var(--radius-sm);">
+                    <p style="color: var(--text-muted); font-size: 0.86rem; margin: 0 0 10px 0;">District-specific DLSA contact details are available. Please verify office details through the official TNSLSA portal.</p>
+                    <a href="https://tamilnadu.nalsa.gov.in/directory/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                        TNSLSA Official Directory ↗
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- DISTRICT ECOURTS & JUDICIARY SERVICES -->
+            <div class="dashboard-panel" style="background: var(--bg-surface); border: 1px solid var(--border-color); padding: 24px; border-radius: var(--radius-md); box-shadow: var(--shadow-subtle);">
+                <h3 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.25rem; margin-top: 0; color: var(--text-primary);">District Court & eCourts Judiciary</h3>
+                {% if directory_results.district_info %}
+                <div style="background: var(--bg-elevated); border: 1px solid var(--border-color); padding: 16px; border-radius: var(--radius-sm);">
+                    <span class="badge badge-mode">eCourts Services</span>
+                    <h4 style="margin: 8px 0 4px; color: var(--text-primary); font-family: 'Newsreader', Georgia, serif; font-size: 1.1rem;">District Court of {{ directory_results.district_info.district }}</h4>
+                    <p style="margin: 3px 0; font-size: 0.85rem; color: var(--text-secondary);"><strong>District Headquarters:</strong> {{ directory_results.district_info.district_headquarters }}</p>
+                    <p style="margin: 3px 0; font-size: 0.85rem; color: var(--text-secondary);"><strong>Official eCourts Portal:</strong> {{ directory_results.district_info.ecourts_portal|default:"https://ecourts.gov.in/ecourts_home/" }}</p>
+                    
+                    <div style="margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
+                        <a href="{{ directory_results.district_info.ecourts_portal|default:'https://ecourts.gov.in/ecourts_home/' }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                            Open Official eCourts Portal ↗
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

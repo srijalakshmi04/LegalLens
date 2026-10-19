@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Legal Lens — Premium Indian Supreme Court Legal Research Platform{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=11">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+</head>
+<body class="app-layout">
+
+    <!-- DESKTOP PERSISTENT LEFT SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="{% url 'cases:home' %}" class="logo">
+                <span class="logo-icon">⚖</span>
+                <span class="logo-text">Legal Lens</span>
+            </a>
+            <div class="logo-badge">PREMIUM RESEARCH</div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <!-- PUBLIC USER RESEARCH SECTION -->
+            <div class="nav-section-title">RESEARCH</div>
+            <a href="{% url 'cases:home' %}" class="sidebar-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                <span class="nav-icon">🔍</span> Case Search
+            </a>
+            <a href="{% url 'cases:dashboard' %}" class="sidebar-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+                <span class="nav-icon">📜</span> Recent Research
+            </a>
+            <a href="{% url 'cases:saved_cases' %}" class="sidebar-link {% if request.resolver_match.url_name == 'saved_cases' %}active{% endif %}">
+                <span class="nav-icon">★</span> Saved Cases
+            </a>
+
+            <!-- PUBLIC USER LEGAL RESOURCES SECTION -->
+            <div class="nav-section-title">LEGAL RESOURCES</div>
+            <a href="{% url 'cases:assistant' %}" class="sidebar-link {% if request.resolver_match.url_name == 'assistant' %}active{% endif %}">
+                <span class="nav-icon">🤖</span> Legal Assistant
+            </a>
+            <a href="{% url 'cases:lawyer_finder' %}" class="sidebar-link {% if request.resolver_match.url_name == 'lawyer_finder' %}active{% endif %}">
+                <span class="nav-icon">🏛</span> Tamil Nadu Legal Help
+            </a>
+            <a href="{% url 'cases:legal_awareness' %}" class="sidebar-link {% if request.resolver_match.url_name == 'legal_awareness' %}active{% endif %}">
+                <span class="nav-icon">📚</span> Legal Awareness
+            </a>
+
+            <!-- PUBLIC USER SYSTEM SECTION -->
+            <div class="nav-section-title">SYSTEM</div>
+            <a href="{% url 'cases:about' %}" class="sidebar-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+                <span class="nav-icon">ℹ</span> About
+            </a>
+
+            <!-- PROTECTED ADMIN MENU (VISIBLE WHEN IS_ADMIN IS TRUE) -->
+            {% if is_admin %}
+            <div class="nav-section-title" style="color: var(--accent-gold-bright); margin-top: 10px;">ADMIN CONSOLE</div>
+            <a href="{% url 'cases:admin_dashboard' %}" class="sidebar-link {% if request.resolver_match.url_name == 'admin_dashboard' %}active{% endif %}">
+                <span class="nav-icon">⚙</span> Overview
+            </a>
+            <a href="{% url 'cases:research_console' %}" class="sidebar-link {% if request.resolver_match.url_name == 'research_console' %}active{% endif %}">
+                <span class="nav-icon">📊</span> Research & System Details
+            </a>
+            <a href="{% url 'cases:admin_corpus' %}" class="sidebar-link {% if request.resolver_match.url_name == 'admin_corpus' %}active{% endif %}">
+                <span class="nav-icon">📁</span> Corpus Management
+            </a>
+            <a href="{% url 'cases:admin_add_case' %}" class="sidebar-link {% if request.resolver_match.url_name == 'admin_add_case' %}active{% endif %}">
+                <span class="nav-icon">➕</span> Add New Judgment
+            </a>
+            <a href="{% url 'cases:admin_ingestion_history' %}" class="sidebar-link {% if request.resolver_match.url_name == 'admin_ingestion_history' %}active{% endif %}">
+                <span class="nav-icon">📜</span> Ingestion History
+            </a>
+            {% endif %}
+        </nav>
+    </aside>
+
+    <!-- MAIN APPLICATION WORKSPACE -->
+    <div class="app-workspace">
+        <!-- TOP HEADER BAR -->
+        <header class="app-topbar">
+            <div class="topbar-left">
+                <button class="mobile-toggle-btn" onclick="toggleSidebar()">☰ Menu</button>
+                <span class="topbar-title">Indian Supreme Court Judgment Similarity & Precedent Retrieval Workstation</span>
+            </div>
+            <div class="topbar-right" style="display: flex; gap: 10px; align-items: center;">
+                {% if is_admin %}
+                <a href="{% url 'cases:admin_dashboard' %}" class="topbar-action-btn" style="background: rgba(197, 155, 39, 0.2); border-color: var(--accent-gold-bright);">
+                    ⚙ Admin Console
+                </a>
+                {% endif %}
+                <a href="{% url 'cases:saved_cases' %}" class="topbar-action-btn">
+                    ★ Precedent Collection
+                </a>
+            </div>
+        </header>
+
+        {% if messages %}
+        <div class="messages-container" style="padding: 15px 30px 0;">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- PAGE CONTENT -->
+        <main class="app-main-content">
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="container footer-content">
+                <div class="footer-info">
+                    <h4>Legal Lens</h4>
+                    <p>An intelligent legal research application for Indian Supreme Court judgment similarity prediction and precedent retrieval.</p>
+                </div>
+                <div class="footer-disclaimer">
+                    <p><strong>Legal Information & Similarity Prediction Disclaimer:</strong> Legal Lens is an information retrieval system. Retrieved Supreme Court judgments and predicted similarity scores represent textual and legal information retrieval relevance. Predicted similarity scores do NOT constitute legal advice, court outcome predictions, win probability, or legal validity. Users must verify all citations with authoritative sources and qualified legal counsel.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- MOBILE BACKDROP -->
+    <div class="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+    <script>
+    function toggleSidebar() {
+        var sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('open');
+        document.body.classList.toggle('sidebar-mobile-open');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. Contextual Form Loading States
+        var forms = document.querySelectorAll('form');
+        forms.forEach(function(form) {
+            form.addEventListener('submit', function(e) {
+                var btn = form.querySelector('button[type="submit"]');
+                if (btn && !btn.classList.contains('btn-loading')) {
+                    var originalText = btn.innerText;
+                    if (originalText.includes('Predict Similar') || originalText.includes('Search')) {
+                        btn.innerText = 'Searching Supreme Court precedents...';
+                    } else if (originalText.includes('Categorize Legal Issue')) {
+                        btn.innerText = 'Preparing legal information...';
+                    } else if (originalText.includes('Find Legal Help')) {
+                        btn.innerText = 'Finding Tamil Nadu legal help...';
+                    } else if (originalText.includes('Compare Cases')) {
+                        btn.innerText = 'Comparing Supreme Court precedents...';
+                    }
+                    btn.classList.add('btn-loading');
+                }
+            });
+        });
+
+        // 2. Card Focus / Case Opening Transition
+        var caseLinks = document.querySelectorAll('.case-title a, .result-card-footer a.btn-primary');
+        caseLinks.forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var card = link.closest('.result-card');
+                if (card) {
+                    card.classList.add('case-opening-active');
+                }
+            });
+        });
+
+        // 3. Save Case Confirmation Pulse
+        var saveBtns = document.querySelectorAll('a[href*="toggle_save_case"]');
+        saveBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                btn.classList.add('btn-save-animate');
+            });
+        });
+    });
+    </script>
+</body>
+</html>

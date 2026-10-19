@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}{{ legal_case.title }} ({{ legal_case.judgment_year }}) — Digital Law Report — Legal Lens{% endblock %}
+
+{% block content %}
+<div class="container case-detail-container">
+    
+    <!-- TOP NAVIGATION ACTIONS -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+        <a href="javascript:history.back()" class="btn btn-outline">← Back to Results</a>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" class="btn btn-secondary" onclick="copyCitation('{{ legal_case.title|escapejs }}{% if meta.citations and meta.citations != "Not available" %} ({{ meta.citations|escapejs }}){% endif %}')">
+                Copy Citation
+            </button>
+            <a href="{% url 'cases:related_cases' legal_case.id %}" class="btn btn-secondary">
+                Find Related Precedents
+            </a>
+            <a href="{% url 'cases:toggle_save_case' legal_case.id %}" class="btn {% if is_saved %}btn-secondary{% else %}btn-primary{% endif %}">
+                {% if is_saved %}Bookmarked in Collection{% else %}Save Case Brief{% endif %}
+            </a>
+        </div>
+    </div>
+
+    <!-- DIGITAL LAW REPORT PAPER SHEET -->
+    <div class="digital-law-report-sheet">
+        <div style="border-bottom: 2px solid var(--accent-gold); padding-bottom: 18px; margin-bottom: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px;">
+                <span class="badge badge-mode">OFFICIAL JUDGMENT ARCHIVE</span>
+                <span class="historical-outcome-tag">SUPREME COURT OF INDIA</span>
+            </div>
+            
+            <h1 style="font-family: 'Newsreader', Georgia, serif; font-size: 2rem; color: var(--text-primary); margin: 6px 0 10px 0; line-height: 1.25;">
+                {{ legal_case.title }}
+            </h1>
+            
+            {% if meta.citations and meta.citations != 'Not available' %}
+            <div style="font-size: 0.9rem; color: var(--text-secondary); font-weight: 500;">
+                <strong>Citation:</strong> {{ meta.citations }} | Judgment Year: {{ meta.judgment_year }}
+            </div>
+            {% else %}
+            <div style="font-size: 0.9rem; color: var(--text-secondary); font-weight: 500;">
+                Supreme Court of India | Judgment Year: {{ meta.judgment_year }}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- REPORT METADATA GRID -->
+        <div class="report-header-grid">
+            <div class="report-meta-item">
+                <label>Judgment Date</label>
+                <span>{{ meta.judgment_date }}</span>
+            </div>
+
+            <div class="report-meta-item">
+                <label>Bench / Coram</label>
+                <span>{{ meta.bench }}</span>
+            </div>
+
+            <div class="report-meta-item">
+                <label>Petitioner / Appellant</label>
+                <span>{{ meta.petitioner }}</span>
+            </div>
+
+            <div class="report-meta-item">
+                <label>Respondent</label>
+                <span>{{ meta.respondent }}</span>
+            </div>
+
+            <div class="report-meta-item">
+                <label>Acts Referenced</label>
+                <span>{{ meta.acts }}</span>
+            </div>
+
+            <div class="report-meta-item">
+                <label>Statutory Provisions</label>
+                <span>{{ meta.legal_sections }}</span>
+            </div>
+
+            <div class="report-meta-item">
+                <label>Judicial Disposition</label>
+                {% if historical_outcome and historical_outcome != 'Not available' %}
+                <span class="badge" style="background: var(--soft-gold-bg); color: var(--accent-burgundy); border: 1px solid var(--border-gold); font-weight: 700; font-size: 0.85rem; display: inline-block;">{{ historical_outcome }}</span>
+                {% else %}
+                <span>Not available</span>
+                {% endif %}
+            </div>
+        </div>
+
+
+        <!-- OPTIMAL READING COLUMN FOR JUDGMENT TEXT -->
+        <div style="border-top: 1px solid var(--border-subtle); padding-top: 28px; margin-top: 28px;">
+            <h2 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.5rem; color: var(--text-primary); margin: 0 0 20px 0;">
+                Supreme Court Judgment Text
+            </h2>
+            <article class="judgment-reading-area">
+                {{ legal_case.cleaned_text|linebreaks }}
+            </article>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyCitation(text) {
+    navigator.clipboard.writeText(text);
+    alert('Citation copied to clipboard:\n' + text);
+}
+</script>
+{% endblock %}

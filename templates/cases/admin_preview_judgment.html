@@ -1,0 +1,361 @@
+{% extends "base.html" %}
+
+{% block title %}Judgment Processing Preview — Admin Console — Legal Lens{% endblock %}
+
+{% block content %}
+<div class="container admin-container" style="max-width: 1050px; margin: 0 auto; padding: 0 15px;">
+    
+    <div class="admin-header-bar" style="margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color);">
+        <div class="badge badge-ready" style="margin-bottom: 8px;">
+            PROCESSING COMPLETE
+        </div>
+        <h1 class="page-title" style="font-family: 'Newsreader', serif; font-size: 2rem; color: var(--accent-gold-bright);">
+            Supreme Court Judgment Ingestion Workstation
+        </h1>
+        <p class="results-meta" style="color: var(--text-muted); font-size: 0.9rem;">
+            Evidence-based metadata extraction, explainable legal classification, duplicate detection, and readiness verification.
+        </p>
+    </div>
+
+    <!-- 1. FILE PROCESSING STATUS CARD -->
+    <div class="dashboard-panel" style="background: var(--bg-surface); padding: 22px 28px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); margin-bottom: 25px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px;">
+        <div>
+            <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; display: block;">Source File</span>
+            <strong style="font-size: 0.95rem; color: var(--accent-gold-bright); word-break: break-all;">{{ pending.filename }}</strong>
+        </div>
+        <div>
+            <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; display: block;">Extraction Status</span>
+            <strong style="font-size: 0.95rem; color: #4ade80;">Text Extracted Successfully</strong>
+        </div>
+        <div>
+            <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; display: block;">PDF Pages / Words</span>
+            <strong style="font-size: 0.95rem; color: var(--text-primary);">{{ pending.page_count }} Pages | {{ pending.word_count }} Words</strong>
+        </div>
+        <div>
+            <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; display: block;">Characters Extracted</span>
+            <strong style="font-size: 0.95rem; color: var(--text-primary);">{{ pending.char_count }} Chars</strong>
+        </div>
+    </div>
+
+    <!-- 2. INGESTION READINESS & DUPLICATE STATUS CARDS -->
+    {% if pending.is_duplicate %}
+    <div class="alert alert-danger" style="background: rgba(220, 53, 69, 0.18); border: 1px solid #dc3545; color: #ff6b6b; padding: 20px 24px; border-radius: 10px; margin-bottom: 25px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 8px;">
+            <h4 style="margin: 0; font-size: 1.15rem; color: #ff6b6b; font-weight: 700;">
+                EXACT DUPLICATE DETECTED
+            </h4>
+            <span class="badge" style="background: #dc3545; color: #fff; font-weight: 700; padding: 6px 14px; font-size: 0.85rem;">INGESTION BLOCKED</span>
+        </div>
+        <p style="margin: 0 0 14px 0; font-size: 0.92rem; color: #fca5a5; line-height: 1.5;">
+            This judgment already exists in the Legal Lens database. Ingestion has been blocked to prevent duplicate records.
+        </p>
+        <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+            {% if pending.existing_case_id %}
+            <a href="{% url 'cases:case_detail' pending.existing_case_id %}" target="_blank" class="btn btn-sm btn-outline" style="border-color: #ff6b6b; color: #ff6b6b; background: rgba(220, 53, 69, 0.15);">
+                View Existing Case #{{ pending.existing_case_id }}{% if pending.existing_case_title %}: {{ pending.existing_case_title|truncatechars:45 }}{% endif %}
+            </a>
+            {% endif %}
+            <a href="{% url 'cases:admin_add_case' %}" class="btn btn-sm btn-outline" style="border-color: var(--border-color); color: var(--text-primary);">
+                Upload Different File
+            </a>
+        </div>
+    </div>
+    {% elif pending.readiness_status == 'VALIDATION_PASSED' or pending.readiness_status == 'READY' %}
+    <div class="alert alert-success" style="background: rgba(34, 197, 94, 0.15); border: 1px solid #22c55e; color: #86efac; padding: 18px 22px; border-radius: 10px; margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <div>
+            <h4 style="margin: 0 0 4px 0; font-size: 1.1rem; color: #86efac; font-weight: 700;">
+                VALIDATION PASSED
+            </h4>
+            <p style="margin: 0; font-size: 0.88rem; color: #dcfce7;">
+                All critical metadata (Case Title & Judgment Year) have been confidently extracted and verified. No duplicate detected.
+            </p>
+        </div>
+        <span class="badge" style="background: #22c55e; color: #000; font-weight: 700; padding: 6px 14px; font-size: 0.85rem;">VALIDATION PASSED</span>
+    </div>
+    {% else %}
+    <div class="alert alert-warning" style="background: rgba(234, 179, 8, 0.15); border: 1px solid #eab308; color: #fef08a; padding: 18px 22px; border-radius: 10px; margin-bottom: 25px;">
+        <h4 style="margin: 0 0 6px 0; font-size: 1.05rem; color: #fef08a;">
+            REVIEW REQUIRED BEFORE INGESTION
+        </h4>
+        <p style="margin-bottom: 8px; font-size: 0.88rem;">
+            Some fields require verification or manual entry before confirming ingestion:
+        </p>
+        <ul style="margin: 0; padding-left: 20px; font-size: 0.85rem;">
+            {% for reason in pending.readiness_reasons %}
+            <li>{{ reason }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <!-- 3. CHECKSUM PANEL (WHEN NOT DUPLICATE) -->
+    {% if not pending.is_duplicate %}
+    <div class="dashboard-panel" style="background: var(--bg-surface); padding: 14px 22px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between;">
+        <span style="font-size: 0.9rem; color: #4ade80; font-weight: 600;">
+            NO DUPLICATE FOUND IN CORPUS
+        </span>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">SHA-256: {{ pending.checksum|slice:":16" }}...</span>
+    </div>
+    {% endif %}
+
+    <!-- MAIN INGESTION FORM -->
+    <form method="POST" action="{% url 'cases:admin_confirm_ingestion' %}">
+        {% csrf_token %}
+
+        <!-- 4. EXTRACTED CASE METADATA -->
+        <div class="dashboard-panel" style="background: var(--bg-surface); padding: 28px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); margin-bottom: 25px;">
+            <h3 style="font-family: 'Newsreader', serif; font-size: 1.3rem; color: var(--accent-gold-bright); margin-top: 0; margin-bottom: 18px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px;">
+                Extracted Case Metadata & Confidence
+            </h3>
+
+            <div style="display: flex; flex-direction: column; gap: 18px;">
+                
+                <!-- CASE TITLE FIELD -->
+                <div class="form-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <label style="font-weight: 600; font-size: 0.85rem; color: var(--text-primary);">
+                            CASE TITLE:
+                        </label>
+                        {% if pending.title_confidence == 'HIGH' %}
+                        <span class="badge" style="background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid #22c55e; font-size: 0.75rem;">HIGH CONFIDENCE ({{ pending.title_confidence_score }})</span>
+                        {% elif pending.title_confidence == 'MEDIUM' %}
+                        <span class="badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid #3b82f6; font-size: 0.75rem;">MEDIUM CONFIDENCE ({{ pending.title_confidence_score }})</span>
+                        {% elif pending.title_confidence == 'LOW' %}
+                        <span class="badge" style="background: rgba(234, 179, 8, 0.2); color: #fef08a; border: 1px solid #eab308; font-size: 0.75rem;">LOW CONFIDENCE — PLEASE VERIFY</span>
+                        {% else %}
+                        <span class="badge" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid #ef4444; font-size: 0.75rem;">NOT FOUND — PLEASE ENTER</span>
+                        {% endif %}
+                    </div>
+                    <input type="text" name="title" value="{{ pending.title }}" placeholder="e.g. State of Tamil Nadu v. K. Selvam" required class="form-control" style="width: 100%; padding: 10px 14px; background: var(--bg-input, #1f293d); border: 1px solid {% if pending.title_confidence == 'LOW' or pending.title_confidence == 'NOT_FOUND' %}#eab308{% else %}var(--border-color){% endif %}; color: var(--text-primary); border-radius: 6px; font-size: 0.95rem;">
+                </div>
+
+                <!-- PETITIONER & RESPONDENT -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px;">
+                    <div class="form-group">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <label style="font-weight: 600; font-size: 0.85rem; color: var(--text-primary);">
+                                PETITIONER / APPELLANT:
+                            </label>
+                            <span class="badge" style="font-size: 0.7rem; background: rgba(255,255,255,0.05); color: var(--text-muted);">{{ pending.petitioner_confidence }}</span>
+                        </div>
+                        <input type="text" name="petitioner" value="{{ pending.petitioner }}" placeholder="Petitioner party name" class="form-control" style="width: 100%; padding: 10px 14px; background: var(--bg-input, #1f293d); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 6px; font-size: 0.9rem;">
+                    </div>
+
+                    <div class="form-group">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <label style="font-weight: 600; font-size: 0.85rem; color: var(--text-primary);">
+                                RESPONDENT:
+                            </label>
+                            <span class="badge" style="font-size: 0.7rem; background: rgba(255,255,255,0.05); color: var(--text-muted);">{{ pending.respondent_confidence }}</span>
+                        </div>
+                        <input type="text" name="respondent" value="{{ pending.respondent }}" placeholder="Respondent party name" class="form-control" style="width: 100%; padding: 10px 14px; background: var(--bg-input, #1f293d); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 6px; font-size: 0.9rem;">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px;">
+                    
+                    <!-- JUDGMENT YEAR -->
+                    <div class="form-group">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <label style="font-weight: 600; font-size: 0.85rem; color: var(--text-primary);">
+                                JUDGMENT YEAR:
+                            </label>
+                            {% if pending.date_confidence == 'HIGH' %}
+                            <span class="badge" style="background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid #22c55e; font-size: 0.72rem;">HIGH</span>
+                            {% elif pending.date_confidence == 'MEDIUM' %}
+                            <span class="badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid #3b82f6; font-size: 0.72rem;">MEDIUM</span>
+                            {% else %}
+                            <span class="badge" style="background: rgba(234, 179, 8, 0.2); color: #fef08a; border: 1px solid #eab308; font-size: 0.72rem;">LOW</span>
+                            {% endif %}
+                        </div>
+                        <input type="number" name="judgment_year" value="{{ pending.judgment_year }}" required class="form-control" style="width: 100%; padding: 10px 14px; background: var(--bg-input, #1f293d); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 6px; font-size: 0.95rem;">
+                    </div>
+
+                    <!-- CITATION -->
+                    <div class="form-group">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <label style="font-weight: 600; font-size: 0.85rem; color: var(--text-primary);">
+                                CITATION / NEUTRAL CITATION:
+                            </label>
+                            {% if pending.citation_confidence == 'HIGH' %}
+                            <span class="badge" style="background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid #22c55e; font-size: 0.72rem;">HIGH</span>
+                            {% elif pending.citation_confidence == 'MEDIUM' %}
+                            <span class="badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid #3b82f6; font-size: 0.72rem;">MEDIUM</span>
+                            {% else %}
+                            <span class="badge" style="background: rgba(107, 114, 128, 0.2); color: #9ca3af; border: 1px solid #6b7280; font-size: 0.72rem;">NOT FOUND</span>
+                            {% endif %}
+                        </div>
+                        <input type="text" name="citations" value="{{ pending.citations }}" placeholder="e.g. 2026 INSC 142" class="form-control" style="width: 100%; padding: 10px 14px; background: var(--bg-input, #1f293d); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 6px; font-size: 0.95rem;">
+                    </div>
+
+                    <!-- CASE NUMBER -->
+                    <div class="form-group">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <label style="font-weight: 600; font-size: 0.85rem; color: var(--text-primary);">
+                                CASE NUMBER:
+                            </label>
+                            <span class="badge" style="font-size: 0.72rem; background: rgba(255,255,255,0.05); color: var(--text-muted);">{{ pending.case_number_confidence }}</span>
+                        </div>
+                        <input type="text" name="case_number" value="{{ pending.case_number }}" placeholder="e.g. SLP(Crl.) No. 4589/2026" class="form-control" style="width: 100%; padding: 10px 14px; background: var(--bg-input, #1f293d); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 6px; font-size: 0.95rem;">
+                    </div>
+
+                    <div class="form-group">
+                        <label style="display: block; font-weight: 600; font-size: 0.85rem; color: var(--text-primary); margin-bottom: 6px;">
+                            COURT:
+                        </label>
+                        <input type="text" value="{{ pending.court }}" disabled class="form-control" style="width: 100%; padding: 10px 14px; background: rgba(15,23,42,0.6); border: 1px solid var(--border-color); color: var(--text-muted); border-radius: 6px; font-size: 0.95rem;">
+                    </div>
+                </div>
+
+                <!-- BENCH / JUDGES FIELD WITH CONFIDENCE -->
+                <div class="form-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                        <label style="font-weight: 600; font-size: 0.85rem; color: var(--text-primary);">
+                            BENCH / JUDGES:
+                        </label>
+                        {% if pending.bench_confidence == 'HIGH' %}
+                        <span class="badge" style="background: rgba(34, 197, 94, 0.2); color: #4ade80; border: 1px solid #22c55e; font-size: 0.72rem;">HIGH CONFIDENCE</span>
+                        {% elif pending.bench_confidence == 'MEDIUM' %}
+                        <span class="badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid #3b82f6; font-size: 0.72rem;">MEDIUM CONFIDENCE</span>
+                        {% else %}
+                        <span class="badge" style="background: rgba(107, 114, 128, 0.2); color: #9ca3af; border: 1px solid #6b7280; font-size: 0.72rem;">NOT CONFIDENTLY DETECTED</span>
+                        {% endif %}
+                    </div>
+                    <input type="text" name="bench" value="{{ pending.bench }}" placeholder="e.g. Justice A.B. Shah, Justice C.D. Roy" class="form-control" style="width: 100%; padding: 10px 14px; background: var(--bg-input, #1f293d); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 6px; font-size: 0.9rem;">
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. CLASSIFICATION & LEGAL ANALYSIS CARD -->
+        <div class="dashboard-panel" style="background: var(--bg-surface); padding: 28px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); margin-bottom: 25px;">
+            <h3 style="font-family: 'Newsreader', serif; font-size: 1.3rem; color: var(--accent-gold-bright); margin-top: 0; margin-bottom: 18px; border-bottom: 1px dashed var(--border-color); padding-bottom: 10px;">
+                Legal Classification & Provision Analysis
+            </h3>
+
+            <div style="display: flex; flex-direction: column; gap: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                    <div>
+                        <strong style="display: block; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">
+                            Primary Legal Category:
+                        </strong>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="badge" style="font-size: 0.95rem; background: rgba(197, 155, 39, 0.25); color: var(--accent-gold-bright); border: 1px solid var(--accent-gold-bright); padding: 6px 14px; border-radius: 6px;">
+                                {{ pending.primary_category }}
+                            </span>
+                            <span style="font-size: 0.88rem; font-weight: 700; color: #4ade80;">
+                                ({{ pending.primary_confidence_pct }}% Classification Confidence)
+                            </span>
+                        </div>
+                    </div>
+
+                    {% if pending.secondary_categories %}
+                    <div>
+                        <strong style="display: block; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">
+                            Secondary Legal Domains:
+                        </strong>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            {% for item in pending.secondary_categories %}
+                            <span class="badge" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd; border: 1px solid #3b82f6; padding: 4px 10px; border-radius: 4px; font-size: 0.82rem;">
+                                {{ item.category }} ({{ item.confidence_pct }}%)
+                            </span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- CLASSIFICATION WHY EVIDENCE BULLETS -->
+                {% if pending.classification_evidence %}
+                <div style="background: rgba(15, 23, 42, 0.6); border-left: 3px solid var(--accent-gold); padding: 14px 18px; border-radius: 6px;">
+                    <strong style="font-size: 0.85rem; color: var(--accent-gold-bright); display: block; margin-bottom: 6px;">
+                        WHY WAS THIS CATEGORY ASSIGNED? (EXPLAINABLE EVIDENCE):
+                    </strong>
+                    <ul style="margin: 0; padding-left: 18px; font-size: 0.88rem; color: #d1d5db; display: flex; flex-direction: column; gap: 4px;">
+                        {% for ev in pending.classification_evidence %}
+                        <li>{{ ev }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 6px;">
+                    <div class="form-group">
+                        <label style="display: block; font-weight: 600; font-size: 0.85rem; color: var(--text-primary); margin-bottom: 6px;">
+                            IDENTIFIED ACTS & CODES:
+                        </label>
+                        <input type="text" name="acts" value="{{ pending.acts }}" placeholder="e.g. Code of Criminal Procedure, Indian Penal Code" class="form-control" style="width: 100%; padding: 10px 14px; background: var(--bg-input, #1f293d); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 6px; font-size: 0.9rem;">
+                    </div>
+
+                    <div class="form-group">
+                        <label style="display: block; font-weight: 600; font-size: 0.85rem; color: var(--text-primary); margin-bottom: 6px;">
+                            IDENTIFIED SECTIONS & ARTICLES:
+                        </label>
+                        <input type="text" name="legal_sections" value="{{ pending.legal_sections }}" placeholder="e.g. Section 439, Section 302, Article 21" class="form-control" style="width: 100%; padding: 10px 14px; background: var(--bg-input, #1f293d); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 6px; font-size: 0.9rem;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. COLLAPSIBLE EXTRACTION EVIDENCE PANEL -->
+        <details class="dashboard-panel" style="background: var(--bg-surface); padding: 20px 28px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); margin-bottom: 25px; cursor: pointer;">
+            <summary style="font-family: 'Newsreader', serif; font-size: 1.2rem; color: var(--accent-gold-bright); font-weight: 600; user-select: none;">
+                Extraction Evidence & Source Snippets (Audit Traceability)
+            </summary>
+            <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 14px; font-size: 0.88rem; color: var(--text-secondary); cursor: auto;">
+                <div style="background: #0d1322; padding: 12px 16px; border-radius: 6px; border-left: 3px solid #22c55e;">
+                    <strong>Case Title Evidence:</strong> "{{ pending.title_evidence|default:'Full VERSUS party block matched' }}"
+                </div>
+                <div style="background: #0d1322; padding: 12px 16px; border-radius: 6px; border-left: 3px solid #3b82f6;">
+                    <strong>Citation Evidence:</strong> "{{ pending.citation_evidence|default:'No citation matched' }}"
+                </div>
+                <div style="background: #0d1322; padding: 12px 16px; border-radius: 6px; border-left: 3px solid #eab308;">
+                    <strong>Judgment Date Evidence:</strong> "{{ pending.date_evidence|default:'No date matched' }}"
+                </div>
+                <div style="background: #0d1322; padding: 12px 16px; border-radius: 6px; border-left: 3px solid #a855f7;">
+                    <strong>Bench / Judges Evidence:</strong> "{{ pending.bench_evidence|default:'No CORAM block matched' }}"
+                </div>
+            </div>
+        </details>
+
+        <!-- 7. TEXT PREVIEW CARD WITH COPY BUTTON -->
+        <div class="dashboard-panel" style="background: var(--bg-surface); padding: 28px; border-radius: var(--radius-lg); border: 1px solid var(--border-color); margin-bottom: 25px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+                <h3 style="font-family: 'Newsreader', serif; font-size: 1.3rem; color: var(--accent-gold-bright); margin: 0;">
+                    Extracted Judgment Text Preview (First 2,000 Characters)
+                </h3>
+                <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('text-preview-box').innerText); alert('Extracted text snippet copied to clipboard!');" class="btn btn-sm btn-outline">
+                    Copy Text Snippet
+                </button>
+            </div>
+            <div id="text-preview-box" style="background: #0d1322; border: 1px solid var(--border-color); border-radius: 8px; padding: 16px; font-family: monospace; font-size: 0.85rem; color: #d1d5db; max-height: 250px; overflow-y: auto; white-space: pre-wrap; line-height: 1.5;">
+{{ text_snippet }}...
+            </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div style="display: flex; gap: 15px; justify-content: flex-end; align-items: center; margin-bottom: 40px; flex-wrap: wrap;">
+            {% if pending.is_duplicate %}
+                {% if pending.existing_case_id %}
+                <a href="{% url 'cases:case_detail' pending.existing_case_id %}" target="_blank" class="btn btn-secondary" style="padding: 12px 24px; background: rgba(59, 130, 246, 0.2); border-color: #3b82f6; color: #93c5fd;">
+                    View Existing Case #{{ pending.existing_case_id }}
+                </a>
+                {% endif %}
+                <a href="{% url 'cases:admin_add_case' %}" class="btn btn-outline" style="padding: 12px 24px;">
+                    Upload Different File
+                </a>
+                <button type="button" disabled class="btn" style="padding: 12px 32px; font-weight: 700; background: #334155; border: 1px solid #475569; color: #94a3b8; cursor: not-allowed; opacity: 0.7;" title="Ingestion blocked due to exact duplicate in database">
+                    INGESTION BLOCKED (EXACT DUPLICATE)
+                </button>
+            {% else %}
+                <a href="{% url 'cases:admin_add_case' %}" class="btn btn-outline" style="padding: 12px 24px;">
+                    Cancel & Upload Different PDF
+                </a>
+                <button type="submit" class="btn btn-primary" style="padding: 12px 32px; font-weight: 700; border: none; color: #000; cursor: pointer; font-size: 0.95rem;">
+                    CONFIRM AND ADD TO LEGALLENS
+                </button>
+            {% endif %}
+        </div>
+    </form>
+
+</div>
+{% endblock %}

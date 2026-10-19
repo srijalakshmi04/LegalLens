@@ -1,0 +1,1447 @@
+{
+  "task_name": "Case-to-Case Similarity Prediction (SIMILAR vs NOT SIMILAR)",
+  "primary_metric": "SIMILARITY PREDICTION ACCURACY = 66.25%",
+  "target_95_status": "NOT ACHIEVED",
+  "target_95_achieved": false,
+  "held_out_test_accuracy": 66.25,
+  "total_test_pairs": 80,
+  "similar_pairs": 30,
+  "not_similar_pairs": 50,
+  "hard_negatives_count": 30,
+  "distant_negatives_count": 20,
+  "correct_predictions": 53,
+  "incorrect_predictions": 27,
+  "precision": 0.5882,
+  "recall": 0.3333,
+  "f1": 0.4255,
+  "macro_f1": 0.5933,
+  "balanced_accuracy": 59.67,
+  "roc_auc": 0.6633,
+  "confusion_matrix": {
+    "matrix": [
+      [
+        43,
+        7
+      ],
+      [
+        20,
+        10
+      ]
+    ],
+    "labels": [
+      "NOT SIMILAR (0)",
+      "SIMILAR (1)"
+    ]
+  },
+  "decision_threshold_pct": 50.0,
+  "evaluation_duration_seconds": 39.18,
+  "separate_retrieval_metrics": {
+    "precision_at_5": 0.64,
+    "precision_at_10": 0.4,
+    "recall_at_5": 1.0,
+    "recall_at_10": 1.0,
+    "mrr": 0.9,
+    "ndcg_at_10": 0.914
+  },
+  "disclaimer": "This module evaluates case-to-case legal similarity prediction. It does not predict court outcomes or judge rulings.",
+  "test_pair_details": [
+    {
+      "query_id": "Q002",
+      "case_id": 13135,
+      "case_title": "A.S.Krishna And Co. Pvt. Ltd vs Land Acquisition Officer(Deputy ... on 19 November, 1991",
+      "judgment_year": 1991,
+      "ground_truth_relevance": 3,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 4.5,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Land Acquisition Act",
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (acquisition, compensation, land, market)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q002",
+      "case_id": 11182,
+      "case_title": "Brij Behari Sahai vs State Of Uttar Pradesh on 5 August, 1986",
+      "judgment_year": 1986,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.8,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Land Acquisition Act",
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (acquisition, compensation, land, statutory)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q002",
+      "case_id": 7756,
+      "case_title": "Thakur Kamta Prasad Singh (Dead) By L.Rs vs The State Of Bihar on 10 March, 1976",
+      "judgment_year": 1976,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 2.9,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Land Acquisition Act",
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (acquisition, compensation, land, market)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q002",
+      "case_id": 4516,
+      "case_title": "Special Land Acquisition & ... vs M. S. Seshagiri Rao & Anr on 31 January, 1968",
+      "judgment_year": 1968,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 99.7,
+      "is_correct": false,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Governed by same statute: Land Acquisition Act",
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (acquisition, compensation, land)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q002",
+      "case_id": 13170,
+      "case_title": "Bhagawathulla Samanna And Ors vs Special Tahsildar And Land Acquisition ... on 18 September, 1991",
+      "judgment_year": 1991,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.5,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Governed by same statute: Land Acquisition Act",
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (acquisition, compensation, land, under)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q002",
+      "case_id": 7724,
+      "case_title": "State Of Madras vs K. N. Shanmugha Mudallar & Ors on 4 March, 1976",
+      "judgment_year": 1976,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.6,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Governed by same statute: Land Acquisition Act",
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (acquisition, compensation, land, under)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q002",
+      "case_id": 6192,
+      "case_title": "Union Of India vs Shri Ram Mehar & Anr on 26 October, 1972",
+      "judgment_year": 1972,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.9,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Land Acquisition Act",
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (acquisition, compensation, land, market)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q002",
+      "case_id": 4593,
+      "case_title": "Vijay Cotton & Oil Mills Ltd vs The State Of Gujarat on 11 September, 1968",
+      "judgment_year": 1968,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.3,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Land Acquisition Act",
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (acquisition, land, under)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q006",
+      "case_id": 21434,
+      "case_title": "State Of Orissa & Ors vs Ujjal Kumar Burdhan on 19 March, 2012",
+      "judgment_year": 2012,
+      "ground_truth_relevance": 3,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 95.8,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same statutory provision: Section 482",
+        "Same core legal issue: Quashing of Criminal Proceedings",
+        "Similar factual pattern: Overlapping keywords (inherent, powers)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q006",
+      "case_id": 26085,
+      "case_title": "Maneesha Yadav vs The State Of Uttar Pradesh on 9 April, 2024",
+      "judgment_year": 2024,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 4.8,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same statutory provision: Section 482",
+        "Governed by same statute: Code of Criminal Procedure",
+        "Same core legal issue: Quashing of Criminal Proceedings",
+        "Similar factual pattern: Overlapping keywords (crpc, inherent, powers)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q006",
+      "case_id": 14699,
+      "case_title": "Union Of India vs B.R. Bajaj on 18 January, 1994",
+      "judgment_year": 1994,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 2.0,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same statutory provision: Section 482",
+        "Governed by same statute: Code of Criminal Procedure",
+        "Same core legal issue: Quashing of Criminal Proceedings",
+        "Similar factual pattern: Overlapping keywords (crpc, quashing)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q006",
+      "case_id": 25906,
+      "case_title": "Anil Mishra vs State Of U.P. on 1 March, 2024",
+      "judgment_year": 2024,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.9,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same statutory provision: Section 482",
+        "Governed by same statute: Code of Criminal Procedure",
+        "Same core legal issue: Quashing of Criminal Proceedings",
+        "Similar factual pattern: Overlapping keywords (crpc, quashing)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q006",
+      "case_id": 25890,
+      "case_title": "A.M. Mohan vs The State Rep By Sho on 20 March, 2024",
+      "judgment_year": 2024,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 4.2,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same statutory provision: Section 482",
+        "Governed by same statute: Code of Criminal Procedure",
+        "Same core legal issue: Quashing of Criminal Proceedings",
+        "Similar factual pattern: Overlapping keywords (crpc, inherent, powers)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q006",
+      "case_id": 25341,
+      "case_title": "Ramesh Chandra Gupta vs State Of U.P. on 28 November, 2022",
+      "judgment_year": 2022,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.0,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same statutory provision: Section 482",
+        "Governed by same statute: Code of Criminal Procedure",
+        "Same core legal issue: Quashing of Criminal Proceedings",
+        "Similar factual pattern: Overlapping keywords (crpc, inherent)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q006",
+      "case_id": 24063,
+      "case_title": "Miss Xyz vs The State Of Gujarat on 25 October, 2019",
+      "judgment_year": 2019,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.3,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same statutory provision: Section 482",
+        "Governed by same statute: Code of Criminal Procedure",
+        "Same core legal issue: Quashing of Criminal Proceedings",
+        "Similar factual pattern: Overlapping keywords (crpc, quashing)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q006",
+      "case_id": 24603,
+      "case_title": "State Rep. By The Inspector Of Police vs M. Murugesan on 15 January, 2020",
+      "judgment_year": 2020,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 3.9,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same statutory provision: Section 482",
+        "Governed by same statute: Code of Criminal Procedure",
+        "Same core legal issue: Quashing of Criminal Proceedings",
+        "Similar factual pattern: Overlapping keywords (crpc, inherent, powers)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q007",
+      "case_id": 10768,
+      "case_title": "Anand Kumar Jain vs Union Of India (Uoi) And Anr. on 29 July, 1985",
+      "judgment_year": 1985,
+      "ground_truth_relevance": 3,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.7,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Similar factual pattern: Overlapping keywords (accident, claims, motor, tribunal)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q007",
+      "case_id": 23503,
+      "case_title": "Anant Son Of Sidheshwar Dukre vs Pratap Son Of Zhamnnappa Lamzane on 21 August, 2018",
+      "judgment_year": 2018,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.6,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (accident, claims, compensation, enhancement)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q007",
+      "case_id": 25750,
+      "case_title": "Rahul Ganpatrao Sable vs Laxman Maruti Jadhav (Dead) Through Its ... on 5 July, 2023",
+      "judgment_year": 2023,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.2,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (accident, claims, compensation, expenses)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q007",
+      "case_id": 20217,
+      "case_title": "T. O. Anthony vs Karvarnan And Others on 1 February, 2008",
+      "judgment_year": 2008,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 2.6,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (accident, claims, compensation, motor)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q007",
+      "case_id": 25281,
+      "case_title": "Mohd. Sabeer @ Shabir Hussain vs Regional Manager, U.P. State Road ... on 9 December, 2022",
+      "judgment_year": 2022,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.3,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (accident, claims, compensation, disability)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q007",
+      "case_id": 24377,
+      "case_title": "Erudhaya Priya vs State Express Transport Corporation ... on 27 July, 2020",
+      "judgment_year": 2020,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.7,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (accident, claims, compensation, disability)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q007",
+      "case_id": 22034,
+      "case_title": "Kumari Kiran Thr. Her Father ... vs Sajjan Singh & Ors on 11 September, 2014",
+      "judgment_year": 2014,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 2.0,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (accident, claims, disability, motor)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q007",
+      "case_id": 22561,
+      "case_title": "S. Perumal vs K. Ambika & Anr on 24 February, 2015",
+      "judgment_year": 2015,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.2,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (accident, claims, compensation, enhancement)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q008",
+      "case_id": 18696,
+      "case_title": "Aniglase Yohannan vs Ramlatha And Ors on 23 September, 2005",
+      "judgment_year": 2005,
+      "ground_truth_relevance": 3,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 99.9,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same core legal issue: Specific Performance of Contract",
+        "Similar factual pattern: Overlapping keywords (contract, readiness, willingness)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q008",
+      "case_id": 23118,
+      "case_title": "B. Vijaya Bharathi vs P. Savitri . on 10 August, 2017",
+      "judgment_year": 2017,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 99.9,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same core legal issue: Specific Performance of Contract",
+        "Similar factual pattern: Overlapping keywords (agreement, readiness, specific, willingness)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q008",
+      "case_id": 23711,
+      "case_title": "P. Meenakshisundaram vs P. Vijayakumar on 28 March, 2018",
+      "judgment_year": 2018,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 99.9,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same statutory provision: Section 16",
+        "Same core legal issue: Specific Performance of Contract",
+        "Similar factual pattern: Overlapping keywords (agreement, contract, performance, property)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q008",
+      "case_id": 16923,
+      "case_title": "Pushparani S. Sundaram And Ors. vs Pauline Manomani James (Deceased) And ... on 4 May, 2000",
+      "judgment_year": 2000,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 99.2,
+      "is_correct": false,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same statutory provision: Section 16",
+        "Same core legal issue: Specific Performance of Contract",
+        "Similar factual pattern: Overlapping keywords (readiness, specific, willingness)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q008",
+      "case_id": 16941,
+      "case_title": "Ram Awadh (Dead) By Lrs. & Ors. vs Achhaibar Dubey & Anr. on 1 February, 2000",
+      "judgment_year": 2000,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 99.7,
+      "is_correct": false,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same core legal issue: Specific Performance of Contract",
+        "Similar factual pattern: Overlapping keywords (contract, performance, readiness, specific)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q008",
+      "case_id": 14448,
+      "case_title": "Jugraj Singh And Another vs Labh Singh And Others on 28 November, 1994",
+      "judgment_year": 1994,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 93.4,
+      "is_correct": false,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same core legal issue: Specific Performance of Contract",
+        "Similar factual pattern: Overlapping keywords (agreement, contract, performance, readiness)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q008",
+      "case_id": 16887,
+      "case_title": "Motilal Jain vs Smt.Ramdasi Devi & Ors on 20 July, 2000",
+      "judgment_year": 2000,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 87.1,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same core legal issue: Specific Performance of Contract",
+        "Similar factual pattern: Overlapping keywords (contract, performance, readiness, specific)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q008",
+      "case_id": 14899,
+      "case_title": "Mohan Lal (Deceased) Throughhis Lrs. ... vs Mirza Abdul Gaffar & Anr on 12 December, 1995",
+      "judgment_year": 1995,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 64.8,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same statutory provision: Section 16",
+        "Same core legal issue: Specific Performance of Contract",
+        "Similar factual pattern: Overlapping keywords (agreement, contract, property, readiness)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q009",
+      "case_id": 15678,
+      "case_title": "M/S. Swastic Industries vs Maharashtra State Electricity Board on 24 January, 1997",
+      "judgment_year": 1997,
+      "ground_truth_relevance": 3,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.6,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Similar factual pattern: Overlapping keywords (consumer, deficiency, negligence, service)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q009",
+      "case_id": 24046,
+      "case_title": "Maharaja Agrasen Hospital . vs Master Rishabh Sharma . on 16 December, 2019",
+      "judgment_year": 2019,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.4,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (compensation, consumer, deficiency, medical)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q009",
+      "case_id": 25139,
+      "case_title": "Chanda Rani Akhouri . vs M.S.Methusethupathi . on 20 April, 2022",
+      "judgment_year": 2022,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.1,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Similar factual pattern: Overlapping keywords (medical, negligence)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q009",
+      "case_id": 23909,
+      "case_title": "Arun Kumar Manglik vs Chirayu Health And Medicare Private Ltd ... on 9 January, 2019",
+      "judgment_year": 2019,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.1,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (compensation, medical, negligence)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q009",
+      "case_id": 16059,
+      "case_title": "M/S. Spring Meadows Hospital & Anr vs Harjol Ahluwalia Through, K.S. ... on 25 March, 1998",
+      "judgment_year": 1998,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.1,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (claim, compensation, medical, negligence)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q009",
+      "case_id": 19651,
+      "case_title": "M/S. Transport Corporation Of India Ltd vs M/S. Veljan Hydrair Ltd on 22 February, 2007",
+      "judgment_year": 2007,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.1,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Similar factual pattern: Overlapping keywords (deficiency, service)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q009",
+      "case_id": 26286,
+      "case_title": "Yash Raj Films Private Limited vs Afreen Fatima Zaidi on 22 April, 2024",
+      "judgment_year": 2024,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.0,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (deficiency, service)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q009",
+      "case_id": 22668,
+      "case_title": "V. Krishnakumar vs State Of Tamil Nadu &Ors.; on 1 July, 2015",
+      "judgment_year": 2015,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.0,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same core legal issue: Land Acquisition & Compensation",
+        "Similar factual pattern: Overlapping keywords (medical, negligence)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q015",
+      "case_id": 24883,
+      "case_title": "Municipal Corporation Of Gr. Mumbai vs Ankita Sinha on 7 October, 2021",
+      "judgment_year": 2021,
+      "ground_truth_relevance": 3,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.8,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Similar factual pattern: Overlapping keywords (environmental, green, national, tribunal)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q015",
+      "case_id": 25310,
+      "case_title": "Pahwa Plastics Pvt Ltd. vs Dastak Ngo on 25 March, 2022",
+      "judgment_year": 2022,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.4,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Similar factual pattern: Overlapping keywords (clearance, environmental, green, national)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q015",
+      "case_id": 25021,
+      "case_title": "The National Highways Authority Of ... vs Pandarinathan Govindarajulu on 19 January, 2021",
+      "judgment_year": 2021,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.8,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Similar factual pattern: Overlapping keywords (clearance, environmental, green, national)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q015",
+      "case_id": 24743,
+      "case_title": "Citizens For Green Doon vs Union Of India on 14 December, 2021",
+      "judgment_year": 2021,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.9,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Similar factual pattern: Overlapping keywords (green, national, tribunal)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q015",
+      "case_id": 26275,
+      "case_title": "Vedanta Limited vs The State Of Tamil Nadu on 29 February, 2024",
+      "judgment_year": 2024,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.7,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Similar factual pattern: Overlapping keywords (control, green, national, pollution)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q015",
+      "case_id": 24207,
+      "case_title": "Tamil Nadu Polution Control Board vs Sterlite Industries (I) Ltd. . on 18 February, 2019",
+      "judgment_year": 2019,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.7,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Similar factual pattern: Overlapping keywords (control, green, national, pollution)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q015",
+      "case_id": 21058,
+      "case_title": "T.N. Godavarman Thirumulpad vs Union Of India & Ors on 6 July, 2011",
+      "judgment_year": 2011,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.4,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Similar factual pattern: Overlapping keywords (clearance, control, environmental, pollution)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q015",
+      "case_id": 24292,
+      "case_title": "Alembic Pharmaceuticals Ltd. vs Rohit Prajapati . on 1 April, 2020",
+      "judgment_year": 2020,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 0.3,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Similar factual pattern: Overlapping keywords (clearance, control, environmental, pollution)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q016",
+      "case_id": 6745,
+      "case_title": "Income Tax Officer, Income ... vs Nawab Mir Barkat Ali Khan Bahadur on 16 October, 1974",
+      "judgment_year": 1974,
+      "ground_truth_relevance": 3,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 98.8,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Income Tax Act",
+        "Similar factual pattern: Overlapping keywords (believe, income, reason, reopening)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q016",
+      "case_id": 12855,
+      "case_title": "Income Tax Officer, Cuttack And Ors vs Biju Patnaik on 7 December, 1990",
+      "judgment_year": 1990,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 9.2,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same statutory provision: Section 147",
+        "Governed by same statute: Income Tax Act",
+        "Same core legal issue: Statutory Application under Section 147",
+        "Similar factual pattern: Overlapping keywords (assessment, believe, escapement, income)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q016",
+      "case_id": 14823,
+      "case_title": "Income-Tax Officer, Calcutta vs M/S. Selected Dalurband Coal Co. Pvt. ... on 29 March, 1995",
+      "judgment_year": 1995,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 37.9,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same statutory provision: Section 147",
+        "Same core legal issue: Statutory Application under Section 147",
+        "Similar factual pattern: Overlapping keywords (assessment, believe, escapement, income)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q016",
+      "case_id": 11372,
+      "case_title": "Niranjan & Co. P. Ltd vs Commissioner Of Income Tax, West ... on 19 March, 1986",
+      "judgment_year": 1986,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 4.9,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same statutory provision: Section 147",
+        "Governed by same statute: Income Tax Act",
+        "Same core legal issue: Statutory Application under Section 147",
+        "Similar factual pattern: Overlapping keywords (assessment, income, reopening)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q016",
+      "case_id": 9468,
+      "case_title": "Ganga Saran And Sons Pvt. Ltd. Calcutta vs Income Tax Officer & Ors on 23 April, 1981",
+      "judgment_year": 1981,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 32.0,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same statutory provision: Section 147",
+        "Governed by same statute: Income Tax Act",
+        "Same core legal issue: Statutory Application under Section 147",
+        "Similar factual pattern: Overlapping keywords (assessment, believe, escapement, income)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q016",
+      "case_id": 15742,
+      "case_title": "Raymond Woollen Mills Ltd. vs Income-Tax Officer And Ors. on 17 December, 1997",
+      "judgment_year": 1997,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 56.6,
+      "is_correct": false,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same statutory provision: Section 147",
+        "Same core legal issue: Statutory Application under Section 147",
+        "Similar factual pattern: Overlapping keywords (assessment, reopening)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q016",
+      "case_id": 11296,
+      "case_title": "Indo-Aden Salt Mfg. & Trading Co. Pvt. ... vs Commissioner Of Income Tax, Bombay on 12 March, 1986",
+      "judgment_year": 1986,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 8.3,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same statutory provision: Section 147",
+        "Governed by same statute: Income Tax Act",
+        "Same core legal issue: Statutory Application under Section 147",
+        "Similar factual pattern: Overlapping keywords (assessment, income, reopening)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q016",
+      "case_id": 11295,
+      "case_title": "Indian Oil Corporation vs Income Tax Officer, Central Circle V, ... on 8 May, 1986",
+      "judgment_year": 1986,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 16.3,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same statutory provision: Section 147",
+        "Governed by same statute: Income Tax Act",
+        "Same core legal issue: Statutory Application under Section 147",
+        "Similar factual pattern: Overlapping keywords (assessment, believe, escapement, income)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q018",
+      "case_id": 25399,
+      "case_title": "State Of Madhya Pradesh Through ... vs Seema Sharma on 12 May, 2022",
+      "judgment_year": 2022,
+      "ground_truth_relevance": 3,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 99.7,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Constitution of India",
+        "Similar factual pattern: Overlapping keywords (article, classification, equality, reasonable)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q018",
+      "case_id": 11667,
+      "case_title": "Haji T.M. Hassan Rawther vs Kerala Financial Corporation on 17 November, 1987",
+      "judgment_year": 1987,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 98.7,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Constitution of India",
+        "Similar factual pattern: Overlapping keywords (action, arbitrary, article, equality)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q018",
+      "case_id": 6411,
+      "case_title": "Navnit Lal Manilal Bhat vs Union Of India (Uoi) And Ors. on 7 March, 1973",
+      "judgment_year": 1973,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 62.1,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Constitution of India",
+        "Similar factual pattern: Overlapping keywords (classification, reasonable)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q018",
+      "case_id": 13068,
+      "case_title": "State Of Rajasthan vs Gurcharan Singh Grewal And Others on 13 July, 1990",
+      "judgment_year": 1990,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 21.8,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Governed by same statute: Constitution of India",
+        "Similar factual pattern: Overlapping keywords (action, article, classification, equality)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q018",
+      "case_id": 25403,
+      "case_title": "State Of Uttarakhand vs Sudhir Budakoti on 7 April, 2022",
+      "judgment_year": 2022,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 9.9,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Governed by same statute: Constitution of India",
+        "Similar factual pattern: Overlapping keywords (article, classification, equality, reasonable)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q018",
+      "case_id": 22680,
+      "case_title": "Vikram Cement & Anr vs State Of M.P. & Ors on 17 March, 2015",
+      "judgment_year": 2015,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 7.0,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Governed by same statute: Constitution of India",
+        "Similar factual pattern: Overlapping keywords (action, article, classification, equality)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q018",
+      "case_id": 9802,
+      "case_title": "D.S. Nakara & Others vs Union Of India on 17 December, 1982",
+      "judgment_year": 1982,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 3.6,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Constitution of India",
+        "Similar factual pattern: Overlapping keywords (action, article, classification, equality)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q018",
+      "case_id": 13271,
+      "case_title": "Jaghnath vs Union Of India And Anr on 1 November, 1991",
+      "judgment_year": 1991,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 8.6,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Constitution of India",
+        "Similar factual pattern: Overlapping keywords (article, classification, reasonable)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q035",
+      "case_id": 22480,
+      "case_title": "Narendra Kumar Amin vs Cbi & Anr on 15 January, 2015",
+      "judgment_year": 2015,
+      "ground_truth_relevance": 3,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 14.2,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same statutory provision: Section 167",
+        "Governed by same statute: Code of Criminal Procedure",
+        "Same core legal issue: Bail Jurisprudence",
+        "Similar factual pattern: Overlapping keywords (bail, days, default, indefeasible)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q035",
+      "case_id": 24335,
+      "case_title": "Bikramjit Singh vs The State Of Punjab on 12 October, 2020",
+      "judgment_year": 2020,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 17.0,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Code of Criminal Procedure",
+        "Same core legal issue: Bail Jurisprudence",
+        "Similar factual pattern: Overlapping keywords (bail, charge, days, default)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q035",
+      "case_id": 23352,
+      "case_title": "Rakesh Kumar Paul vs State Of Assam on 16 August, 2017",
+      "judgment_year": 2017,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 8.2,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Code of Criminal Procedure",
+        "Same core legal issue: Bail Jurisprudence",
+        "Similar factual pattern: Overlapping keywords (bail, charge, days, default)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q035",
+      "case_id": 25743,
+      "case_title": "Qamar Ghani Usmani vs The State Of Gujarat on 10 April, 2023",
+      "judgment_year": 2023,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 14.4,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same statutory provision: Section 167",
+        "Same core legal issue: Bail Jurisprudence",
+        "Similar factual pattern: Overlapping keywords (bail, days, default, period)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q035",
+      "case_id": 25205,
+      "case_title": "Jigar @ Jimmy Pravinchandra Adatiya vs State Of Gujarat on 23 September, 2022",
+      "judgment_year": 2022,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.5,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same statutory provision: Section 167",
+        "Governed by same statute: Code of Criminal Procedure",
+        "Same core legal issue: Bail Jurisprudence",
+        "Similar factual pattern: Overlapping keywords (bail, charge, crpc, days)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q035",
+      "case_id": 24549,
+      "case_title": "S. Kasi vs State Through The Inspector Of Police ... on 19 June, 2020",
+      "judgment_year": 2020,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.0,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Same statutory provision: Section 167",
+        "Governed by same statute: Code of Criminal Procedure",
+        "Same core legal issue: Bail Jurisprudence",
+        "Similar factual pattern: Overlapping keywords (bail, charge, default, filing)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q035",
+      "case_id": 24431,
+      "case_title": "M Ravindran vs The Intelligence Officer Directorate ... on 26 October, 2020",
+      "judgment_year": 2020,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.1,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same statutory provision: Section 167",
+        "Governed by same statute: Code of Criminal Procedure",
+        "Same core legal issue: Bail Jurisprudence",
+        "Similar factual pattern: Overlapping keywords (bail, charge, days, default)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q035",
+      "case_id": 20982,
+      "case_title": "Sadhwi Pragyna Singh Thakur vs State Of Maharashtra on 23 September, 2011",
+      "judgment_year": 2011,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 1.4,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Same statutory provision: Section 167",
+        "Same core legal issue: Bail Jurisprudence",
+        "Similar factual pattern: Overlapping keywords (bail, charge, days, default)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q041",
+      "case_id": 25761,
+      "case_title": "Ramisetty Venkatanna vs Nasyam Jamal Saheb on 28 April, 2023",
+      "judgment_year": 2023,
+      "ground_truth_relevance": 3,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 82.3,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Code of Civil Procedure",
+        "Similar factual pattern: Overlapping keywords (action, barred, cause, plaint)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q041",
+      "case_id": 15620,
+      "case_title": "I.T.C. Limited vs The Debts Recovery Appellate Tribunal & ... on 19 December, 1997",
+      "judgment_year": 1997,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "SIMILAR",
+      "similarity_percentage": 98.1,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Code of Civil Procedure",
+        "Similar factual pattern: Overlapping keywords (action, cause, plaint, rule)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q041",
+      "case_id": 25133,
+      "case_title": "C.S. Ramaswamy vs V.K. Senthil on 30 September, 2022",
+      "judgment_year": 2022,
+      "ground_truth_relevance": 2,
+      "ground_truth_label": "SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 23.1,
+      "is_correct": false,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Code of Civil Procedure",
+        "Similar factual pattern: Overlapping keywords (action, barred, cause, plaint)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q041",
+      "case_id": 26659,
+      "case_title": "Umadevi vs Anand Kumar on 2 April, 2025",
+      "judgment_year": 2025,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 16.3,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Governed by same statute: Code of Civil Procedure",
+        "Similar factual pattern: Overlapping keywords (action, barred, cause, limitation)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q041",
+      "case_id": 24449,
+      "case_title": "M/S. Shakti Bhog Food Industries Ltd. vs The Central Bank Of India on 5 June, 2020",
+      "judgment_year": 2020,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 5.8,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Governed by same statute: Code of Civil Procedure",
+        "Similar factual pattern: Overlapping keywords (action, barred, cause, plaint)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q041",
+      "case_id": 22669,
+      "case_title": "Vaish Aggarwal Panchayat vs Inder Kumar & Ors on 25 August, 2015",
+      "judgment_year": 2015,
+      "ground_truth_relevance": 1,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 4.9,
+      "is_correct": true,
+      "is_hard_negative": true,
+      "why_similar": [
+        "Governed by same statute: Code of Civil Procedure",
+        "Similar factual pattern: Overlapping keywords (barred, limitation, plaint, rule)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q041",
+      "case_id": 24343,
+      "case_title": "Canara Bank vs P Sellathal (Dead) Thr Lrs on 28 February, 2020",
+      "judgment_year": 2020,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 8.7,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Code of Civil Procedure",
+        "Similar factual pattern: Overlapping keywords (action, barred, plaint, rejection)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    },
+    {
+      "query_id": "Q041",
+      "case_id": 25390,
+      "case_title": "Sri Biswanath Banik vs Sulanga Bose on 14 March, 2022",
+      "judgment_year": 2022,
+      "ground_truth_relevance": 0,
+      "ground_truth_label": "NOT SIMILAR",
+      "predicted_label": "NOT SIMILAR",
+      "similarity_percentage": 2.9,
+      "is_correct": true,
+      "is_hard_negative": false,
+      "why_similar": [
+        "Governed by same statute: Code of Civil Procedure",
+        "Similar factual pattern: Overlapping keywords (barred, limitation, plaint, rule)",
+        "Similar procedural posture: Supreme Court Judgment before the Supreme Court"
+      ]
+    }
+  ]
+}

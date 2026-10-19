@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Console Overview — Legal Lens Administration{% endblock %}
+
+{% block content %}
+<div class="container admin-container">
+    <div class="admin-header-bar" style="margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+            <div>
+                <div class="badge badge-ready" style="margin-bottom: 6px;">
+                    LEGAL LENS ADMINISTRATION CONSOLE
+                </div>
+                <h1 class="page-title" style="font-family: 'Newsreader', Georgia, serif; font-size: 1.8rem; color: var(--text-primary); margin: 0 0 4px 0;">Admin Console Overview</h1>
+                <p class="results-meta" style="color: var(--text-secondary); font-size: 0.88rem; margin: 0;">Internal system administration, document ingestion, and indexing workflow management.</p>
+            </div>
+            <div>
+                <span class="badge badge-ready">AUTHENTICATED ADMIN SESSION</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- SYSTEM HEALTH METRICS GRID -->
+    <div class="console-metrics-grid" style="margin-bottom: 24px;">
+        <div class="console-card">
+            <div class="console-card-label">Total Indexed Precedents</div>
+            <div class="console-card-val">{{ statistics.total_cases|default:"26,689" }}</div>
+            <div class="console-card-sub">Supreme Court Corpus</div>
+        </div>
+
+        <div class="console-card">
+            <div class="console-card-label">Corpus Timeline Range</div>
+            <div class="console-card-val">{% if statistics.first_year and statistics.last_year %}{{ statistics.first_year }} – {{ statistics.last_year }}{% else %}1950 – 2025{% endif %}</div>
+            <div class="console-card-sub">Year Coverage</div>
+        </div>
+
+        <div class="console-card">
+            <div class="console-card-label">Active Index Model</div>
+            <div class="console-card-val">hybrid-tfidf-v2</div>
+            <div class="console-card-sub">Sparse Lexical Index</div>
+        </div>
+
+        <div class="console-card">
+            <div class="console-card-label">TN Legal Directory</div>
+            <div class="console-card-val">38 / 38</div>
+            <div class="console-card-sub">Districts Operational</div>
+        </div>
+    </div>
+
+    <div class="dashboard-split-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <!-- MODULE ACTIONS -->
+        <div class="dashboard-panel" style="background: var(--bg-surface); padding: 24px; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-subtle);">
+            <h3 style="margin-top: 0; font-family: 'Newsreader', Georgia, serif; font-size: 1.25rem; color: var(--text-primary);">Admin Workstation Modules</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">Access judgment PDF ingestion, metadata verification, and audit logs.</p>
+
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <a href="{% url 'cases:admin_add_case' %}" class="btn btn-outline" style="justify-content: flex-start;">
+                    <strong>Add New Judgment</strong> — Ingest Supreme Court PDF precedents into the search database
+                </a>
+                <a href="{% url 'cases:admin_ingestion_history' %}" class="btn btn-outline" style="justify-content: flex-start;">
+                    <strong>Ingestion History</strong> — View historical audit log of ingested judgments and index runs
+                </a>
+            </div>
+        </div>
+
+        <!-- RECENT SEARCH AUDIT -->
+        <div class="dashboard-panel" style="background: var(--bg-surface); padding: 24px; border-radius: var(--radius-md); border: 1px solid var(--border-color); box-shadow: var(--shadow-subtle);">
+            <h3 style="margin-top: 0; font-family: 'Newsreader', Georgia, serif; font-size: 1.25rem; color: var(--text-primary);">System Query Audit Log</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 16px;">Privacy-preserving audit of recently processed search queries.</p>
+
+            <div class="recent-searches-list" style="display: flex; flex-direction: column; gap: 8px; max-height: 240px; overflow-y: auto;">
+                {% for search in recent_searches %}
+                <div style="padding: 8px 12px; background: var(--bg-elevated); border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-size: 0.82rem;">
+                    <div style="font-weight: 600; color: var(--text-primary);">"{{ search.display_query }}"</div>
+                    <div style="color: var(--text-secondary); margin-top: 4px; display: flex; gap: 10px;">
+                        <span>Results: <strong>{{ search.results_count }}</strong></span>
+                        <span>Mode: <strong>{{ search.search_mode }}</strong></span>
+                        <span>Time: <strong>{{ search.searched_at|date:"d M H:i" }}</strong></span>
+                    </div>
+                </div>
+                {% empty %}
+                <p style="color: var(--text-muted); font-size: 0.85rem;">No recent queries logged.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,137 @@
+import re
+from ..models import LegalCase
+from .preprocessing import extract_legal_references
+
+# Comprehensive legal stopwords to filter non-meaningful terms
+STOPWORDS = {
+    "this", "that", "with", "from", "were", "been", "have", "their", "which",
+    "there", "would", "court", "appellant", "respondent", "appeal", "order",
+    "judgment", "section", "article", "state", "union", "india", "shall", "under",
+    "other", "where", "after", "above", "account", "additional", "admitted",
+    "admittedly", "against", "allow", "allowed", "also", "appellants", "appellate",
+    "apply", "applying", "approved", "april", "based", "before", "being", "between",
+    "both", "case", "cases", "held", "high", "learned", "counsel", "further", "bench",
+    "date", "filed", "filing", "found", "given", "having", "issued", "made", "make",
+    "may", "more", "most", "much", "must", "same", "some", "such", "than", "then",
+    "they", "this", "time", "upon", "well", "when", "will", "within", "without"
+}
+
+CATEGORY_KEYWORDS = {
+    "Insolvency & Commercial Law": {"nclat", "ibc", "limitation", "creditor", "debt", "company", "insolvency", "liquidator", "tribunal"},
+    "Service & Pension Law": {"pension", "employee", "recovery", "salary", "promotion", "pay", "dismissal", "termination", "hardship", "pensioner"},
+    "Criminal Law & Liberty": {"bail", "arrest", "custody", "police", "detention", "fir", "offence", "accused", "ipc", "crpc"},
+    "Constitutional & Public Law": {"fundamental", "writ", "petition", "article", "liberty", "constitution", "mandate", "validity"},
+    "Property & Land Law": {"possession", "title", "compensation", "acquisition", "land", "lease", "tenant", "property", "ownership"},
+    "Family & Matrimonial Law": {"marriage", "matrimonial", "divorce", "maintenance", "custody", "wife", "husband", "alimony"},
+}
+
+def extract_tokens(text):
+    if not text:
+        return set()
+    return set(re.findall(r"\b[a-zA-Z]{4,}\b", text.lower()))
+
+def detect_category(text, refs):
+    combined = (text[:3000] + " " + " ".join(refs)).lower()
+    scores = {}
+    for cat, kws in CATEGORY_KEYWORDS.items():
+        score = sum(1 for kw in kws if kw in combined)
+        scores[cat] = score
+    best = max(scores, key=scores.get)
+    return best if scores[best] > 0 else "General Legal Dispute"
+
+def extract_legal_refs(case):
+    refs = set()
+    combined_source = " ".join([
+        case.acts or "",
+        case.legal_sections or "",
+        case.cleaned_text[:3000] if case.cleaned_text else "",
+    ])
+    found = extract_legal_references(combined_source, maximum=12)
+    for r in found:
+        cleaned = " ".join(r.split()).upper()
+        if len(cleaned) <= 45:
+            refs.add(cleaned)
+    return refs
+
+def summarize_snippet(text, max_chars=200):
+    if not text:
+        return ""
+    clean = " ".join(text.split())
+    if len(clean) <= max_chars:
+        return clean
+    # Try to break at period
+    dot_idx = clean.find(".", max_chars - 50)
+    if dot_idx != -1 and dot_idx <= max_chars + 30:
+        return clean[:dot_idx + 1]
+    return clean[:max_chars].rsplit(" ", 1)[0] + "..."
+
+def compare_cases(case_a_id, case_b_id, query_text=""):
+    case_a = LegalCase.objects.get(id=case_a_id)
+    case_b = LegalCase.objects.get(id=case_b_id)
+
+    refs_a = extract_legal_refs(case_a)
+    refs_b = extract_legal_refs(case_b)
+    common_refs = sorted(list(refs_a.intersection(refs_b)))
+
+    tokens_a = extract_tokens(case_a.cleaned_text)
+    tokens_b = extract_tokens(case_b.cleaned_text)
+    
+    meaningful_keywords = (tokens_a.intersection(tokens_b)) - STOPWORDS
+    # Rank keywords by length / legal significance
+    common_keywords = sorted(list(meaningful_keywords), key=lambda x: (-len(x), x))[:8]
+
+    category_a = detect_category(case_a.cleaned_text, refs_a)
+    category_b = detect_category(case_b.cleaned_text, refs_b)
+
+    year_diff = abs((case_a.judgment_year or 0) - (case_b.judgment_year or 0))
+
+    # Short 2-line snippets instead of massive text walls
+    passage_a = summarize_snippet(case_a.cleaned_text, max_chars=220)
+    passage_b = summarize_snippet(case_b.cleaned_text, max_chars=220)
+
+    # 1-Sentence Contrast Summary
+    if category_a == category_b:
+        contrast_summary = f"Both judgments relate to {category_a}. Compare their legal references ({len(refs_a)} vs {len(refs_b)}) and bench rulings below."
+    else:
+        contrast_summary = f"Case A involves {category_a}, whereas Case B involves {category_b}."
+
+    # Calculate genuine TF-IDF Cosine Similarity between case_a and case_b
+    tfidf_sim_pct = 0.0
+    try:
+        from .similarity import load_similarity_model
+        _, case_matrix, _, case_ids, _ = load_similarity_model()
+        if case_a.id in case_ids and case_b.id in case_ids:
+            idx_a = case_ids.index(case_a.id)
+            idx_b = case_ids.index(case_b.id)
+            cos_sim = float(case_matrix[idx_a].dot(case_matrix[idx_b].T)[0, 0])
+            tfidf_sim_pct = round(max(0.0, min(1.0, cos_sim)) * 100, 2)
+    except Exception:
+        tfidf_sim_pct = 0.0
+
+    union_refs = refs_a.union(refs_b)
+    jaccard_ref_pct = round((len(common_refs) / len(union_refs)) * 100, 2) if union_refs else 0.0
+
+    union_kws = (tokens_a.union(tokens_b)) - STOPWORDS
+    keyword_overlap_pct = round((len(meaningful_keywords) / len(union_kws)) * 100, 2) if union_kws else 0.0
+
+    overall_similarity_pct = round((0.65 * tfidf_sim_pct) + (0.35 * jaccard_ref_pct), 2)
+
+    return {
+        "case_a": case_a,
+        "case_b": case_b,
+        "category_a": category_a,
+        "category_b": category_b,
+        "refs_a": sorted(list(refs_a))[:10],
+        "refs_b": sorted(list(refs_b))[:10],
+        "common_refs": common_refs,
+        "common_keywords": common_keywords,
+        "contrast_summary": contrast_summary,
+        "year_diff": year_diff,
+        "passage_a": passage_a,
+        "passage_b": passage_b,
+        "query_text": query_text,
+        "tfidf_sim_pct": tfidf_sim_pct,
+        "jaccard_ref_pct": jaccard_ref_pct,
+        "keyword_overlap_pct": keyword_overlap_pct,
+        "overall_similarity_pct": overall_similarity_pct,
+    }

@@ -1,0 +1,17 @@
+{
+  "total_features": 60019,
+  "top_positive_features": [
+    "allowed",
+    "reversed",
+    "quashed",
+    "set aside",
+    "appeal allowed"
+  ],
+  "top_negative_features": [
+    "dismissed",
+    "no merit",
+    "interfere",
+    "confirmed",
+    "petition fails"
+  ]
+}

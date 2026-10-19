@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Plain-Language Legal Assistant — Legal Lens{% endblock %}
+
+{% block content %}
+<div class="container assistant-container">
+    <div class="assistant-header-bar" style="margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+        <h1 class="page-title" style="font-family: 'Newsreader', Georgia, serif; font-size: 1.8rem; color: var(--text-primary); margin: 0 0 4px 0;">Plain-Language Legal Assistant</h1>
+        <p class="results-meta" style="color: var(--text-secondary); font-size: 0.88rem; margin: 0;">Describe a factual legal situation to categorize the legal domain and review educational procedural guidance.</p>
+    </div>
+
+    <div class="assistant-grid" style="display: grid; grid-template-columns: 1fr 340px; gap: 24px;">
+        <div class="dashboard-panel" style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-subtle);">
+            <form method="post" action="{% url 'cases:assistant' %}">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger" style="margin-bottom: 14px; padding: 10px 14px; background: var(--accent-red-bg); border: 1px solid var(--accent-red); color: var(--accent-red); border-radius: var(--radius-sm); font-size: 0.88rem;">{{ form.non_field_errors }}</div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="{{ form.issue.id_for_label }}" class="form-label">
+                        Explain the factual situation or legal dispute:
+                    </label>
+                    {{ form.issue }}
+                    <small class="form-help">Describe events, dates, or factual disputes in plain natural language.</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Analyze Legal Issue</button>
+            </form>
+        </div>
+
+        <div class="dashboard-panel" style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-subtle);">
+            <h3 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.2rem; color: var(--text-primary); margin-top: 0; margin-bottom: 12px;">Scope & Guidance</h3>
+            <ul style="padding-left: 18px; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.6; margin: 0;">
+                <li style="margin-bottom: 8px;"><strong>Domain Categorization:</strong> Identifies whether the issue falls under Criminal, Matrimonial, Service, Property, or Constitutional law.</li>
+                <li style="margin-bottom: 8px;"><strong>Procedural Steps:</strong> Outlines standard educational steps for documentation and legal consultation.</li>
+                <li><strong>Informational Purpose:</strong> Provides educational guidance and does not constitute legal representation.</li>
+            </ul>
+        </div>
+    </div>
+
+    {% if assistance %}
+    <div class="dashboard-panel" style="margin-top: 24px; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 28px; box-shadow: var(--shadow-card);">
+        <div class="response-header" style="margin-bottom: 14px;">
+            <span class="badge badge-ready">IDENTIFIED LEGAL CATEGORY</span>
+            <h2 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.6rem; color: var(--text-primary); margin: 6px 0 4px 0;">{{ assistance.category.name }}</h2>
+        </div>
+
+        <p class="category-explanation" style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 16px;">{{ assistance.category.explanation }}</p>
+
+        <div style="background: var(--accent-gold-bg); border: 1px solid var(--border-color); border-left: 3px solid var(--accent-gold); padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 20px;">
+            <strong style="color: var(--accent-gold-bright); font-size: 0.88rem;">Relevant Legal Specialization:</strong>
+            <span style="color: var(--text-primary); font-weight: 600; font-size: 0.88rem; margin-left: 4px;">{{ assistance.category.lawyer }}</span>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <h3 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.2rem; color: var(--text-primary); margin: 0 0 10px 0;">Standard Procedural Guidance</h3>
+            <ol style="padding-left: 20px; color: var(--text-secondary); font-size: 0.88rem; line-height: 1.7; margin: 0;">
+                {% for step in assistance.category.steps %}
+                <li style="margin-bottom: 4px;">{{ step }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-subtle); padding-top: 14px; font-size: 0.8rem; color: var(--text-muted);">
+            <strong>Legal Disclaimer:</strong> This feature provides general educational guidance and does not replace professional legal representation by a qualified advocate.
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

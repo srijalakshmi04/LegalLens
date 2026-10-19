@@ -1,0 +1,240 @@
+{% extends "base.html" %}
+
+{% block title %}Precedent Search — Indian Supreme Court Legal Research Platform — Legal Lens{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="hero-grid">
+        <div class="hero-left">
+            <h1 class="hero-title">Precedent Research</h1>
+            <p class="hero-subtitle">Search and understand relevant Supreme Court judgments through evidence-based legal retrieval.</p>
+            
+            <div class="search-card" id="search">
+                <form method="post" action="{% url 'cases:home' %}">
+                    {% csrf_token %}
+                    
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-danger" style="margin-bottom: 14px; padding: 10px 14px; background: var(--accent-red-bg); border: 1px solid var(--accent-red); color: var(--accent-red); border-radius: var(--radius-sm); font-size: 0.88rem;">
+                        {% for error in form.non_field_errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="form-group" style="margin-bottom: 18px;">
+                        <label for="{{ form.case_description.id_for_label }}" class="form-label" style="font-weight: 600; font-size: 0.88rem; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 8px; display: block;">
+                            Legal Issue, Fact Pattern, or Provision
+                        </label>
+                        {{ form.case_description }}
+                        <small class="form-help" style="display: block; margin-top: 8px; font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">
+                            Example: Police detained a person without following Section 41 CrPC procedures, violating personal liberty under Article 21.
+                        </small>
+                    </div>
+
+                    <div class="search-btn-container" style="margin-top: 20px;">
+                        <button type="submit" class="btn btn-primary btn-search" id="submit-search-btn" style="padding: 12px 30px; font-size: 0.98rem; font-weight: 600; display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+                            <span>🔍 Find Similar Cases</span>
+                        </button>
+                    </div>
+                    {{ form.result_count }}
+                </form>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE: PREMIUM 3D SCULPTURE -->
+        <div class="hero-3d-container">
+            <canvas id="hero-sculpture-canvas" class="hero-3d-canvas" width="280" height="240" aria-label="3D Legal Research Sculpture"></canvas>
+            
+            <!-- FALLBACK SVG IF JS/CANVAS IS DISABLED -->
+            <noscript>
+                <svg width="240" height="200" viewBox="0 0 240 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="120" cy="180" rx="90" ry="12" fill="#20242A" opacity="0.08"/>
+                    <!-- Walnut Base -->
+                    <rect x="40" y="150" width="160" height="18" rx="3" fill="#3D2619" stroke="#26170E" stroke-width="1"/>
+                    <rect x="42" y="152" width="156" height="4" fill="#593926" opacity="0.6"/>
+                    <!-- Parchment Book 1 -->
+                    <polygon points="50,140 190,140 185,150 45,150" fill="#F4EFE6" stroke="#D9D4C9" stroke-width="1"/>
+                    <rect x="40" y="125" width="150" height="16" rx="2" fill="#4A1825" stroke="#331019" stroke-width="1"/>
+                    <line x1="45" y1="133" x2="185" y2="133" stroke="#9A7625" stroke-width="1.5"/>
+                    <!-- Parchment Book 2 (Top Angle) -->
+                    <rect x="55" y="100" width="130" height="16" rx="2" fill="#FBF9F5" stroke="#D9D4C9" stroke-width="1"/>
+                    <rect x="55" y="100" width="20" height="16" fill="#7A2638"/>
+                    <!-- Brass Scale Icon Emblem -->
+                    <circle cx="120" cy="70" r="22" fill="#F2EBD9" stroke="#9A7625" stroke-width="2"/>
+                    <path d="M120 56 V84 M110 64 H130 M110 64 L104 76 M130 64 L136 76" stroke="#9A7625" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </noscript>
+        </div>
+    </div>
+</section>
+
+{% block footer %}{% endblock %}
+
+<!-- SCRIPT FOR 3D LEGAL SCULPTURE CANVAS -->
+<script>
+
+// Sophisticated Canvas 3D Render of Ivory Law Books + Walnut Spine + Brushed Brass Accent
+(function() {
+    var canvas = document.getElementById('hero-sculpture-canvas');
+    if (!canvas || !canvas.getContext) return;
+    var ctx = canvas.getContext('2d');
+
+    var mouseX = 0, mouseY = 0;
+    var angleX = 0, angleY = 0;
+    var isHovered = false;
+
+    // Check reduced motion preference
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    canvas.addEventListener('mousemove', function(e) {
+        var rect = canvas.getBoundingClientRect();
+        mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 0.4;
+        mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 0.3;
+        isHovered = true;
+    });
+
+    canvas.addEventListener('mouseleave', function() {
+        isHovered = false;
+    });
+
+    var time = 0;
+    function render() {
+        if (!prefersReducedMotion) {
+            time += 0.015;
+        }
+
+        var targetX = isHovered ? mouseX : Math.sin(time * 0.5) * 0.08;
+        var targetY = isHovered ? mouseY : Math.cos(time * 0.4) * 0.05;
+
+        angleX += (targetX - angleX) * 0.05;
+        angleY += (targetY - angleY) * 0.05;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        var centerX = canvas.width / 2 + angleX * 25;
+        var centerY = canvas.height / 2 + 10 + angleY * 15;
+
+        // 1. Soft Realistic Drop Shadow
+        ctx.beginPath();
+        ctx.ellipse(centerX, centerY + 75, 95 + Math.sin(time)*3, 14, 0, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(32, 36, 42, 0.07)';
+        ctx.fill();
+
+        // 2. Dark Walnut Base Platform
+        ctx.save();
+        ctx.translate(centerX, centerY + 65);
+        ctx.fillStyle = '#3D2619'; // Walnut dark brown
+        ctx.beginPath();
+        ctx.roundRect(-85, -8, 170, 16, 3);
+        ctx.fill();
+        ctx.strokeStyle = '#26170E';
+        ctx.stroke();
+        // Walnut wood shine highlight
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
+        ctx.fillRect(-80, -6, 160, 3);
+        ctx.restore();
+
+        // 3. Stacked Law Books (Warm Ivory / Parchment Pages & Burgundy Binding)
+        // Book 1 (Bottom Large Volume)
+        ctx.save();
+        ctx.translate(centerX - 5, centerY + 45 + Math.sin(time*0.5)*2);
+        ctx.fillStyle = '#F4EFE6'; // Parchment pages
+        ctx.beginPath();
+        ctx.roundRect(-75, -12, 150, 24, 2);
+        ctx.fill();
+        ctx.strokeStyle = '#D9D4C9';
+        ctx.stroke();
+        // Spine accent (Burgundy)
+        ctx.fillStyle = '#7A2638';
+        ctx.fillRect(-75, -12, 22, 24);
+        // Brass Spine Ribs
+        ctx.fillStyle = '#9A7625';
+        ctx.fillRect(-73, -6, 18, 2);
+        ctx.fillRect(-73, 4, 18, 2);
+        ctx.restore();
+
+        // Book 2 (Middle Volume - Slight Offset Angle)
+        ctx.save();
+        ctx.translate(centerX + 8, centerY + 22 + Math.cos(time*0.6)*2);
+        ctx.rotate(0.04);
+        ctx.fillStyle = '#FCFBF8'; // Ivory
+        ctx.beginPath();
+        ctx.roundRect(-68, -11, 136, 22, 2);
+        ctx.fill();
+        ctx.strokeStyle = '#D9D4C9';
+        ctx.stroke();
+        // Spine (Dark Walnut)
+        ctx.fillStyle = '#4A3222';
+        ctx.fillRect(-68, -11, 20, 22);
+        ctx.restore();
+
+        // Book 3 (Top Volume)
+        ctx.save();
+        ctx.translate(centerX - 2, centerY + 2 + Math.sin(time*0.7)*2);
+        ctx.rotate(-0.03);
+        ctx.fillStyle = '#F9F6F0';
+        ctx.beginPath();
+        ctx.roundRect(-60, -10, 120, 20, 2);
+        ctx.fill();
+        ctx.strokeStyle = '#D9D4C9';
+        ctx.stroke();
+        // Spine (Gold Accent)
+        ctx.fillStyle = '#9A7625';
+        ctx.fillRect(-60, -10, 18, 20);
+        ctx.restore();
+
+        // 4. Restrained Brushed Brass Scales Emblem (Top Centerpiece)
+        ctx.save();
+        ctx.translate(centerX, centerY - 38 + Math.sin(time*0.8)*3);
+        
+        // Brass Stand
+        ctx.fillStyle = '#9A7625';
+        ctx.fillRect(-2, 0, 4, 30);
+        ctx.fillRect(-12, 28, 24, 4);
+
+        // Beam
+        ctx.fillRect(-26, 2, 52, 3);
+
+        // Left Pan (Parchment & Brass)
+        ctx.beginPath();
+        ctx.moveTo(-24, 5);
+        ctx.lineTo(-30, 20);
+        ctx.lineTo(-18, 20);
+        ctx.closePath();
+        ctx.strokeStyle = '#83631A';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(-24, 20, 10, 0, Math.PI);
+        ctx.fillStyle = '#F2EBD9';
+        ctx.fill();
+        ctx.stroke();
+
+        // Right Pan
+        ctx.beginPath();
+        ctx.moveTo(24, 5);
+        ctx.lineTo(18, 20);
+        ctx.lineTo(30, 20);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(24, 20, 10, 0, Math.PI);
+        ctx.fillStyle = '#F2EBD9';
+        ctx.fill();
+        ctx.stroke();
+
+        // Central Finial Circle
+        ctx.beginPath();
+        ctx.arc(0, -2, 6, 0, Math.PI * 2);
+        ctx.fillStyle = '#9A7625';
+        ctx.fill();
+
+        ctx.restore();
+
+        requestAnimationFrame(render);
+    }
+
+    render();
+})();
+</script>
+{% endblock %}

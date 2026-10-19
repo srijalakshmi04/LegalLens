@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+
+{% block title %}Judgment Comparison Workstation — Legal Lens{% endblock %}
+
+{% block content %}
+<div class="container compare-workstation-container" style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 15px;">
+
+    <!-- TOP HEADER BAR -->
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 24px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
+        <div>
+            <div class="badge badge-mode" style="margin-bottom: 6px;">LEGAL WORKSTATION</div>
+            <h1 class="page-title" style="font-family: 'Newsreader', serif; font-size: 2rem; color: var(--accent-gold-bright);">
+                Supreme Court Judgment Comparison
+            </h1>
+            <p class="results-meta" style="color: var(--text-muted); font-size: 0.9rem;">
+                Side-by-side precedent analysis, statutory overlap comparison, and TF-IDF similarity calculation.
+            </p>
+        </div>
+        <div>
+            <a href="javascript:history.back()" class="btn btn-outline" style="font-size: 0.85rem;">
+                ← Back to Search Results
+            </a>
+        </div>
+    </div>
+
+    {% if error %}
+    <div class="alert alert-danger" style="margin-bottom: 24px;">
+        ⚠️ {{ error }}
+    </div>
+    {% endif %}
+
+    <!-- CASE SELECTOR FORM -->
+    <div class="result-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 20px; margin-bottom: 30px;">
+        <h3 style="font-size: 1.05rem; font-weight: 600; color: var(--accent-gold-bright); margin-bottom: 16px;">
+            📌 Select Judgments to Compare
+        </h3>
+
+        <form method="GET" action="{% url 'cases:case_compare' %}" style="display: flex; flex-direction: column; gap: 16px;">
+            {% if query_text %}
+            <input type="hidden" name="query" value="{{ query_text }}">
+            {% endif %}
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                <!-- CASE A SELECTOR -->
+                <div>
+                    <label for="case_a" style="display: block; font-weight: 600; font-size: 0.85rem; color: var(--text-primary); margin-bottom: 6px;">
+                        CASE A (First Precedent):
+                    </label>
+                    <select name="case_a" id="case_a" class="form-control" required style="width: 100%; padding: 10px; background: var(--bg-input, #1f293d); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 6px; font-size: 0.9rem; word-break: break-word;">
+                        <option value="">-- Select Case A --</option>
+                        {% for c in recent_cases %}
+                        <option value="{{ c.id }}" {% if case_a_obj and case_a_obj.id == c.id %}selected{% endif %}>
+                            {{ c.title|truncatechars:70 }} ({{ c.judgment_year }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- CASE B SELECTOR -->
+                <div>
+                    <label for="case_b" style="display: block; font-weight: 600; font-size: 0.85rem; color: var(--text-primary); margin-bottom: 6px;">
+                        CASE B (Second Precedent):
+                    </label>
+                    <select name="case_b" id="case_b" class="form-control" required style="width: 100%; padding: 10px; background: var(--bg-input, #1f293d); border: 1px solid var(--border-color); color: var(--text-primary); border-radius: 6px; font-size: 0.9rem; word-break: break-word;">
+                        <option value="">-- Select Case B --</option>
+                        {% for c in recent_cases %}
+                        <option value="{{ c.id }}" {% if case_b_obj and case_b_obj.id == c.id %}selected{% endif %}>
+                            {{ c.title|truncatechars:70 }} ({{ c.judgment_year }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; align-items: center; justify-content: flex-end; margin-top: 4px;">
+                <button type="submit" class="btn btn-primary" style="padding: 10px 24px; font-weight: 700;">
+                    ⚖ Compare Selected Cases
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- COMPARISON RESULTS WORKSTATION -->
+    {% if comparison %}
+
+    <!-- 1. CENTRAL SIMILARITY ANALYSIS PANEL -->
+    <div class="result-card" style="background: linear-gradient(135deg, rgba(17,24,39,0.95), rgba(31,41,55,0.95)); border: 1px solid var(--accent-gold-bright); border-radius: 12px; padding: 24px; margin-bottom: 30px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 16px; border-bottom: 1px dashed var(--border-color); padding-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.5rem;">📊</span>
+                <div>
+                    <h2 style="font-family: 'Newsreader', serif; font-size: 1.4rem; color: var(--accent-gold-bright); margin: 0;">
+                        SIMILARITY ANALYSIS
+                    </h2>
+                    <span style="font-size: 0.8rem; color: var(--text-muted);">Empirical vector space and statutory overlap computation</span>
+                </div>
+            </div>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <div style="text-align: right;">
+                    <div style="font-size: 1.8rem; font-weight: 800; color: var(--accent-gold-bright); line-height: 1;">
+                        {{ comparison.overall_similarity_pct }}%
+                    </div>
+                    <div style="font-size: 0.7rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px;">
+                        Overall Similarity
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+            <div style="background: rgba(15,23,42,0.6); padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+                <span style="display: block; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">TF-IDF Document Similarity</span>
+                <strong style="font-size: 1.2rem; color: var(--text-primary);">{{ comparison.tfidf_sim_pct }}%</strong>
+            </div>
+
+            <div style="background: rgba(15,23,42,0.6); padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+                <span style="display: block; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Statutory Reference Overlap</span>
+                <strong style="font-size: 1.2rem; color: var(--accent-gold-bright);">{{ comparison.jaccard_ref_pct }}%</strong>
+            </div>
+
+            <div style="background: rgba(15,23,42,0.6); padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+                <span style="display: block; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Vocabulary Keyword Overlap</span>
+                <strong style="font-size: 1.2rem; color: var(--text-primary);">{{ comparison.keyword_overlap_pct }}%</strong>
+            </div>
+        </div>
+
+        <!-- CONTRAST SUMMARY -->
+        <div style="background: rgba(31,41,55,0.7); border-left: 4px solid var(--accent-gold-bright); padding: 12px 16px; border-radius: 4px; font-size: 0.92rem;">
+            <strong>Comparative Summary:</strong> {{ comparison.contrast_summary }}
+        </div>
+
+        <!-- COMMON STATUTORY PROVISIONS & KEYWORDS -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 20px;">
+            {% if comparison.common_refs %}
+            <div>
+                <strong style="display: block; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px;">
+                    Shared Statutory Provisions ({{ comparison.common_refs|length }}):
+                </strong>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px; max-height: 120px; overflow-y: auto; padding-right: 4px;">
+                    {% for ref in comparison.common_refs %}
+                    <span class="badge badge-shared-ref" style="font-size: 0.8rem; background: rgba(197,155,39,0.2); border: 1px solid var(--accent-gold-bright); color: var(--accent-gold-bright); padding: 4px 8px; border-radius: 4px;">
+                        ✓ {{ ref }}
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            {% if comparison.common_keywords %}
+            <div>
+                <strong style="display: block; font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px;">
+                    Common Legal Terminology:
+                </strong>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px; max-height: 120px; overflow-y: auto; padding-right: 4px;">
+                    {% for kw in comparison.common_keywords %}
+                    <span class="badge badge-term" style="font-size: 0.8rem; background: rgba(59,130,246,0.15); border: 1px solid #3b82f6; color: #93c5fd; padding: 4px 8px; border-radius: 4px;">
+                        {{ kw }}
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- 2. SIDE-BY-SIDE RESPONSIVE COMPARISON PANELS -->
+    <div class="compare-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; align-items: start; word-break: break-word; overflow-wrap: anywhere;">
+        
+        <!-- CASE A COLUMN -->
+        <div class="result-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+            <div style="border-bottom: 2px solid #3b82f6; padding-bottom: 12px; margin-bottom: 16px;">
+                <span class="badge" style="background: rgba(59,130,246,0.2); color: #60a5fa; border: 1px solid #3b82f6; margin-bottom: 6px;">CASE A</span>
+                <h2 style="font-family: 'Newsreader', serif; font-size: 1.35rem; color: var(--text-primary); word-break: break-word; line-height: 1.3;">
+                    {{ comparison.case_a.title }}
+                </h2>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+                    Year: <strong>{{ comparison.case_a.judgment_year }}</strong> | Citation: {{ comparison.case_a.citations|default:'Supreme Court Judgment' }}
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 14px; font-size: 0.9rem;">
+                <div>
+                    <strong style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; display: block;">Legal Category</strong>
+                    <span style="color: var(--text-primary); font-weight: 600;">{{ comparison.category_a }}</span>
+                </div>
+
+                <div>
+                    <strong style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; display: block; margin-bottom: 6px;">Statutory Provisions (Case A)</strong>
+                    <div style="display: flex; flex-wrap: wrap; gap: 4px; max-height: 140px; overflow-y: auto;">
+                        {% for ref in comparison.refs_a %}
+                        <span style="background: rgba(255,255,255,0.06); padding: 2px 8px; border-radius: 4px; font-size: 0.78rem; border: 1px solid var(--border-color);">
+                            {{ ref }}
+                        </span>
+                        {% empty %}
+                        <span style="color: var(--text-muted); font-style: italic;">No specific statutory sections extracted</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div>
+                    <strong style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; display: block; margin-bottom: 6px;">Passage Excerpt (Case A)</strong>
+                    <div style="background: #0d1322; padding: 12px; border-radius: 6px; font-style: italic; color: #d1d5db; max-height: 180px; overflow-y: auto; font-size: 0.85rem; border: 1px solid var(--border-color);">
+                        "{{ comparison.passage_a }}"
+                    </div>
+                </div>
+
+                <div style="margin-top: 10px;">
+                    <a href="{% url 'cases:case_detail' comparison.case_a.id %}" class="btn btn-sm btn-outline" style="width: 100%; text-align: center;">
+                        View Full Judgment A →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CASE B COLUMN -->
+        <div class="result-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+            <div style="border-bottom: 2px solid var(--accent-gold-bright); padding-bottom: 12px; margin-bottom: 16px;">
+                <span class="badge" style="background: rgba(197,155,39,0.2); color: var(--accent-gold-bright); border: 1px solid var(--accent-gold-bright); margin-bottom: 6px;">CASE B</span>
+                <h2 style="font-family: 'Newsreader', serif; font-size: 1.35rem; color: var(--text-primary); word-break: break-word; line-height: 1.3;">
+                    {{ comparison.case_b.title }}
+                </h2>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 4px;">
+                    Year: <strong>{{ comparison.case_b.judgment_year }}</strong> | Citation: {{ comparison.case_b.citations|default:'Supreme Court Judgment' }}
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 14px; font-size: 0.9rem;">
+                <div>
+                    <strong style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; display: block;">Legal Category</strong>
+                    <span style="color: var(--text-primary); font-weight: 600;">{{ comparison.category_b }}</span>
+                </div>
+
+                <div>
+                    <strong style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; display: block; margin-bottom: 6px;">Statutory Provisions (Case B)</strong>
+                    <div style="display: flex; flex-wrap: wrap; gap: 4px; max-height: 140px; overflow-y: auto;">
+                        {% for ref in comparison.refs_b %}
+                        <span style="background: rgba(255,255,255,0.06); padding: 2px 8px; border-radius: 4px; font-size: 0.78rem; border: 1px solid var(--border-color);">
+                            {{ ref }}
+                        </span>
+                        {% empty %}
+                        <span style="color: var(--text-muted); font-style: italic;">No specific statutory sections extracted</span>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div>
+                    <strong style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; display: block; margin-bottom: 6px;">Passage Excerpt (Case B)</strong>
+                    <div style="background: #0d1322; padding: 12px; border-radius: 6px; font-style: italic; color: #d1d5db; max-height: 180px; overflow-y: auto; font-size: 0.85rem; border: 1px solid var(--border-color);">
+                        "{{ comparison.passage_b }}"
+                    </div>
+                </div>
+
+                <div style="margin-top: 10px;">
+                    <a href="{% url 'cases:case_detail' comparison.case_b.id %}" class="btn btn-sm btn-outline" style="width: 100%; text-align: center;">
+                        View Full Judgment B →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% else %}
+    <div class="alert alert-info" style="text-align: center; padding: 30px;">
+        📌 Select two Supreme Court judgments above and click <strong>"Compare Selected Cases"</strong> to initiate side-by-side workstation analysis.
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}

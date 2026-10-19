@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}Similar Supreme Court Judgments — Legal Lens Search Results{% endblock %}
+
+{% block content %}
+<div class="container results-container">
+    <div class="results-header-bar">
+        <div>
+            <div class="badge badge-mode" style="margin-bottom: 8px;">RESEARCH RESULTS</div>
+            <h1 class="page-title">Similar Supreme Court Judgments</h1>
+            <p class="results-meta">
+                Found <strong>{{ results|length }}</strong> potentially relevant precedents | Search Mode: <span class="badge badge-mode">{{ search_mode|upper }}</span>
+            </p>
+        </div>
+        <div>
+            <a href="{% url 'cases:home' %}" class="btn btn-outline">← New Case Search</a>
+        </div>
+    </div>
+
+    <!-- DYNAMIC SEARCH ANALYSIS PANEL -->
+    <div class="diagnostic-panel">
+        <div class="diagnostic-header">
+            <h3><span class="icon">🔍</span> Search Analysis</h3>
+        </div>
+
+        <div class="diagnostic-expansion-box">
+            {% if diagnostics.legal_references %}
+            <div class="expansion-group">
+                <strong>Legal references detected:</strong>
+                {% for ref in diagnostics.legal_references %}
+                <span class="badge badge-ref">{{ ref }}</span>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="expansion-group">
+                <strong>Legal references detected:</strong>
+                <span class="badge badge-mode">No specific legal sections or articles detected</span>
+            </div>
+            {% endif %}
+
+            {% if diagnostics.expanded_terms %}
+            <div class="expansion-group">
+                <strong>Related legal terminology:</strong>
+                {% for term in diagnostics.expanded_terms %}
+                <span class="badge badge-term">{{ term }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- RESULTS LIST -->
+    {% if results %}
+    <div class="results-list">
+        {% for item in results %}
+        <div class="result-card">
+            <div class="result-card-header">
+                <div class="case-main-info">
+                    <span class="case-year-tag">{{ item.case.judgment_year }}</span>
+                    {% if item.relevance_tier == 'HIGH' %}
+                    <span class="badge badge-tier-high">HIGH RELEVANCE</span>
+                    {% elif item.relevance_tier == 'MEDIUM' %}
+                    <span class="badge badge-tier-medium">MEDIUM RELEVANCE</span>
+                    {% else %}
+                    <span class="badge badge-tier-low">LOW RELEVANCE</span>
+                    {% endif %}
+
+                    <h2 class="case-title">
+                        <a href="{% url 'cases:case_detail' item.case.id %}">{{ item.case.title }}</a>
+                    </h2>
+                    {% if item.case.citations %}
+                    <div class="case-citation">Citation: {{ item.case.citations }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="score-badge-box">
+                    <div class="score-percentage">{{ item.percentage }}%</div>
+                    <div class="score-label" title="Estimated textual and legal research relevance to your query description. This is an information retrieval score, not a legal outcome or win probability.">
+                        PREDICTED SIMILARITY
+                    </div>
+                </div>
+            </div>
+
+            <!-- WHY THIS CASE MATCHES -->
+            <div class="evidence-box">
+                <strong>WHY THIS CASE MATCHES:</strong>
+                <p>{{ item.why_matched }}</p>
+
+                {% if item.matched_references %}
+                <div class="matched-refs-list">
+                    <strong>Matching Legal Provisions:</strong>
+                    {% for ref in item.matched_references %}
+                    <span class="badge badge-shared-ref">{{ ref }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if item.matched_terms %}
+                <div class="matched-terms-list">
+                    <strong>Matching Topics:</strong>
+                    {% for term in item.matched_terms %}
+                    <span class="badge badge-matched-term">{{ term }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- RELEVANT PASSAGE -->
+            {% if item.relevant_passage %}
+            <div class="passage-box">
+                <div class="passage-header">
+                    <strong>📌 RELEVANT PASSAGE EXCERPT:</strong>
+                </div>
+                <blockquote class="passage-text">
+                    "{{ item.relevant_passage|truncatewords:120 }}"
+                </blockquote>
+            </div>
+            {% endif %}
+
+            <!-- RANKING DETAILS -->
+            <details class="ranking-accordion">
+                <summary class="accordion-summary">Why was this case ranked here?</summary>
+                <div class="accordion-content">
+                    <div class="score-breakdown">
+                        <div class="breakdown-item" style="margin-bottom: 8px;">
+                            <span class="breakdown-label" style="font-size: 0.82rem; color: var(--text-muted);">Document-Level Overlap: <strong style="color: var(--text-primary);">{{ item.document_percentage }}%</strong></span>
+                        </div>
+                        <div class="breakdown-item" style="margin-bottom: 8px;">
+                            <span class="breakdown-label" style="font-size: 0.82rem; color: var(--text-muted);">Relevant Passage Overlap: <strong style="color: var(--text-primary);">{{ item.passage_percentage }}%</strong></span>
+                        </div>
+                        {% if item.matched_references %}
+                        <div class="breakdown-item">
+                            <span class="breakdown-label" style="font-size: 0.82rem; color: var(--text-muted);">Legal Provision Match: <strong style="color: var(--accent-gold-bright);">High</strong></span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </details>
+
+            <!-- CARD FOOTER ACTIONS -->
+            <div class="result-card-footer">
+                <a href="{% url 'cases:case_detail' item.case.id %}" class="btn btn-sm btn-primary">
+                    VIEW JUDGMENT
+                </a>
+
+                <a href="{% url 'cases:related_cases' item.case.id %}" class="btn btn-sm btn-secondary">
+                    FIND RELATED
+                </a>
+
+                <a href="{% url 'cases:toggle_save_case' item.case.id %}" class="btn btn-sm {% if item.is_saved %}btn-saved{% else %}btn-outline{% endif %}">
+                    {% if item.is_saved %}★ Saved in Collection{% else %}☆ SAVE CASE{% endif %}
+                </a>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-warning">
+        No similar precedents found for the provided query. Try adding more specific legal details or selecting a different search mode context.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

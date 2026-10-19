@@ -1,0 +1,74 @@
+{
+  "Formulation_A_Binary_Allowed_vs_Dismissed": {
+    "total_count": 16449,
+    "class_counts": {
+      "ALLOWED": 7302,
+      "DISMISSED": 9147
+    },
+    "class_proportions_pct": {
+      "ALLOWED": 44.39,
+      "DISMISSED": 55.61
+    },
+    "split_counts": {
+      "train": 11513,
+      "validation": 2468,
+      "test": 2468
+    }
+  },
+  "Formulation_B_3Class_Allowed_Dismissed_Partly": {
+    "total_count": 17441,
+    "class_counts": {
+      "ALLOWED": 7302,
+      "DISMISSED": 9147,
+      "PARTLY ALLOWED": 992
+    },
+    "class_proportions_pct": {
+      "ALLOWED": 41.87,
+      "DISMISSED": 52.45,
+      "PARTLY ALLOWED": 5.69
+    },
+    "split_counts": {
+      "train": 12208,
+      "validation": 2616,
+      "test": 2617
+    }
+  },
+  "Formulation_C_3Class_Allowed_Dismissed_Other": {
+    "total_count": 26690,
+    "class_counts": {
+      "OTHER / PROCEDURAL": 10241,
+      "ALLOWED": 7302,
+      "DISMISSED": 9147
+    },
+    "class_proportions_pct": {
+      "OTHER / PROCEDURAL": 38.37,
+      "ALLOWED": 27.36,
+      "DISMISSED": 34.27
+    },
+    "split_counts": {
+      "train": 18682,
+      "validation": 4004,
+      "test": 4004
+    }
+  },
+  "Formulation_D_4Class_Allowed_Dismissed_Partly_Remanded": {
+    "total_count": 18175,
+    "class_counts": {
+      "ALLOWED": 7302,
+      "DISMISSED": 9147,
+      "PARTLY ALLOWED": 992,
+      "REMANDED FOR FRESH HEARING": 734
+    },
+    "class_proportions_pct": {
+      "ALLOWED": 40.18,
+      "DISMISSED": 50.33,
+      "PARTLY ALLOWED": 5.46,
+      "REMANDED FOR FRESH HEARING": 4.04
+    },
+    "split_counts": {
+      "train": 12721,
+      "validation": 2727,
+      "test": 2727
+    }
+  }
+}

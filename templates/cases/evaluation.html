@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Model Evaluation — Legal Lens Benchmark Metrics{% endblock %}
+
+{% block content %}
+<div class="container eval-container">
+    <div class="eval-header-bar">
+        <div>
+            <h1 class="page-title">Retrieval System Evaluation & Metrics</h1>
+            <p class="results-meta">Academic evaluation framework measuring Baseline TF-IDF vs Hybrid Reranking</p>
+        </div>
+        <div>
+            <span class="badge {% if eval_results.is_configured %}badge-ready{% else %}badge-warning{% endif %}">
+                {% if eval_results.is_configured %}● BENCHMARK ACTIVE{% else %}⚠️ UNCONFIGURED{% endif %}
+            </span>
+        </div>
+    </div>
+
+    {% if not eval_results.is_configured %}
+    <div class="alert alert-warning">
+        <strong>Academic Honesty Notice (Section 23-25):</strong> {{ eval_results.message }}<br>
+        Legal Lens does not display hardcoded or fake precision/recall numbers. To evaluate the model on a ground-truth benchmark, configure a test query set with expert-labeled relevant judgments.
+    </div>
+    {% endif %}
+
+    <div class="eval-grid">
+        <div class="eval-card">
+            <h3>Evaluation Methodology</h3>
+            <p>Information Retrieval performance is measured across standard metrics on top-K retrieved candidate Supreme Court judgments:</p>
+            <ul>
+                <li><strong>Precision@5 & Precision@10:</strong> Proportion of relevant judgments in top 5 and top 10 results.</li>
+                <li><strong>Recall@K:</strong> Ratio of ground-truth relevant judgments successfully retrieved in top-K.</li>
+                <li><strong>Mean Reciprocal Rank (MRR):</strong> Average of reciprocal ranks of the first relevant judgment.</li>
+                <li><strong>NDCG@10:</strong> Normalized Discounted Cumulative Gain accounting for position-weighted relevance.</li>
+            </ul>
+        </div>
+
+        <div class="eval-card">
+            <h3>Architecture Comparison</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Baseline TF-IDF</th>
+                        <th>Hybrid Reranking (Legal Lens)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Precision@5</strong></td>
+                        <td>{{ eval_results.metrics.baseline_tfidf.precision_at_5|default:"Not evaluated" }}</td>
+                        <td>{{ eval_results.metrics.hybrid_retrieval.precision_at_5|default:"Not evaluated" }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Precision@10</strong></td>
+                        <td>{{ eval_results.metrics.baseline_tfidf.precision_at_10|default:"Not evaluated" }}</td>
+                        <td>{{ eval_results.metrics.hybrid_retrieval.precision_at_10|default:"Not evaluated" }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Recall@10</strong></td>
+                        <td>{{ eval_results.metrics.baseline_tfidf.recall_at_10|default:"Not evaluated" }}</td>
+                        <td>{{ eval_results.metrics.hybrid_retrieval.recall_at_10|default:"Not evaluated" }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MRR</strong></td>
+                        <td>{{ eval_results.metrics.baseline_tfidf.mrr|default:"Not evaluated" }}</td>
+                        <td>{{ eval_results.metrics.hybrid_retrieval.mrr|default:"Not evaluated" }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>NDCG@10</strong></td>
+                        <td>{{ eval_results.metrics.baseline_tfidf.ndcg_at_10|default:"Not evaluated" }}</td>
+                        <td>{{ eval_results.metrics.hybrid_retrieval.ndcg_at_10|default:"Not evaluated" }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

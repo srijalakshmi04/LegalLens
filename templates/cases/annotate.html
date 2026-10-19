@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+
+{% block title %}Benchmark Annotation Tool | Legal Lens Research{% endblock %}
+
+{% block content %}
+<div class="space-y-6 max-w-5xl mx-auto py-4">
+
+  <!-- Header Banner & Progress Bar -->
+  <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-4 mb-4">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="px-2.5 py-0.5 rounded text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            Research Tooling
+          </span>
+          <span class="text-xs text-slate-400">Query {{ current_item.query_id }} | Split: <span class="uppercase font-mono text-slate-200">{{ current_item.split_assignment }}</span></span>
+        </div>
+        <h1 class="text-2xl font-bold text-white mt-1">Human Relevance Benchmark Annotator</h1>
+      </div>
+
+      <!-- Real Calculated Progress Badge -->
+      <div class="text-right bg-slate-950 px-4 py-2 rounded-lg border border-slate-800">
+        <div class="text-xs text-slate-400 mb-1">
+          {% if annotated_count == 0 %}
+            <span class="text-amber-400 font-semibold">Human annotation pending</span>
+          {% else %}
+            Progress Status: <span class="text-emerald-400 font-semibold">{{ annotation_status }}</span>
+          {% endif %}
+        </div>
+        <div class="text-lg font-bold font-mono text-white">
+          Annotated: <span id="annotated-count-display">{{ annotated_count }}</span> / {{ total_candidate_items }} (<span id="progress-pct-display">{{ progress_pct }}</span>%)
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="w-full bg-slate-950 rounded-full h-2 overflow-hidden border border-slate-800">
+      <div id="progress-bar-fill" class="bg-emerald-500 h-2 transition-all duration-300" style="width: {{ progress_pct }}%;"></div>
+    </div>
+  </div>
+
+  {% if current_item %}
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- Left / Center: Query & Candidate Details -->
+    <div class="lg:col-span-2 space-y-6">
+      
+      <!-- Query Box -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+        <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Search Query</div>
+        <div class="text-lg font-medium text-slate-100 bg-slate-950 p-4 rounded-lg border border-slate-800 font-mono">
+          "{{ current_item.query_text }}"
+        </div>
+        <div class="mt-2 text-xs text-slate-400">
+          Category: <span class="text-slate-300 font-medium">{{ current_item.legal_category }}</span>
+        </div>
+      </div>
+
+      <!-- Candidate Judgment Details -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-4">
+        <div class="flex justify-between items-start gap-4">
+          <div>
+            <span class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Candidate Judgment</span>
+            <h2 class="text-xl font-bold text-white mt-1">{{ case_details.title|default:current_item.candidate.case_title }}</h2>
+            <div class="flex flex-wrap items-center gap-3 text-xs text-slate-400 mt-2 font-mono">
+              <span>🗓 Year: <strong class="text-slate-200">{{ case_details.judgment_year|default:current_item.candidate.judgment_year }}</strong></span>
+              <span>📜 Citation: <strong class="text-slate-200">{{ case_details.citation|default:"Supreme Court of India" }}</strong></span>
+              <span>⚡ Baseline Score: <strong class="text-emerald-400">{{ current_item.candidate.baseline_score }}%</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Retrieved Relevant Evidence Passage -->
+        <div>
+          <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Retrieved Passage Snippet</h4>
+          <div class="p-4 rounded-lg bg-slate-950 border border-slate-800 text-sm text-slate-300 leading-relaxed italic">
+            "{% if case_details and case_details.raw_text %}{{ case_details.raw_text|truncatewords:100 }}{% else %}No passage available.{% endif %}"
+          </div>
+        </div>
+
+        <!-- Statutory References -->
+        <div>
+          <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Statutory References</h4>
+          <div class="flex flex-wrap gap-2">
+            {% if case_details and case_details.legal_sections %}
+              <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs text-slate-300 font-mono">Sections: {{ case_details.legal_sections }}</span>
+            {% endif %}
+            {% if case_details and case_details.acts %}
+              <span class="px-2.5 py-1 rounded bg-slate-950 border border-slate-800 text-xs text-slate-300 font-mono">Acts: {{ case_details.acts }}</span>
+            {% endif %}
+            {% if not case_details.legal_sections and not case_details.acts %}
+              <span class="text-xs text-slate-500 italic">No statutory references extracted.</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: Annotation Control Box -->
+    <div class="space-y-6">
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 sticky top-6">
+        <h3 class="text-lg font-bold text-white mb-4 border-b border-slate-800 pb-3">Human Relevance Rating</h3>
+
+        <form id="annotation-form" class="space-y-4">
+          {% csrf_token %}
+          <input type="hidden" name="query_id" value="{{ current_item.query_id }}">
+          <input type="hidden" name="case_id" value="{{ current_item.candidate.case_id }}">
+
+          <div class="space-y-2">
+            <label class="flex items-start p-3 rounded-lg border border-slate-800 bg-slate-950 hover:border-emerald-500/50 cursor-pointer transition">
+              <input type="radio" name="relevance" value="3" class="mt-1 text-emerald-500 bg-slate-900 border-slate-700" {% if current_item.candidate.relevance == 3 %}checked{% endif %}>
+              <div class="ml-3">
+                <span class="text-sm font-bold text-emerald-400">3 — Highly Relevant</span>
+                <p class="text-xs text-slate-400 mt-0.5">Exact factual and legal match.</p>
+              </div>
+            </label>
+
+            <label class="flex items-start p-3 rounded-lg border border-slate-800 bg-slate-950 hover:border-emerald-500/50 cursor-pointer transition">
+              <input type="radio" name="relevance" value="2" class="mt-1 text-emerald-500 bg-slate-900 border-slate-700" {% if current_item.candidate.relevance == 2 %}checked{% endif %}>
+              <div class="ml-3">
+                <span class="text-sm font-bold text-blue-400">2 — Relevant</span>
+                <p class="text-xs text-slate-400 mt-0.5">Substantial legal principles overlap.</p>
+              </div>
+            </label>
+
+            <label class="flex items-start p-3 rounded-lg border border-slate-800 bg-slate-950 hover:border-emerald-500/50 cursor-pointer transition">
+              <input type="radio" name="relevance" value="1" class="mt-1 text-emerald-500 bg-slate-900 border-slate-700" {% if current_item.candidate.relevance == 1 %}checked{% endif %}>
+              <div class="ml-3">
+                <span class="text-sm font-bold text-amber-400">1 — Marginally Relevant</span>
+                <p class="text-xs text-slate-400 mt-0.5">Weak conceptual similarity.</p>
+              </div>
+            </label>
+
+            <label class="flex items-start p-3 rounded-lg border border-slate-800 bg-slate-950 hover:border-emerald-500/50 cursor-pointer transition">
+              <input type="radio" name="relevance" value="0" class="mt-1 text-emerald-500 bg-slate-900 border-slate-700" {% if current_item.candidate.relevance == 0 %}checked{% endif %}>
+              <div class="ml-3">
+                <span class="text-sm font-bold text-slate-400">0 — Irrelevant</span>
+                <p class="text-xs text-slate-400 mt-0.5">Unrelated area of law or facts.</p>
+              </div>
+            </label>
+          </div>
+
+          <div class="pt-4 border-t border-slate-800 flex flex-col gap-2">
+            <button type="submit" class="w-full py-2.5 px-4 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm transition shadow-sm">
+              Save Annotation
+            </button>
+
+            <div class="grid grid-cols-3 gap-2 pt-2">
+              <a href="?item={{ prev_idx }}" class="py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium text-center transition">
+                ← Prev
+              </a>
+              <a href="?item={{ next_idx }}" class="py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium text-center transition">
+                Skip
+              </a>
+              <a href="?item={{ next_idx }}" class="py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium text-center transition">
+                Next →
+              </a>
+            </div>
+          </div>
+        </form>
+
+        <div id="save-msg" class="mt-3 text-xs text-center hidden"></div>
+      </div>
+    </div>
+
+  </div>
+  {% else %}
+  <div class="p-8 text-center bg-slate-900 border border-slate-800 rounded-xl">
+    <p class="text-slate-400">No benchmark items found.</p>
+  </div>
+  {% endif %}
+
+</div>
+
+<script>
+document.getElementById('annotation-form')?.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const form = this;
+  const formData = new FormData(form);
+  const msgEl = document.getElementById('save-msg');
+
+  fetch('{% url "cases:save_annotation" %}', {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'X-CSRFToken': formData.get('csrfmiddlewaretoken')
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.status === 'success') {
+      msgEl.className = 'mt-3 text-xs text-center text-emerald-400 font-semibold';
+      msgEl.textContent = 'Saved successfully! Loading next item...';
+      msgEl.classList.remove('hidden');
+
+      // Update counters dynamically
+      document.getElementById('annotated-count-display').textContent = data.annotated_count;
+      const pct = Math.round((data.annotated_count / data.total_candidate_items) * 1000) / 10;
+      document.getElementById('progress-pct-display').textContent = pct;
+      document.getElementById('progress-bar-fill').style.width = pct + '%';
+
+      setTimeout(() => {
+        window.location.href = '?item={{ next_idx }}';
+      }, 500);
+    } else {
+      msgEl.className = 'mt-3 text-xs text-center text-rose-400 font-semibold';
+      msgEl.textContent = data.message || 'Save error';
+      msgEl.classList.remove('hidden');
+    }
+  })
+  .catch(err => {
+    msgEl.className = 'mt-3 text-xs text-center text-rose-400 font-semibold';
+    msgEl.textContent = 'Failed to submit annotation.';
+    msgEl.classList.remove('hidden');
+  });
+});
+</script>
+{% endblock %}

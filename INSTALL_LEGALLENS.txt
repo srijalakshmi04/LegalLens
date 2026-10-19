@@ -1,0 +1,76 @@
+LegalLens complete source installation
+======================================
+
+This package contains the Django source code. It intentionally does not contain
+the large SQLite database, trained model files or Supreme Court PDF dataset.
+Continue using the existing folders from F:\jurismatch:
+
+data\legal_cases.sqlite3
+ml_models\
+
+Safe installation
+-----------------
+1. Stop the Django server with Ctrl+C.
+2. Keep the existing F:\jurismatch folder as a backup.
+3. Extract this ZIP to F:\legallens.
+4. Copy the existing data and model folders:
+
+   Copy-Item "F:\jurismatch\data" "F:\legallens\data" -Recurse -Force
+   Copy-Item "F:\jurismatch\ml_models" "F:\legallens\ml_models" -Recurse -Force
+
+5. Create and activate a virtual environment:
+
+   cd "F:\legallens"
+   py -m venv .venv
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+   .\.venv\Scripts\Activate.ps1
+   python -m pip install --upgrade pip
+   python -m pip install -r requirements.txt
+
+6. Verify the project. No new migration is required:
+
+   python manage.py showmigrations cases
+   python manage.py check
+   python manage.py test cases
+
+7. Test the retrieval model:
+
+   python manage.py test_similarity --query "The police detained me without a proper trial. I believe this violated my personal freedom and I want the detention order cancelled." --top 5
+
+8. Start LegalLens:
+
+   python manage.py runserver
+
+Open http://127.0.0.1:8000/
+Open http://127.0.0.1:8000/assistant/ for the plain-language assistant.
+Open http://127.0.0.1:8000/tamil-nadu-legal-help/ for the Tamil Nadu
+lawyer and legal-aid finder.
+
+The assistant is local and does not call a cloud AI API. It classifies the
+issue, explains the likely category, suggests a lawyer type and provides simple
+next steps. Similar-case retrieval remains a separate Search Cases feature.
+The assistant does not provide legal advice.
+
+New additive features
+---------------------
+- Tamil Nadu district, legal-category and locality filters.
+- Official TNSLSA/DLSA and eCourts verification links.
+- Fictional advocate demonstration profiles, visibly labelled as demo data.
+- No lawyer data is added to data\legal_cases.sqlite3.
+- Optional All, Current relevance, Recent-only and Historical search modes.
+- All remains the default, preserving the earlier retrieval behaviour.
+- Older judgments display a current-status warning. The application does not
+  claim that recency proves validity or that an old precedent is overruled.
+
+Data integrity
+--------------
+The ZIP intentionally excludes data\legal_cases.sqlite3, ml_models\ and the
+Supreme Court PDF collection. Reuse the existing copies as shown above. Do not
+run train_model or import_cases merely to install this source upgrade.
+
+Lawyer-directory limitation
+---------------------------
+The bundled advocate records are fictional demonstration records. Never replace
+them with real names collected from random websites. A production version must
+obtain the advocate's consent, verify enrolment details and provide correction
+and deletion controls before publishing a real profile.

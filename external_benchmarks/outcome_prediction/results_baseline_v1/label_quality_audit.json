@@ -1,0 +1,415 @@
+{
+  "total_cases_audited": 26690,
+  "primary_outcome_counts": {
+    "OTHER": 7354,
+    "ALLOWED": 7304,
+    "DISMISSED": 9121,
+    "CONVICTION / ORDER SET ASIDE": 206,
+    "DISPOSED": 993,
+    "PARTLY ALLOWED": 993,
+    "REMANDED FOR FRESH HEARING": 719
+  },
+  "confidence_threshold": 0.85,
+  "sample_audits": [
+    {
+      "case_id": 26290,
+      "title": "A Rajendra vs Gonugunta Madhusudhan Rao on 4 April, 2025",
+      "primary_outcome": "OTHER",
+      "outcome_source": " 2025 [ ahsanuddin amanullah ] \u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20acj. [ augustine george masih ] new delhi; april 04, 2025 civil appeal no(s). 11070 \u0192 11071 of 2024 a raje",
+      "outcome_confidence": 0.5,
+      "label_reason": "No regex pattern triggered"
+    },
+    {
+      "case_id": 26410,
+      "title": "Jogeswar Sahoo vs The District Judge, Cuttack on 4 April, 2025",
+      "primary_outcome": "OTHER",
+      "outcome_source": "et aside. \u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20acj. (pamidighantam sri narasimha) .........\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac.j. (prashant kumar mishra) new delhi; april 04, 2025. jogeswar sah",
+      "outcome_confidence": 0.5,
+      "label_reason": "No regex pattern triggered"
+    },
+    {
+      "case_id": 26427,
+      "title": "Kousik Das vs The State Of West Bengal on 4 April, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "appeal is allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26486,
+      "title": "Murugan vs The State Rep. By The Inspector Of Police on 4 April, 2025",
+      "primary_outcome": "OTHER",
+      "outcome_source": "abhay s. oka ] \u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac..j. [ ahsanuddin amanullah ] \u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac..j. [ augustine george masih ] new delhi; april 04, 2025 murugan vs the stat",
+      "outcome_confidence": 0.5,
+      "label_reason": "No regex pattern triggered"
+    },
+    {
+      "case_id": 26561,
+      "title": "Sangita Sinha vs Bhawana Bhardwaj on 4 April, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "appeal is allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26586,
+      "title": "Soumen Paul vs Shrabani Nayek on 4 April, 2025",
+      "primary_outcome": "DISMISSED",
+      "outcome_source": "dismissed as withdrawn",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main dismissed pattern"
+    },
+    {
+      "case_id": 26360,
+      "title": "G.C. Manjunath vs Seetaram on 3 April, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "appeal is allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26451,
+      "title": "M/S R.K. Transport Company vs M/S Bharat Aluminum Company Limited ... on 3 April, 2025",
+      "primary_outcome": "DISMISSED",
+      "outcome_source": "appeal is dismissed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main dismissed pattern"
+    },
+    {
+      "case_id": 26495,
+      "title": "New Mangalore Port Trust vs Clifford D Souza Etc. Etc on 3 April, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "appeals are allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26533,
+      "title": "Ram Kishan (Since Deceased) Through His ... vs State Of Haryana on 3 April, 2025",
+      "primary_outcome": "OTHER",
+      "outcome_source": ".........................j. [b.r. gavai] \u201e\u201e\u201e.........................j. [k. v. viswanathan] new delhi; 3rd april, 2025. ram kishan (since deceased) th",
+      "outcome_confidence": 0.5,
+      "label_reason": "No regex pattern triggered"
+    },
+    {
+      "case_id": 26652,
+      "title": "The State Of West Bengal vs Baishakhi Bhattacharyya (Chatterjee) on 3 April, 2025",
+      "primary_outcome": "OTHER",
+      "outcome_source": "..............cji. (sanjiv khanna) \u2020......................................j. (sanjay kumar) new delhi; april 03, 2025. the state of west bengal vs bai",
+      "outcome_confidence": 0.5,
+      "label_reason": "No regex pattern triggered"
+    },
+    {
+      "case_id": 26657,
+      "title": "Uco Bank vs Vijay Kumar Handa on 3 April, 2025",
+      "primary_outcome": "DISMISSED",
+      "outcome_source": "appeal is dismissed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main dismissed pattern"
+    },
+    {
+      "case_id": 26308,
+      "title": "Ashok Singh vs State Of U.P on 2 April, 2025",
+      "primary_outcome": "CONVICTION / ORDER SET ASIDE",
+      "outcome_source": "impugned order is set aside",
+      "outcome_confidence": 0.95,
+      "label_reason": "Explicit set aside / quashing"
+    },
+    {
+      "case_id": 26411,
+      "title": "Jomon K.K vs Shajimon P on 2 April, 2025",
+      "primary_outcome": "DISPOSED",
+      "outcome_source": "stands disposed",
+      "outcome_confidence": 0.85,
+      "label_reason": "Procedural disposal pattern"
+    },
+    {
+      "case_id": 26445,
+      "title": "M/S Ferro Concrete Construction ... vs The State Of Rajasthan on 2 April, 2025",
+      "primary_outcome": "DISPOSED",
+      "outcome_source": "stand disposed",
+      "outcome_confidence": 0.85,
+      "label_reason": "Procedural disposal pattern"
+    },
+    {
+      "case_id": 26471,
+      "title": "Manish vs The State Of Maharashtra on 2 April, 2025",
+      "primary_outcome": "CONVICTION / ORDER SET ASIDE",
+      "outcome_source": "impugned order is set aside",
+      "outcome_confidence": 0.95,
+      "label_reason": "Explicit set aside / quashing"
+    },
+    {
+      "case_id": 26476,
+      "title": "Maukam Singh vs The State Of Madhya Pradesh on 2 April, 2025",
+      "primary_outcome": "DISMISSED",
+      "outcome_source": "no reason to interfere",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main dismissed pattern"
+    },
+    {
+      "case_id": 26577,
+      "title": "Shri. Masaidevi Vividh Karyakari ... vs The State Of Maharashtra on 2 April, 2025",
+      "primary_outcome": "DISMISSED",
+      "outcome_source": "stand dismissed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main dismissed pattern"
+    },
+    {
+      "case_id": 26622,
+      "title": "The General Manager, Business Network ... vs P Soundarya on 2 April, 2025",
+      "primary_outcome": "OTHER",
+      "outcome_source": "g application(s), if any, shall stand disposed of. \u2021\u2021\u2021\u2021\u2021\u2021\u2021\u2021j. (sanjay karol) \u2021\u2021\u2021\u2021\u2021\u2021\u2021\u2021j. (manmohan) new delhi; 2nd april, 2025. the general manager, bu",
+      "outcome_confidence": 0.5,
+      "label_reason": "No regex pattern triggered"
+    },
+    {
+      "case_id": 26624,
+      "title": "The Management Of Worth Trust vs The Secretary Worth Trust Workers Union on 2 April, 2025",
+      "primary_outcome": "DISMISSED",
+      "outcome_source": "stands dismissed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main dismissed pattern"
+    },
+    {
+      "case_id": 26659,
+      "title": "Umadevi vs Anand Kumar on 2 April, 2025",
+      "primary_outcome": "OTHER",
+      "outcome_source": "ending application(s), if any, stand(s) disposed of. .......\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac.j. [sudhanshu dhulia] ..\u20ac.....\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac.j. [k. vinod chandran] new delhi, apri",
+      "outcome_confidence": 0.5,
+      "label_reason": "No regex pattern triggered"
+    },
+    {
+      "case_id": 26673,
+      "title": "Vinay Aggarwal vs State Of Haryana on 2 April, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "appeal is allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26302,
+      "title": "Amresh Shrivastava vs The State Of Madhya Pradesh on 1 April, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "appeal is allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26386,
+      "title": "I.K. Merchants Pvt. Ltd vs The State Of Rajasthan on 1 April, 2025",
+      "primary_outcome": "DISPOSED",
+      "outcome_source": "stand disposed",
+      "outcome_confidence": 0.85,
+      "label_reason": "Procedural disposal pattern"
+    },
+    {
+      "case_id": 26426,
+      "title": "Kishore Chhabra vs The State Of Haryana on 1 April, 2025",
+      "primary_outcome": "DISPOSED",
+      "outcome_source": "appeal is disposed of",
+      "outcome_confidence": 0.85,
+      "label_reason": "Procedural disposal pattern"
+    },
+    {
+      "case_id": 26444,
+      "title": "M/S Faime Makers Pvt. Ltd vs District Deputy Registrar on 1 April, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "appeal is allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26509,
+      "title": "Piramal Capital And Housing Finance ... vs 63 Moons Technologies Limited) on 1 April, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "stand allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26530,
+      "title": "Rakesh Bhanot vs M/S Gurdas Agro Pvt. Ltd on 1 April, 2025",
+      "primary_outcome": "DISMISSED",
+      "outcome_source": "petition are dismissed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main dismissed pattern"
+    },
+    {
+      "case_id": 26536,
+      "title": "Ramayana Ispat Pvt. Ltd. And Anr vs State Of Rajasthan And Ors on 1 April, 2025",
+      "primary_outcome": "DISMISSED",
+      "outcome_source": "appeals are dismissed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main dismissed pattern"
+    },
+    {
+      "case_id": 26568,
+      "title": "Satbir Singh vs Rajesh Kumar on 1 April, 2025",
+      "primary_outcome": "DISPOSED",
+      "outcome_source": "stand disposed",
+      "outcome_confidence": 0.85,
+      "label_reason": "Procedural disposal pattern"
+    },
+    {
+      "case_id": 26626,
+      "title": "The Secretary All India Shri Shivaji ... vs The State Of Maharashtra on 1 April, 2025",
+      "primary_outcome": "PARTLY ALLOWED",
+      "outcome_source": "partly allowed",
+      "outcome_confidence": 0.92,
+      "label_reason": "Partly allowed phrase"
+    },
+    {
+      "case_id": 26366,
+      "title": "Gastrade International vs Commissioner Of Customs, Kandla on 28 March, 2025",
+      "primary_outcome": "OTHER",
+      "outcome_source": "foresaid terms. \u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20acj. (b.v. nagarathna) \u20ac\u20ac\u20ac\u20ac\u20ac\u20ac.\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20acj. (nongmeikapam kotiswar singh) new delhi; march 28, 2025. gastrade international vs",
+      "outcome_confidence": 0.5,
+      "label_reason": "No regex pattern triggered"
+    },
+    {
+      "case_id": 26388,
+      "title": "Imran Pratapgadhi vs State Of Gujarat on 28 March, 2025",
+      "primary_outcome": "OTHER",
+      "outcome_source": " proceedings based thereon. the appeal is accordingly allowed. \u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac..j. (abhay s. oka) \u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac..j. (ujjal bhuyan) new delhi; march 28, 2025 imran",
+      "outcome_confidence": 0.5,
+      "label_reason": "No regex pattern triggered"
+    },
+    {
+      "case_id": 26635,
+      "title": "The State Of Jharkhand vs Rukma Kesh Mishra on 28 March, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "stands allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26306,
+      "title": "Arun vs State Of Madhya Pradesh on 27 March, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "appeals are allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26309,
+      "title": "Aslam Alias Imran vs The State Of Madhya Pradesh on 27 March, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "appeal is allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26447,
+      "title": "M/S Jsw Ispat Special Products Limited vs Pratishtha Thakur Haritwal on 27 March, 2025",
+      "primary_outcome": "OTHER",
+      "outcome_source": "..........j (b.r. gavai) \u20ac\u20ac\u20ac\u20ac................................j (augustine george masih) new delhi; march 27, 2025 m/s jsw ispat special products limit",
+      "outcome_confidence": 0.5,
+      "label_reason": "No regex pattern triggered"
+    },
+    {
+      "case_id": 26462,
+      "title": "Madhya Pradesh Road Development ... vs Vincent Daniel on 27 March, 2025",
+      "primary_outcome": "OTHER",
+      "outcome_source": "...........................cji. (sanjiv khanna) ....................................j. (sanjay kumar) new delhi; march 27, 2025. madhya pradesh road d",
+      "outcome_confidence": 0.5,
+      "label_reason": "No regex pattern triggered"
+    },
+    {
+      "case_id": 26520,
+      "title": "R. Shashirekha vs State Of Karnataka on 27 March, 2025",
+      "primary_outcome": "PARTLY ALLOWED",
+      "outcome_source": "partly allowed",
+      "outcome_confidence": 0.92,
+      "label_reason": "Partly allowed phrase"
+    },
+    {
+      "case_id": 26539,
+      "title": "Ramesh Kumaran vs State Through The Inspector Of Police on 27 March, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "appeal is allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26560,
+      "title": "Samtola Devi vs The State Of Uttar Pradesh on 27 March, 2025",
+      "primary_outcome": "OTHER",
+      "outcome_source": "thal) .............\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac.. j. (s.v.n. bhatti) new delhi; samtola devi vs the state of uttar pradesh on 27 march, 2025 march 27, 2025 samtola de",
+      "outcome_confidence": 0.5,
+      "label_reason": "No regex pattern triggered"
+    },
+    {
+      "case_id": 26361,
+      "title": "Gajendra Singh vs Reena Balmiki on 26 March, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "appeal is allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26546,
+      "title": "Rekha Sharad Ushir vs Saptashrungi Mahila Nagari Sahkari ... on 26 March, 2025",
+      "primary_outcome": "OTHER",
+      "outcome_source": "4. the appeal is, accordingly, allowed. \u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac..j. (abhay s. oka) \u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac\u20ac..j. (ujjal bhuyan) new delhi; march 26, 2025 rekha sharad ushir vs saptas",
+      "outcome_confidence": 0.5,
+      "label_reason": "No regex pattern triggered"
+    },
+    {
+      "case_id": 26594,
+      "title": "State Rep. By Deputy Superintendent Of ... vs G. Easwaran on 26 March, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "appeal is allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26620,
+      "title": "The Chief Officer, Nagpur Housing And ... vs Manohar Burde on 26 March, 2025",
+      "primary_outcome": "PARTLY ALLOWED",
+      "outcome_source": "partly allowed",
+      "outcome_confidence": 0.92,
+      "label_reason": "Partly allowed phrase"
+    },
+    {
+      "case_id": 26685,
+      "title": "Yadwinder Singh vs Lakhi Alias Lakhwinder Singh on 26 March, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "appeals are allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26299,
+      "title": "Akshay Gupta vs Icici Bank Limited on 25 March, 2025",
+      "primary_outcome": "DISPOSED",
+      "outcome_source": "stand disposed",
+      "outcome_confidence": 0.85,
+      "label_reason": "Procedural disposal pattern"
+    },
+    {
+      "case_id": 26343,
+      "title": "Deepak Kumar Tala vs State Of Andhra Pradesh on 25 March, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "appeal is allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    },
+    {
+      "case_id": 26398,
+      "title": "J. Ganapatha vs M/S. N. Selvarajalou Chetty Trust on 25 March, 2025",
+      "primary_outcome": "DISMISSED",
+      "outcome_source": "appeal fails",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main dismissed pattern"
+    },
+    {
+      "case_id": 26470,
+      "title": "Manilal Shamalbhai Patel (Deceased) ... vs Officer On Special Duty (Land ... on 25 March, 2025",
+      "primary_outcome": "ALLOWED",
+      "outcome_source": "appeal is allowed",
+      "outcome_confidence": 0.96,
+      "label_reason": "Main allowed pattern"
+    }
+  ]
+}

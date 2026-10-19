@@ -1,0 +1,14 @@
+{
+  "audit_version": "v2",
+  "total_cases_audited": 16449,
+  "clean_binary_cases": 16449,
+  "extracted_dispositions": {
+    "ALLOWED": 1096,
+    "DISMISSED": 1372
+  },
+  "boilerplate_cleaned_patterns": [
+    "Pending application(s) shall stand disposed of",
+    "No order as to costs"
+  ],
+  "cross_split_leakage": 0
+}

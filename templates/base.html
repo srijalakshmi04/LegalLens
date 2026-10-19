@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Legal Lens — Indian Supreme Court Legal Research Platform{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=12">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+</head>
+<body class="app-layout">
+
+    <!-- DESKTOP PERSISTENT LEFT SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="{% url 'cases:home' %}" class="logo">
+                <div class="logo-icon">§</div>
+                <div>
+                    <span class="logo-text">Legal Lens</span>
+                    <span class="logo-subtitle">Supreme Court Archive</span>
+                </div>
+            </a>
+        </div>
+
+        <nav class="sidebar-nav">
+            <!-- JUDGMENT RESEARCH -->
+            <div class="nav-section-title">JUDGMENT RESEARCH</div>
+            <a href="{% url 'cases:home' %}" class="sidebar-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                Precedent Search
+            </a>
+            <a href="{% url 'cases:saved_cases' %}" class="sidebar-link {% if request.resolver_match.url_name == 'saved_cases' %}active{% endif %}">
+                Saved Collection
+            </a>
+
+            <!-- LEGAL ASSISTANCE -->
+            <div class="nav-section-title">LEGAL ASSISTANCE</div>
+            <a href="{% url 'cases:lawyer_finder' %}" class="sidebar-link {% if request.resolver_match.url_name == 'lawyer_finder' %}active{% endif %}">
+                Tamil Nadu Legal Help
+            </a>
+            <a href="{% url 'cases:assistant' %}" class="sidebar-link {% if request.resolver_match.url_name == 'assistant' %}active{% endif %}">
+                Legal Assistant
+            </a>
+            <a href="{% url 'cases:legal_awareness' %}" class="sidebar-link {% if request.resolver_match.url_name == 'legal_awareness' %}active{% endif %}">
+                Judiciary Resources
+            </a>
+
+            <!-- SYSTEM -->
+            <div class="nav-section-title">SYSTEM</div>
+            {% if is_admin %}
+            <a href="{% url 'cases:admin_dashboard' %}" class="sidebar-link {% if request.resolver_match.url_name == 'admin_dashboard' %}active{% endif %}">
+                Admin Console
+            </a>
+            <a href="{% url 'cases:admin_add_case' %}" class="sidebar-link {% if request.resolver_match.url_name == 'admin_add_case' %}active{% endif %}">
+                Add New Judgment
+            </a>
+            <a href="{% url 'cases:admin_ingestion_history' %}" class="sidebar-link {% if request.resolver_match.url_name == 'admin_ingestion_history' %}active{% endif %}">
+                Ingestion History
+            </a>
+            <a href="{% url 'cases:admin_logout' %}" class="sidebar-link" style="color: var(--accent-red); margin-top: 6px;">
+                Sign Out ({{ request.user.username }})
+            </a>
+            {% else %}
+            <a href="{% url 'cases:admin_login' %}" class="sidebar-link {% if request.resolver_match.url_name == 'admin_login' %}active{% endif %}">
+                Admin Sign In
+            </a>
+            {% endif %}
+        </nav>
+    </aside>
+
+    <!-- MAIN APPLICATION WORKSPACE -->
+    <div class="app-workspace">
+        <!-- TOP HEADER BAR -->
+        <header class="app-topbar">
+            <div class="topbar-left">
+                <button class="mobile-toggle-btn" onclick="toggleSidebar()">Menu</button>
+                <span class="topbar-title">Indian Supreme Court Precedent Retrieval Workstation</span>
+            </div>
+            <div class="topbar-right"></div>
+        </header>
+
+        {% if messages %}
+        <div class="messages-container" style="padding: 15px 20px 0;">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- PAGE CONTENT -->
+        <main class="app-main-content">
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- FOOTER -->
+        {% block footer %}
+        <footer class="footer">
+            <div class="container footer-content">
+                <div class="footer-info">
+                    <h4>Legal Lens</h4>
+                    <p>An intelligent legal information retrieval application for Indian Supreme Court judgment precedent search.</p>
+                </div>
+                <div class="footer-disclaimer">
+                    <p><strong>Legal Information Disclaimer:</strong> Legal Lens is an information retrieval system. Retrieved Supreme Court judgments and similarity scores represent textual and statutory information retrieval relevance. Scores do NOT constitute legal advice, judicial outcome predictions, or legal validity. Users must verify citations with official sources and qualified legal counsel.</p>
+                </div>
+            </div>
+        </footer>
+        {% endblock %}
+    </div>
+
+    <!-- MOBILE BACKDROP -->
+    <div class="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+    <script>
+    function toggleSidebar() {
+        var sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('open');
+        document.body.classList.toggle('sidebar-mobile-open');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Form Loading States
+        var forms = document.querySelectorAll('form');
+        forms.forEach(function(form) {
+            form.addEventListener('submit', function(e) {
+                var btn = form.querySelector('button[type="submit"]');
+                if (btn && !btn.classList.contains('btn-loading')) {
+                    var originalText = btn.innerText;
+                    if (originalText.includes('Search')) {
+                        btn.innerText = 'Searching Supreme Court precedents...';
+                    } else if (originalText.includes('Find Legal Help')) {
+                        btn.innerText = 'Searching legal assistance directory...';
+                    }
+                    btn.classList.add('btn-loading');
+                }
+            });
+        });
+
+        // Case Opening Transition
+        var caseLinks = document.querySelectorAll('.case-title a, .result-card-footer a.btn-primary');
+        caseLinks.forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                var card = link.closest('.result-card');
+                if (card) {
+                    card.classList.add('selected-card');
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>

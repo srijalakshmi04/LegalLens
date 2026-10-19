@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Judiciary Resources & Legal Awareness — Legal Lens{% endblock %}
+
+{% block content %}
+<div class="container awareness-container">
+    <div style="margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border-color);">
+        <div class="badge badge-mode" style="margin-bottom: 8px;">KNOW YOUR RIGHTS</div>
+        <h1 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.8rem; color: var(--text-primary); margin: 0 0 4px 0;">Judiciary Resources & Legal Awareness</h1>
+        <p style="color: var(--text-secondary); font-size: 0.88rem; margin: 0;">Essential educational guidance regarding fundamental rights, legal procedures, and statutory protections in India.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+        <article class="dashboard-panel" style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-subtle);">
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-gold); text-transform: uppercase;">01</div>
+            <h2 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.3rem; color: var(--text-primary); margin: 6px 0 10px 0;">Fundamental Rights</h2>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px;">The Constitution protects equality, freedom of speech, religious freedom, cultural rights, and constitutional remedies.</p>
+            <ul style="padding-left: 18px; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.65; margin: 0;">
+                <li>Right to Equality (Articles 14–18)</li>
+                <li>Right to Freedom & Personal Liberty (Articles 19–22)</li>
+                <li>Right Against Exploitation (Articles 23–24)</li>
+                <li>Right to Constitutional Remedies (Article 32 & 226)</li>
+            </ul>
+        </article>
+
+        <article class="dashboard-panel" style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-subtle);">
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-gold); text-transform: uppercase;">02</div>
+            <h2 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.3rem; color: var(--text-primary); margin: 6px 0 10px 0;">Rights of Women</h2>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px;">Women are protected by specific statutory frameworks concerning safety, domestic peace, workplace dignity, and equal opportunity.</p>
+            <ul style="padding-left: 18px; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.65; margin: 0;">
+                <li>Protection Against Domestic Violence (DV Act 2005)</li>
+                <li>Workplace Harassment Protection (POSH Act)</li>
+                <li>Equal Remuneration & Property Rights</li>
+                <li>Right to Safe Legal Reporting Procedures</li>
+            </ul>
+        </article>
+
+        <article class="dashboard-panel" style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-subtle);">
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-gold); text-transform: uppercase;">03</div>
+            <h2 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.3rem; color: var(--text-primary); margin: 6px 0 10px 0;">Consumer Rights</h2>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px;">Consumers are legally entitled to remedies against defective products, deficiency of service, and unfair trade practices.</p>
+            <ul style="padding-left: 18px; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.65; margin: 0;">
+                <li>Right to Safety & Information</li>
+                <li>Right to Choose & Seek Redressal</li>
+                <li>District, State & National Consumer Commissions</li>
+                <li>Protection Against Misleading Advertisements</li>
+            </ul>
+        </article>
+
+        <article class="dashboard-panel" style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 24px; box-shadow: var(--shadow-subtle);">
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent-gold); text-transform: uppercase;">04</div>
+            <h2 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.3rem; color: var(--text-primary); margin: 6px 0 10px 0;">Arrest & Procedural Safeguards</h2>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px;">The Code of Criminal Procedure and constitutional mandates protect individuals against unlawful arrest and custodial abuse.</p>
+            <ul style="padding-left: 18px; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.65; margin: 0;">
+                <li>Right to Know Grounds of Arrest (Section 50 CrPC)</li>
+                <li>Right to Consult Legal Practitioner</li>
+                <li>Production Before Magistrate Within 24 Hours</li>
+                <li>Mandatory DK Basu Guidelines Compliance</li>
+            </ul>
+        </article>
+    </div>
+
+    <div style="margin-top: 28px; padding: 16px 20px; background: var(--bg-surface); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-gold); border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--text-secondary);">
+        <strong style="color: var(--text-primary);">Educational Purpose Disclaimer:</strong> Information provided on this page is for general educational awareness and does not replace formal legal advice or representation by a registered legal practitioner.
+    </div>
+</div>
+{% endblock %}

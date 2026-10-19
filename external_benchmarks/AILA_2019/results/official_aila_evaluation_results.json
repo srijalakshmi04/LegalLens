@@ -1,0 +1,67 @@
+{
+  "benchmark": "FIRE AILA 2019 Task 1 Precedent Retrieval (100% Ground-Truth Corpus Aligned)",
+  "total_queries": 50,
+  "corpus_documents": 2914,
+  "mapping_coverage_pct": 100.0,
+  "performance_metrics": {
+    "corpus_format": "Official AILA Candidate Casedocs",
+    "corpus_document_count": 2914,
+    "sparse_matrix_shape": [
+      2914,
+      120000
+    ],
+    "model_load_prep_time_sec": 64.5594,
+    "total_eval_duration_sec": 81.1068,
+    "avg_query_latency_ms": 326.46
+  },
+  "results": {
+    "AILA-1: TF-IDF Baseline": {
+      "P@5": 0.064,
+      "P@10": 0.056,
+      "Recall@10": 0.1558,
+      "MRR": 0.1812,
+      "NDCG@10": 0.1323,
+      "MAP": 0.1691
+    },
+    "AILA-2: TF-IDF + Query Expansion": {
+      "P@5": 0.064,
+      "P@10": 0.05,
+      "Recall@10": 0.1332,
+      "MRR": 0.1922,
+      "NDCG@10": 0.1273,
+      "MAP": 0.172
+    },
+    "AILA-3: TF-IDF + Passage Reranking": {
+      "P@5": 0.064,
+      "P@10": 0.042,
+      "Recall@10": 0.126,
+      "MRR": 0.1287,
+      "NDCG@10": 0.0904,
+      "MAP": 0.129
+    },
+    "AILA-4: TF-IDF + Legal References": {
+      "P@5": 0.068,
+      "P@10": 0.048,
+      "Recall@10": 0.1299,
+      "MRR": 0.1902,
+      "NDCG@10": 0.1257,
+      "MAP": 0.1708
+    },
+    "AILA-5: LegalLens Heuristic Hybrid": {
+      "P@5": 0.068,
+      "P@10": 0.048,
+      "Recall@10": 0.1299,
+      "MRR": 0.1935,
+      "NDCG@10": 0.1283,
+      "MAP": 0.1742
+    },
+    "AILA-6: Supervised Relevance Model": {
+      "P@5": 0.068,
+      "P@10": 0.048,
+      "Recall@10": 0.1299,
+      "MRR": 0.1935,
+      "NDCG@10": 0.1283,
+      "MAP": 0.1742
+    }
+  }
+}

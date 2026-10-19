@@ -1,0 +1,13 @@
+{
+    "trained_at": "2026-07-27T19:38:12.687187+00:00",
+    "case_count": 26688,
+    "feature_count": 100000,
+    "matrix_rows": 26688,
+    "matrix_columns": 100000,
+    "algorithm": "TF-IDF with cosine similarity",
+    "ngram_range": [
+        1,
+        2
+    ],
+    "max_features": 100000
+}

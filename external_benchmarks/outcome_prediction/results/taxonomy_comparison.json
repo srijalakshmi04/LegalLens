@@ -1,0 +1,68 @@
+{
+  "Raw 7-Class Baseline": {
+    "num_classes": 7,
+    "total_samples": 26690,
+    "best_model": "Linear SVM",
+    "val_accuracy": 0.502,
+    "test_accuracy": 0.4893,
+    "macro_precision": 0.4919,
+    "macro_recall": 0.2662,
+    "macro_f1": 0.2694,
+    "weighted_f1": 0.4637
+  },
+  "Refined 7-Class (Improved Rules)": {
+    "num_classes": 7,
+    "total_samples": 26690,
+    "best_model": "Linear SVM",
+    "val_accuracy": 0.4848,
+    "test_accuracy": 0.4675,
+    "macro_precision": 0.6081,
+    "macro_recall": 0.2585,
+    "macro_f1": 0.2662,
+    "weighted_f1": 0.4408
+  },
+  "Refined 5-Class": {
+    "num_classes": 5,
+    "total_samples": 26690,
+    "best_model": "Linear SVM",
+    "val_accuracy": 0.488,
+    "test_accuracy": 0.4803,
+    "macro_precision": 0.4831,
+    "macro_recall": 0.3571,
+    "macro_f1": 0.3557,
+    "weighted_f1": 0.455
+  },
+  "Refined 4-Class": {
+    "num_classes": 4,
+    "total_samples": 26690,
+    "best_model": "Linear SVM",
+    "val_accuracy": 0.5165,
+    "test_accuracy": 0.519,
+    "macro_precision": 0.5253,
+    "macro_recall": 0.4315,
+    "macro_f1": 0.4378,
+    "weighted_f1": 0.5036
+  },
+  "Refined 3-Class": {
+    "num_classes": 3,
+    "total_samples": 26690,
+    "best_model": "Logistic Regression",
+    "val_accuracy": 0.5712,
+    "test_accuracy": 0.5582,
+    "macro_precision": 0.5582,
+    "macro_recall": 0.56,
+    "macro_f1": 0.5581,
+    "weighted_f1": 0.5574
+  },
+  "Refined Binary (Allowed vs Dismissed, n=18343)": {
+    "num_classes": 2,
+    "total_samples": 18343,
+    "best_model": "Linear SVM",
+    "val_accuracy": 0.6813,
+    "test_accuracy": 0.6817,
+    "macro_precision": 0.6817,
+    "macro_recall": 0.6817,
+    "macro_f1": 0.6817,
+    "weighted_f1": 0.6817
+  }
+}

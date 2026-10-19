@@ -1,0 +1,38 @@
+{
+  "tfidf_gradient_boosting_baseline_accuracy": 69.49,
+  "best_validated_transformer_condition": "Condition 1: Text Attention + Logistic Head",
+  "held_out_test_accuracy": 64.3,
+  "balanced_accuracy": 63.7,
+  "macro_precision": 0.6379,
+  "macro_recall": 0.637,
+  "macro_f1": 0.6373,
+  "weighted_f1": 0.6424,
+  "confusion_matrix": [
+    [
+      639,
+      457
+    ],
+    [
+      424,
+      948
+    ]
+  ],
+  "target_90_95_achieved": false,
+  "validation_results_matrix": {
+    "Condition 1: Text Attention + Logistic Head": {
+      "Val Accuracy": 66.13,
+      "Val Balanced Acc": 65.38,
+      "Val Macro F1": 0.6545
+    },
+    "Condition 3: Deep Transformer Encoder + Structured Metadata": {
+      "Val Accuracy": 65.68,
+      "Val Balanced Acc": 65.33,
+      "Val Macro F1": 0.653
+    },
+    "Condition 4: Deep Transformer Encoder + Meta + Precedent Consensus": {
+      "Val Accuracy": 64.51,
+      "Val Balanced Acc": 64.78,
+      "Val Macro F1": 0.6442
+    }
+  }
+}

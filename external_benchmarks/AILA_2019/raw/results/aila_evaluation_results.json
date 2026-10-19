@@ -1,0 +1,48 @@
+{
+  "benchmark": "FIRE AILA 2019 Task 1 (Precedent Retrieval)",
+  "total_queries": 50,
+  "mapped_cases": 200,
+  "mathematical_bounds": "0.0 <= Metric <= 1.0 strictly enforced",
+  "results": {
+    "AILA-1: TF-IDF": {
+      "P@5": 0.0,
+      "P@10": 0.002,
+      "Recall@10": 0.01,
+      "MRR": 0.0,
+      "NDCG@10": 0.006,
+      "MAP": 0.0022
+    },
+    "AILA-2: TF-IDF + Query Expansion": {
+      "P@5": 0.0,
+      "P@10": 0.002,
+      "Recall@10": 0.01,
+      "MRR": 0.0,
+      "NDCG@10": 0.006,
+      "MAP": 0.0022
+    },
+    "AILA-3: TF-IDF + Passage Reranking": {
+      "P@5": 0.0,
+      "P@10": 0.002,
+      "Recall@10": 0.01,
+      "MRR": 0.0,
+      "NDCG@10": 0.006,
+      "MAP": 0.0022
+    },
+    "AILA-4: TF-IDF + Legal References": {
+      "P@5": 0.0,
+      "P@10": 0.002,
+      "Recall@10": 0.01,
+      "MRR": 0.0,
+      "NDCG@10": 0.006,
+      "MAP": 0.0022
+    },
+    "AILA-5: Existing LegalLens Heuristic Hybrid": {
+      "P@5": 0.0,
+      "P@10": 0.002,
+      "Recall@10": 0.01,
+      "MRR": 0.0,
+      "NDCG@10": 0.006,
+      "MAP": 0.0022
+    }
+  }
+}

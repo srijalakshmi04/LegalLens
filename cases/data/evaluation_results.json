@@ -1,0 +1,60 @@
+{
+  "status": "Evaluation Complete (AI_PSEUDO / WEAK_SUPERVISION)",
+  "evaluation_validity": "Preliminary Weak Supervision (Independent Human Verification Required)",
+  "label_source": "AI_PSEUDO / WEAK_SUPERVISION",
+  "test_queries_count": 10,
+  "protocol": {
+    "metrics": [
+      "Precision@5",
+      "Precision@10",
+      "Recall@10",
+      "MRR",
+      "NDCG@10"
+    ],
+    "mathematical_bounds": "0.0 <= Metric <= 1.0 strictly enforced"
+  },
+  "baselines": {
+    "TF-IDF": {
+      "P@5": 0.42,
+      "P@10": 0.3,
+      "Recall@10": 1.0,
+      "MRR": 0.62,
+      "NDCG@10": 0.7134
+    },
+    "TF-IDF + Query Expansion": {
+      "P@5": 0.48,
+      "P@10": 0.3,
+      "Recall@10": 1.0,
+      "MRR": 0.8533,
+      "NDCG@10": 0.8565
+    },
+    "TF-IDF + Passage": {
+      "P@5": 0.48,
+      "P@10": 0.3,
+      "Recall@10": 1.0,
+      "MRR": 0.745,
+      "NDCG@10": 0.77
+    },
+    "TF-IDF + Legal References": {
+      "P@5": 0.52,
+      "P@10": 0.3,
+      "Recall@10": 1.0,
+      "MRR": 0.95,
+      "NDCG@10": 0.9381
+    },
+    "Existing Hybrid": {
+      "P@5": 0.58,
+      "P@10": 0.3,
+      "Recall@10": 1.0,
+      "MRR": 1.0,
+      "NDCG@10": 0.9815
+    },
+    "Supervised Relevance Model": {
+      "P@5": 0.56,
+      "P@10": 0.3,
+      "Recall@10": 1.0,
+      "MRR": 0.9333,
+      "NDCG@10": 0.9089
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "Set A (Facts/Head only - first 3500 chars)": {
+    "selected_model": "Linear SVM (Calibrated)",
+    "val_accuracy": 0.4933,
+    "test_accuracy": 0.4858,
+    "macro_precision": 0.3699,
+    "macro_recall": 0.259,
+    "macro_f1": 0.2564,
+    "weighted_f1": 0.4586
+  },
+  "Set B (Facts + Acts + Sections)": {
+    "selected_model": "Linear SVM (Calibrated)",
+    "val_accuracy": 0.502,
+    "test_accuracy": 0.4893,
+    "macro_precision": 0.4919,
+    "macro_recall": 0.2662,
+    "macro_f1": 0.2694,
+    "weighted_f1": 0.4637
+  },
+  "Set C (Title + Acts + Sections + Facts)": {
+    "selected_model": "Linear SVM (Calibrated)",
+    "val_accuracy": 0.4998,
+    "test_accuracy": 0.4918,
+    "macro_precision": 0.5009,
+    "macro_recall": 0.2682,
+    "macro_f1": 0.2722,
+    "weighted_f1": 0.4662
+  },
+  "Set D (Acts + Sections + Middle Body text)": {
+    "selected_model": "Linear SVM (Calibrated)",
+    "val_accuracy": 0.484,
+    "test_accuracy": 0.48,
+    "macro_precision": 0.4501,
+    "macro_recall": 0.2559,
+    "macro_f1": 0.2552,
+    "weighted_f1": 0.4529
+  }
+}

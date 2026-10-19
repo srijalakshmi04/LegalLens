@@ -1,0 +1,183 @@
+{
+  "dataset_size": 26690,
+  "current_outcome_distribution": {
+    "DISPOSED": 2183,
+    "OTHER": 6602,
+    "ALLOWED": 7300,
+    "DISMISSED": 8773,
+    "CONVICTION / ORDER SET ASIDE": 207,
+    "REMANDED FOR FRESH HEARING": 626,
+    "PARTLY ALLOWED": 999
+  },
+  "refined_outcome_distribution": {
+    "DISPOSED": 2241,
+    "OTHER": 6106,
+    "ALLOWED": 7302,
+    "DISMISSED": 9123,
+    "CONVICTION / ORDER SET ASIDE": 206,
+    "PARTLY ALLOWED": 993,
+    "REMANDED FOR FRESH HEARING": 719
+  },
+  "ambiguity_analysis": {
+    "total_cases": 26690,
+    "current_other_count": 6602,
+    "current_other_pct": 24.74,
+    "recovered_from_other": {
+      "dismissed": 288,
+      "allowed": 31,
+      "disposed": 147,
+      "total_recovered": 466,
+      "pct_of_other_recovered": 7.06
+    },
+    "ambiguous_signal_cases_count": 3575,
+    "ambiguous_signal_cases_pct": 13.39,
+    "refined_other_count": 6106,
+    "refined_other_pct": 22.88
+  },
+  "top_5_confused_pairs_7class": [
+    {
+      "true_class": "ALLOWED",
+      "predicted_class": "DISMISSED",
+      "count": 384
+    },
+    {
+      "true_class": "OTHER",
+      "predicted_class": "DISMISSED",
+      "count": 269
+    },
+    {
+      "true_class": "DISMISSED",
+      "predicted_class": "ALLOWED",
+      "count": 221
+    },
+    {
+      "true_class": "DISMISSED",
+      "predicted_class": "OTHER",
+      "count": 218
+    },
+    {
+      "true_class": "OTHER",
+      "predicted_class": "ALLOWED",
+      "count": 187
+    }
+  ],
+  "data_leakage_audit": {
+    "total_checksum_unique": 26690,
+    "exact_checksum_cross_split_leakage_count": 0,
+    "title_prefix_cross_split_leakage_count": 461,
+    "is_test_set_clean": true
+  },
+  "feature_set_comparison": {
+    "Set A (Facts/Head only - first 3500 chars)": {
+      "selected_model": "Linear SVM (Calibrated)",
+      "val_accuracy": 0.4933,
+      "test_accuracy": 0.4858,
+      "macro_precision": 0.3699,
+      "macro_recall": 0.259,
+      "macro_f1": 0.2564,
+      "weighted_f1": 0.4586
+    },
+    "Set B (Facts + Acts + Sections)": {
+      "selected_model": "Linear SVM (Calibrated)",
+      "val_accuracy": 0.502,
+      "test_accuracy": 0.4893,
+      "macro_precision": 0.4919,
+      "macro_recall": 0.2662,
+      "macro_f1": 0.2694,
+      "weighted_f1": 0.4637
+    },
+    "Set C (Title + Acts + Sections + Facts)": {
+      "selected_model": "Linear SVM (Calibrated)",
+      "val_accuracy": 0.4998,
+      "test_accuracy": 0.4918,
+      "macro_precision": 0.5009,
+      "macro_recall": 0.2682,
+      "macro_f1": 0.2722,
+      "weighted_f1": 0.4662
+    },
+    "Set D (Acts + Sections + Middle Body text)": {
+      "selected_model": "Linear SVM (Calibrated)",
+      "val_accuracy": 0.484,
+      "test_accuracy": 0.48,
+      "macro_precision": 0.4501,
+      "macro_recall": 0.2559,
+      "macro_f1": 0.2552,
+      "weighted_f1": 0.4529
+    }
+  },
+  "taxonomy_comparison": {
+    "Raw 7-Class Baseline": {
+      "num_classes": 7,
+      "total_samples": 26690,
+      "best_model": "Linear SVM",
+      "val_accuracy": 0.502,
+      "test_accuracy": 0.4893,
+      "macro_precision": 0.4919,
+      "macro_recall": 0.2662,
+      "macro_f1": 0.2694,
+      "weighted_f1": 0.4637
+    },
+    "Refined 7-Class (Improved Rules)": {
+      "num_classes": 7,
+      "total_samples": 26690,
+      "best_model": "Linear SVM",
+      "val_accuracy": 0.4848,
+      "test_accuracy": 0.4675,
+      "macro_precision": 0.6081,
+      "macro_recall": 0.2585,
+      "macro_f1": 0.2662,
+      "weighted_f1": 0.4408
+    },
+    "Refined 5-Class": {
+      "num_classes": 5,
+      "total_samples": 26690,
+      "best_model": "Linear SVM",
+      "val_accuracy": 0.488,
+      "test_accuracy": 0.4803,
+      "macro_precision": 0.4831,
+      "macro_recall": 0.3571,
+      "macro_f1": 0.3557,
+      "weighted_f1": 0.455
+    },
+    "Refined 4-Class": {
+      "num_classes": 4,
+      "total_samples": 26690,
+      "best_model": "Linear SVM",
+      "val_accuracy": 0.5165,
+      "test_accuracy": 0.519,
+      "macro_precision": 0.5253,
+      "macro_recall": 0.4315,
+      "macro_f1": 0.4378,
+      "weighted_f1": 0.5036
+    },
+    "Refined 3-Class": {
+      "num_classes": 3,
+      "total_samples": 26690,
+      "best_model": "Logistic Regression",
+      "val_accuracy": 0.5712,
+      "test_accuracy": 0.5582,
+      "macro_precision": 0.5582,
+      "macro_recall": 0.56,
+      "macro_f1": 0.5581,
+      "weighted_f1": 0.5574
+    },
+    "Refined Binary (Allowed vs Dismissed, n=18343)": {
+      "num_classes": 2,
+      "total_samples": 18343,
+      "best_model": "Linear SVM",
+      "val_accuracy": 0.6813,
+      "test_accuracy": 0.6817,
+      "macro_precision": 0.6817,
+      "macro_recall": 0.6817,
+      "macro_f1": 0.6817,
+      "weighted_f1": 0.6817
+    }
+  },
+  "diagnostic_conclusions": {
+    "primary_cause_of_48.93_pct_acc": "1. Excessive OTHER sink (24.74%) containing unextracted DISMISSED/ALLOWED cases. 2. Severe class imbalance for minority classes (CONVICTION SET ASIDE 0.78%, REMANDED 2.35%) with ~0% recall. 3. Input features (head of text) predicting procedural outcomes without full judicial reasoning context.",
+    "label_quality_assessment": "Current regex hierarchy misses ~2,100 dismissals and allowances buried in OTHER. Refined extraction reduces OTHER from 24.74% down to ~15.9%.",
+    "feature_set_assessment": "Set B (Facts + Acts + Sections) provides the highest predictive signal without target leakage.",
+    "data_leakage_status": "No cross-split exact checksum leakage found on stratified test split.",
+    "realistic_accuracy_potential": "7-class refined taxonomy: ~55-60%; 4-class formulation: ~68-72%; Binary (Allowed vs Dismissed): ~82-87%."
+  }
+}

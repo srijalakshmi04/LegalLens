@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}About Legal Lens — Academic Project & ML Methodology{% endblock %}
+
+{% block content %}
+<div class="container about-container">
+    <div class="about-header-bar">
+        <h1 class="page-title">About Legal Lens</h1>
+        <p class="results-meta">An MCA Final Year Research Project — Information Retrieval for Indian Jurisprudence</p>
+    </div>
+
+    <div class="about-grid">
+        <div class="about-main-card">
+            <h2>What is Legal Lens?</h2>
+            <p>
+                <strong>Legal Lens</strong> is an NLP and Machine Learning-assisted legal case similarity and retrieval system. Given a user's natural-language description of a legal dispute, Legal Lens searches a vast collection of Indian Supreme Court judgments (1950–2025), ranking and explaining the most relevant historical precedents.
+            </p>
+
+            <h2>Machine Learning Methodology</h2>
+            <p>The system utilizes a two-stage hybrid information retrieval architecture:</p>
+            <ul>
+                <li><strong>Text Extraction & Audit:</strong> Extracted from 26,688 Supreme Court judgments (26,647 complete, 36 partial, 5 scanned OCR).</li>
+                <li><strong>TF-IDF Vector Space:</strong> Documents are vectorized into a 120,000-dimensional sparse feature space (unigrams & bigrams).</li>
+                <li><strong>Domain Expansion:</strong> Maps informal user vocabulary (e.g. <em>"detained"</em>) to formal legal terms (<em>detention, custody, personal liberty</em>).</li>
+                <li><strong>Passage Reranking:</strong> Locates local high-density paragraph matches within candidate judgments.</li>
+                <li><strong>Legal Reference Matching:</strong> Uses Jaccard overlap on detected Articles, Sections, and Acts.</li>
+            </ul>
+
+            <h2>System Limitations</h2>
+            <ul>
+                <li><strong>Lexical/Statistical Matching:</strong> Relies on TF-IDF features and passage NLP, not formal judicial reasoning.</li>
+                <li><strong>No Outcome Prediction:</strong> Does not predict case outcomes, win probability, or guilt.</li>
+                <li><strong>No Automatic Overruling Detection:</strong> Does not automatically confirm whether a historical precedent has been overruled or modified by a larger bench.</li>
+            </ul>
+
+            <h2>Legal Disclaimer</h2>
+            <div class="disclaimer-callout">
+                "Legal Lens is an academic legal information retrieval system. Retrieved cases are provided for research and informational purposes. Similarity does not establish legal applicability, precedent status, or legal outcome. Users should verify legal information with authoritative sources and qualified legal professionals."
+            </div>
+        </div>
+
+        <div class="about-side-card">
+            <h3>Technology Stack</h3>
+            <table class="data-table">
+                <tbody>
+                    <tr><td><strong>Backend Framework</strong></td><td>Python 3.14 / Django 6.1</td></tr>
+                    <tr><td><strong>Database</strong></td><td>SQLite (3.77 GB)</td></tr>
+                    <tr><td><strong>Machine Learning</strong></td><td>scikit-learn, NumPy, SciPy</td></tr>
+                    <tr><td><strong>Model Format</strong></td><td>SciPy Sparse NPZ + Joblib</td></tr>
+                    <tr><td><strong>Frontend</strong></td><td>Django Templates, HTML5, CSS3, JS</td></tr>
+                    <tr><td><strong>Dataset Scope</strong></td><td>26,688 SC Cases (1950–2025)</td></tr>
+                    <tr><td><strong>Feature Space</strong></td><td>120,000 TF-IDF Features</td></tr>
+                    <tr><td><strong>Active Model</strong></td><td><code>hybrid-tfidf-v2</code></td></tr>
+                </tbody>
+            </table>
+
+            <div class="academic-badge-box" style="margin-top: 1.5rem;">
+                <strong>Academic Project Information</strong>
+                <p>Submitted for MCA Final Year Project Review, Technical Viva, and Research Presentation.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

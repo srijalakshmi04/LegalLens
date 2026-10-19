@@ -1,0 +1,112 @@
+from django.test import TestCase, SimpleTestCase
+from django.urls import reverse
+from django.contrib.auth.models import User
+from cases.forms import LawyerFinderForm
+from cases.services.lawyer_directory import find_tamil_nadu_help, get_directory_stats
+from cases.models import SearchHistory
+from cases.views import sanitize_query_for_display
+
+
+class TamilNaduLegalHelpTests(SimpleTestCase):
+    def test_finder_page_renders_without_case_database_changes(self):
+        response = self.client.get("/tamil-nadu-legal-help/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Tamil Nadu")
+
+    def test_only_tamil_nadu_district_choices_are_exposed(self):
+        form = LawyerFinderForm()
+        values = {value for value, _ in form.fields["district"].choices}
+        self.assertIn("Coimbatore", values)
+        self.assertNotIn("Bengaluru", values)
+
+    def test_coimbatore_criminal_demo_profile_matches(self):
+        result = find_tamil_nadu_help("Coimbatore", "criminal")
+        self.assertTrue(result["offices"])
+        self.assertEqual(len(result["lawyers"]), 1)
+        self.assertIn("criminal", result["lawyers"][0]["specializations"])
+
+    def test_family_specialization_filtering(self):
+        result = find_tamil_nadu_help("Coimbatore", "family")
+        self.assertEqual(result["district"], "Coimbatore")
+
+
+class SearchHistoryDisplayTests(TestCase):
+    def test_search_history_display_query_truncation_and_fallback(self):
+        long_query = "Police arrested and detained a person without following proper legal procedure under Section 41 CrPC and Article 21"
+        sanitized = sanitize_query_for_display(long_query, max_len=75)
+        self.assertTrue(sanitized.endswith("..."))
+        self.assertLessEqual(len(sanitized), 78)
+
+        item = SearchHistory.objects.create(
+            query_fingerprint="abc123hash",
+            sanitized_query=sanitized,
+            search_mode="recent",
+            query_word_count=18,
+            results_count=5,
+            top_similarity_score=42.50,
+        )
+        self.assertEqual(item.display_query, sanitized)
+        self.assertEqual(item.search_mode, "recent")
+        self.assertEqual(item.query_fingerprint, "abc123hash")
+
+        legacy_item = SearchHistory.objects.create(
+            query_fingerprint="legacyhash123",
+            sanitized_query="",
+            query_word_count=12,
+            results_count=5,
+        )
+        self.assertEqual(legacy_item.display_query, "Legal Search (12 words)")
+
+    def test_dashboard_renders_readable_queries(self):
+        SearchHistory.objects.create(
+            query_fingerprint="testfingerprint999",
+            sanitized_query="Police detained person without warrant",
+            search_mode="all",
+            query_word_count=5,
+            results_count=5,
+            top_similarity_score=35.50,
+        )
+
+        response = self.client.get("/dashboard/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Police detained person without warrant")
+        self.assertContains(response, "Top Similarity:")
+        self.assertContains(response, "35.50%")
+
+
+class AdminConsoleAccessControlTests(TestCase):
+    def setUp(self):
+        self.normal_user = User.objects.create_user(username="lawyer_user", password="password123")
+        self.admin_user = User.objects.create_superuser(username="admin_user", password="password123", email="admin@legallens.gov.in")
+
+    def test_anonymous_user_blocked_from_admin_console_and_research(self):
+        response = self.client.get("/admin-console/research/", follow=True)
+        self.assertRedirects(response, "/dashboard/")
+        self.assertContains(response, "Access restricted. Administrator privileges required")
+
+        response_admin = self.client.get("/admin-console/", follow=True)
+        self.assertRedirects(response_admin, "/dashboard/")
+
+    def test_normal_user_blocked_from_admin_console_and_research(self):
+        self.client.login(username="lawyer_user", password="password123")
+        response = self.client.get("/admin-console/research/", follow=True)
+        self.assertRedirects(response, "/dashboard/")
+        self.assertContains(response, "Access restricted. Administrator privileges required")
+
+    def test_admin_user_can_access_admin_console_and_research(self):
+        self.client.login(username="admin_user", password="password123")
+        
+        res_dash = self.client.get("/admin-console/")
+        self.assertEqual(res_dash.status_code, 200)
+        self.assertContains(res_dash, "Admin Console Overview")
+
+        res_research = self.client.get("/admin-console/research/")
+        self.assertEqual(res_research.status_code, 200)
+        self.assertContains(res_research, "Research & System Details")
+        self.assertContains(res_research, "TF-IDF Vector Space Dimension")
+
+    def test_public_sidebar_does_not_contain_research_details_for_normal_users(self):
+        response = self.client.get("/")
+        self.assertEqual(response.status_code, 200)
+        self.assertNotContains(response, "Research & System Details")
+        self.assertNotContains(response, "ADMIN CONSOLE")

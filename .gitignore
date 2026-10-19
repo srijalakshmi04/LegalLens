@@ -1,0 +1,48 @@
+# Python & Django
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Database (Large 3.78GB SQLite file - GitHub max file size is 100MB)
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+data/*.sqlite3
+data/*.sqlite3-wal
+data/*.sqlite3-shm
+db.sqlite3
+
+# Large ML Matrix Artifacts (>100MB exceeds GitHub push limit)
+*.npz
+ml_models/*.npz
+ml_models/**/*.npz
+*.joblib
+ml_models/*.joblib
+ml_models/**/*.joblib
+
+# OS & IDE Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment variables
+.env
+
+# Scratch and temporary logs
+scratch/
+*.log
+
+# Generated ML indexes and large artifacts
+ml_models/**/*.npz
+ml_models/**/*.joblib
+

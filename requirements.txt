@@ -1,0 +1,7 @@
+Django>=6.0,<6.2
+joblib
+numpy
+pypdf
+python-dotenv
+scikit-learn
+scipy

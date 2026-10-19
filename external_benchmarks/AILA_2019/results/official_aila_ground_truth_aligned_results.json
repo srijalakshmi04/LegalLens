@@ -1,0 +1,838 @@
+{
+  "benchmark": "FIRE AILA 2019 Task 1 Precedent Retrieval (100% Ground-Truth Corpus Aligned)",
+  "total_queries": 50,
+  "corpus_documents": 2914,
+  "mapping_coverage_pct": 100.0,
+  "results": {
+    "AILA-1: TF-IDF Baseline": {
+      "P@5": 0.064,
+      "P@10": 0.056,
+      "Recall@10": 0.1558,
+      "MRR": 0.1812,
+      "NDCG@10": 0.1323,
+      "MAP": 0.1691
+    },
+    "AILA-2: TF-IDF + Query Expansion": {
+      "P@5": 0.064,
+      "P@10": 0.05,
+      "Recall@10": 0.1332,
+      "MRR": 0.1922,
+      "NDCG@10": 0.1273,
+      "MAP": 0.172
+    },
+    "AILA-3: TF-IDF + Passage Reranking": {
+      "P@5": 0.064,
+      "P@10": 0.042,
+      "Recall@10": 0.126,
+      "MRR": 0.1287,
+      "NDCG@10": 0.0904,
+      "MAP": 0.129
+    },
+    "AILA-4: TF-IDF + Legal References": {
+      "P@5": 0.068,
+      "P@10": 0.048,
+      "Recall@10": 0.1299,
+      "MRR": 0.1902,
+      "NDCG@10": 0.1257,
+      "MAP": 0.1708
+    },
+    "AILA-5: LegalLens Heuristic Hybrid": {
+      "P@5": 0.068,
+      "P@10": 0.048,
+      "Recall@10": 0.1299,
+      "MRR": 0.1935,
+      "NDCG@10": 0.1283,
+      "MAP": 0.1742
+    },
+    "AILA-6: Supervised Relevance Model": {
+      "P@5": 0.068,
+      "P@10": 0.048,
+      "Recall@10": 0.1299,
+      "MRR": 0.1935,
+      "NDCG@10": 0.1283,
+      "MAP": 0.1742
+    }
+  },
+  "query_traces_sample_10": [
+    {
+      "qid": "AILA_Q1",
+      "query_text_snippet": "The appellant on February 9, 1961 was appointed as an Officer in Grade III in the respondent Bank ( ",
+      "ranks": {
+        "AILA-1: TF-IDF Baseline": [
+          "C1240",
+          "C1237",
+          "C1138",
+          "C100",
+          "C2907",
+          "C1051",
+          "C560",
+          "C1613",
+          "C306",
+          "C1389"
+        ],
+        "AILA-2: TF-IDF + Query Expansion": [
+          "C1240",
+          "C1138",
+          "C1237",
+          "C1051",
+          "C100",
+          "C1389",
+          "C1961",
+          "C306",
+          "C1613",
+          "C2468"
+        ],
+        "AILA-3: TF-IDF + Passage Reranking": [
+          "C1138",
+          "C1051",
+          "C1237",
+          "C1389",
+          "C1961",
+          "C1240",
+          "C1878",
+          "C1776",
+          "C1012",
+          "C306"
+        ],
+        "AILA-4: TF-IDF + Legal References": [
+          "C1240",
+          "C1237",
+          "C1138",
+          "C1051",
+          "C100",
+          "C1389",
+          "C306",
+          "C1613",
+          "C2907",
+          "C1961"
+        ],
+        "AILA-5: LegalLens Heuristic Hybrid": [
+          "C1240",
+          "C1237",
+          "C1138",
+          "C1051",
+          "C100",
+          "C1389",
+          "C306",
+          "C1613",
+          "C2907",
+          "C1961"
+        ],
+        "AILA-6: Supervised Relevance Model": [
+          "C1240",
+          "C1237",
+          "C1138",
+          "C1051",
+          "C100",
+          "C1389",
+          "C306",
+          "C1613",
+          "C2907",
+          "C1961"
+        ]
+      }
+    },
+    {
+      "qid": "AILA_Q2",
+      "query_text_snippet": "The appellant before us was examined as prime witness in the trial of T.R. on the file of the Specia",
+      "ranks": {
+        "AILA-1: TF-IDF Baseline": [
+          "C2316",
+          "C2846",
+          "C2462",
+          "C2765",
+          "C2313",
+          "C1325",
+          "C2449",
+          "C1838",
+          "C2311",
+          "C2725"
+        ],
+        "AILA-2: TF-IDF + Query Expansion": [
+          "C2316",
+          "C1325",
+          "C2846",
+          "C2462",
+          "C2313",
+          "C2765",
+          "C958",
+          "C2725",
+          "C1838",
+          "C2475"
+        ],
+        "AILA-3: TF-IDF + Passage Reranking": [
+          "C2316",
+          "C1325",
+          "C2475",
+          "C958",
+          "C2313",
+          "C2725",
+          "C2462",
+          "C242",
+          "C993",
+          "C2311"
+        ],
+        "AILA-4: TF-IDF + Legal References": [
+          "C2316",
+          "C2846",
+          "C1325",
+          "C2462",
+          "C2313",
+          "C2765",
+          "C2725",
+          "C958",
+          "C1838",
+          "C2311"
+        ],
+        "AILA-5: LegalLens Heuristic Hybrid": [
+          "C2316",
+          "C2846",
+          "C1325",
+          "C2462",
+          "C2313",
+          "C2765",
+          "C2725",
+          "C958",
+          "C1838",
+          "C2311"
+        ],
+        "AILA-6: Supervised Relevance Model": [
+          "C2316",
+          "C2846",
+          "C1325",
+          "C2462",
+          "C2313",
+          "C2765",
+          "C2725",
+          "C958",
+          "C1838",
+          "C2311"
+        ]
+      }
+    },
+    {
+      "qid": "AILA_Q3",
+      "query_text_snippet": "This appeal arises from the judgment of the learned Single Judge of High Court dated 6th June, 1988 ",
+      "ranks": {
+        "AILA-1: TF-IDF Baseline": [
+          "C246",
+          "C1147",
+          "C294",
+          "C103",
+          "C277",
+          "C63",
+          "C2431",
+          "C1933",
+          "C2322",
+          "C414"
+        ],
+        "AILA-2: TF-IDF + Query Expansion": [
+          "C246",
+          "C1147",
+          "C294",
+          "C414",
+          "C2322",
+          "C103",
+          "C2562",
+          "C277",
+          "C190",
+          "C609"
+        ],
+        "AILA-3: TF-IDF + Passage Reranking": [
+          "C1147",
+          "C294",
+          "C246",
+          "C414",
+          "C2322",
+          "C190",
+          "C2562",
+          "C103",
+          "C277",
+          "C609"
+        ],
+        "AILA-4: TF-IDF + Legal References": [
+          "C246",
+          "C1147",
+          "C294",
+          "C414",
+          "C2322",
+          "C103",
+          "C277",
+          "C2562",
+          "C190",
+          "C609"
+        ],
+        "AILA-5: LegalLens Heuristic Hybrid": [
+          "C246",
+          "C1147",
+          "C294",
+          "C414",
+          "C2322",
+          "C103",
+          "C277",
+          "C2562",
+          "C190",
+          "C609"
+        ],
+        "AILA-6: Supervised Relevance Model": [
+          "C246",
+          "C1147",
+          "C294",
+          "C414",
+          "C2322",
+          "C103",
+          "C277",
+          "C2562",
+          "C190",
+          "C609"
+        ]
+      }
+    },
+    {
+      "qid": "AILA_Q4",
+      "query_text_snippet": "The Petitioner was married to the Respondent No.2, on 27th November, 2005, as per Hindu traditions a",
+      "ranks": {
+        "AILA-1: TF-IDF Baseline": [
+          "C191",
+          "C1677",
+          "C2726",
+          "C267",
+          "C913",
+          "C2747",
+          "C1473",
+          "C2799",
+          "C1026",
+          "C331"
+        ],
+        "AILA-2: TF-IDF + Query Expansion": [
+          "C1847",
+          "C2747",
+          "C1677",
+          "C267",
+          "C2585",
+          "C191",
+          "C913",
+          "C1473",
+          "C738",
+          "C221"
+        ],
+        "AILA-3: TF-IDF + Passage Reranking": [
+          "C1847",
+          "C2747",
+          "C2585",
+          "C221",
+          "C899",
+          "C1677",
+          "C267",
+          "C738",
+          "C968",
+          "C2497"
+        ],
+        "AILA-4: TF-IDF + Legal References": [
+          "C2747",
+          "C1847",
+          "C1677",
+          "C267",
+          "C191",
+          "C2585",
+          "C913",
+          "C1473",
+          "C738",
+          "C2726"
+        ],
+        "AILA-5: LegalLens Heuristic Hybrid": [
+          "C2747",
+          "C1847",
+          "C1677",
+          "C267",
+          "C191",
+          "C2585",
+          "C913",
+          "C1473",
+          "C738",
+          "C2726"
+        ],
+        "AILA-6: Supervised Relevance Model": [
+          "C2747",
+          "C1847",
+          "C1677",
+          "C267",
+          "C191",
+          "C2585",
+          "C913",
+          "C1473",
+          "C738",
+          "C2726"
+        ]
+      }
+    },
+    {
+      "qid": "AILA_Q5",
+      "query_text_snippet": "This appeal is preferred against the judgment dated 19.8.2011 passed by the High Court, whereby the ",
+      "ranks": {
+        "AILA-1: TF-IDF Baseline": [
+          "C1739",
+          "C1538",
+          "C1719",
+          "C1262",
+          "C636",
+          "C705",
+          "C1383",
+          "C1151",
+          "C2853",
+          "C1550"
+        ],
+        "AILA-2: TF-IDF + Query Expansion": [
+          "C1739",
+          "C1262",
+          "C705",
+          "C1538",
+          "C1383",
+          "C636",
+          "C1151",
+          "C2853",
+          "C1719",
+          "C2728"
+        ],
+        "AILA-3: TF-IDF + Passage Reranking": [
+          "C1262",
+          "C705",
+          "C1739",
+          "C1383",
+          "C1538",
+          "C1151",
+          "C636",
+          "C2853",
+          "C2728",
+          "C739"
+        ],
+        "AILA-4: TF-IDF + Legal References": [
+          "C1739",
+          "C1262",
+          "C705",
+          "C1538",
+          "C636",
+          "C1383",
+          "C1151",
+          "C1719",
+          "C2853",
+          "C2728"
+        ],
+        "AILA-5: LegalLens Heuristic Hybrid": [
+          "C1739",
+          "C1262",
+          "C705",
+          "C1538",
+          "C636",
+          "C1383",
+          "C1151",
+          "C1719",
+          "C2853",
+          "C2728"
+        ],
+        "AILA-6: Supervised Relevance Model": [
+          "C1739",
+          "C1262",
+          "C705",
+          "C1538",
+          "C636",
+          "C1383",
+          "C1151",
+          "C1719",
+          "C2853",
+          "C2728"
+        ]
+      }
+    },
+    {
+      "qid": "AILA_Q6",
+      "query_text_snippet": "On 19.3.1999, SI P1 along Ct. P2 went to Village V1 where Inspector P1, PW-16, had reached along wit",
+      "ranks": {
+        "AILA-1: TF-IDF Baseline": [
+          "C1262",
+          "C636",
+          "C356",
+          "C1550",
+          "C1932",
+          "C1739",
+          "C2267",
+          "C1529",
+          "C2771",
+          "C1522"
+        ],
+        "AILA-2: TF-IDF + Query Expansion": [
+          "C1262",
+          "C636",
+          "C1932",
+          "C356",
+          "C2267",
+          "C1522",
+          "C2237",
+          "C1550",
+          "C1440",
+          "C562"
+        ],
+        "AILA-3: TF-IDF + Passage Reranking": [
+          "C1262",
+          "C1932",
+          "C636",
+          "C2267",
+          "C356",
+          "C2237",
+          "C1522",
+          "C562",
+          "C1440",
+          "C591"
+        ],
+        "AILA-4: TF-IDF + Legal References": [
+          "C1262",
+          "C636",
+          "C1932",
+          "C356",
+          "C2267",
+          "C1550",
+          "C1522",
+          "C2237",
+          "C1440",
+          "C562"
+        ],
+        "AILA-5: LegalLens Heuristic Hybrid": [
+          "C1262",
+          "C636",
+          "C1932",
+          "C356",
+          "C2267",
+          "C1550",
+          "C1522",
+          "C2237",
+          "C1440",
+          "C562"
+        ],
+        "AILA-6: Supervised Relevance Model": [
+          "C1262",
+          "C636",
+          "C1932",
+          "C356",
+          "C2267",
+          "C1550",
+          "C1522",
+          "C2237",
+          "C1440",
+          "C562"
+        ]
+      }
+    },
+    {
+      "qid": "AILA_Q7",
+      "query_text_snippet": "This criminal appeal is directed against the judgment of the High Court dismissing the appeal but mo",
+      "ranks": {
+        "AILA-1: TF-IDF Baseline": [
+          "C705",
+          "C2853",
+          "C1968",
+          "C1948",
+          "C2132",
+          "C1630",
+          "C797",
+          "C1396",
+          "C676",
+          "C1532"
+        ],
+        "AILA-2: TF-IDF + Query Expansion": [
+          "C705",
+          "C2853",
+          "C1968",
+          "C440",
+          "C2318",
+          "C1355",
+          "C1948",
+          "C1690",
+          "C1151",
+          "C1428"
+        ],
+        "AILA-3: TF-IDF + Passage Reranking": [
+          "C705",
+          "C440",
+          "C2318",
+          "C1151",
+          "C1428",
+          "C1690",
+          "C2853",
+          "C1250",
+          "C1355",
+          "C1977"
+        ],
+        "AILA-4: TF-IDF + Legal References": [
+          "C705",
+          "C2853",
+          "C1968",
+          "C1948",
+          "C1355",
+          "C440",
+          "C2318",
+          "C1630",
+          "C1396",
+          "C2132"
+        ],
+        "AILA-5: LegalLens Heuristic Hybrid": [
+          "C705",
+          "C2853",
+          "C1968",
+          "C1948",
+          "C1355",
+          "C440",
+          "C2318",
+          "C1630",
+          "C1396",
+          "C2132"
+        ],
+        "AILA-6: Supervised Relevance Model": [
+          "C705",
+          "C2853",
+          "C1968",
+          "C1948",
+          "C1355",
+          "C440",
+          "C2318",
+          "C1630",
+          "C1396",
+          "C2132"
+        ]
+      }
+    },
+    {
+      "qid": "AILA_Q8",
+      "query_text_snippet": "This appeal, by special leave, has been preferred against the judgment and order dated 23 February 2",
+      "ranks": {
+        "AILA-1: TF-IDF Baseline": [
+          "C1739",
+          "C1550",
+          "C636",
+          "C632",
+          "C2808",
+          "C2301",
+          "C2648",
+          "C2340",
+          "C178",
+          "C1869"
+        ],
+        "AILA-2: TF-IDF + Query Expansion": [
+          "C1739",
+          "C636",
+          "C1550",
+          "C2301",
+          "C2340",
+          "C1262",
+          "C2808",
+          "C1537",
+          "C632",
+          "C178"
+        ],
+        "AILA-3: TF-IDF + Passage Reranking": [
+          "C636",
+          "C1739",
+          "C2301",
+          "C1550",
+          "C2340",
+          "C1262",
+          "C1537",
+          "C2808",
+          "C600",
+          "C468"
+        ],
+        "AILA-4: TF-IDF + Legal References": [
+          "C1739",
+          "C636",
+          "C1550",
+          "C2301",
+          "C2340",
+          "C2808",
+          "C1262",
+          "C632",
+          "C178",
+          "C1537"
+        ],
+        "AILA-5: LegalLens Heuristic Hybrid": [
+          "C1739",
+          "C636",
+          "C1550",
+          "C2301",
+          "C2340",
+          "C2808",
+          "C1262",
+          "C632",
+          "C178",
+          "C1537"
+        ],
+        "AILA-6: Supervised Relevance Model": [
+          "C1739",
+          "C636",
+          "C1550",
+          "C2301",
+          "C2340",
+          "C2808",
+          "C1262",
+          "C632",
+          "C178",
+          "C1537"
+        ]
+      }
+    },
+    {
+      "qid": "AILA_Q9",
+      "query_text_snippet": "The complainant P1 filed a Special Leave Petition in this court seeking leave to appeal against the ",
+      "ranks": {
+        "AILA-1: TF-IDF Baseline": [
+          "C2799",
+          "C2040",
+          "C404",
+          "C173",
+          "C2747",
+          "C2362",
+          "C2337",
+          "C2562",
+          "C1993",
+          "C757"
+        ],
+        "AILA-2: TF-IDF + Query Expansion": [
+          "C2040",
+          "C2799",
+          "C404",
+          "C2747",
+          "C1328",
+          "C2278",
+          "C215",
+          "C757",
+          "C2288",
+          "C532"
+        ],
+        "AILA-3: TF-IDF + Passage Reranking": [
+          "C2040",
+          "C2799",
+          "C2278",
+          "C2747",
+          "C404",
+          "C1328",
+          "C2288",
+          "C215",
+          "C2383",
+          "C532"
+        ],
+        "AILA-4: TF-IDF + Legal References": [
+          "C2040",
+          "C2799",
+          "C404",
+          "C2747",
+          "C1328",
+          "C215",
+          "C757",
+          "C2278",
+          "C2362",
+          "C2632"
+        ],
+        "AILA-5: LegalLens Heuristic Hybrid": [
+          "C2040",
+          "C2799",
+          "C404",
+          "C2747",
+          "C1328",
+          "C215",
+          "C757",
+          "C2278",
+          "C2362",
+          "C2632"
+        ],
+        "AILA-6: Supervised Relevance Model": [
+          "C2040",
+          "C2799",
+          "C404",
+          "C2747",
+          "C1328",
+          "C215",
+          "C757",
+          "C2278",
+          "C2362",
+          "C2632"
+        ]
+      }
+    },
+    {
+      "qid": "AILA_Q10",
+      "query_text_snippet": "The four appellants, along with P1 son of P2, were jointly tried in the court of Additional Sessions",
+      "ranks": {
+        "AILA-1: TF-IDF Baseline": [
+          "C2265",
+          "C2409",
+          "C2731",
+          "C522",
+          "C1778",
+          "C568",
+          "C1358",
+          "C558",
+          "C479",
+          "C1167"
+        ],
+        "AILA-2: TF-IDF + Query Expansion": [
+          "C2265",
+          "C758",
+          "C2425",
+          "C2409",
+          "C2731",
+          "C522",
+          "C1778",
+          "C568",
+          "C1358",
+          "C558"
+        ],
+        "AILA-3: TF-IDF + Passage Reranking": [
+          "C758",
+          "C1368",
+          "C2425",
+          "C1320",
+          "C2239",
+          "C2265",
+          "C1514",
+          "C892",
+          "C77",
+          "C1974"
+        ],
+        "AILA-4: TF-IDF + Legal References": [
+          "C2265",
+          "C2239",
+          "C786",
+          "C758",
+          "C2409",
+          "C2731",
+          "C522",
+          "C1778",
+          "C2425",
+          "C568"
+        ],
+        "AILA-5: LegalLens Heuristic Hybrid": [
+          "C2265",
+          "C758",
+          "C2409",
+          "C2731",
+          "C522",
+          "C1778",
+          "C2425",
+          "C568",
+          "C1358",
+          "C558"
+        ],
+        "AILA-6: Supervised Relevance Model": [
+          "C2265",
+          "C758",
+          "C2409",
+          "C2731",
+          "C522",
+          "C1778",
+          "C2425",
+          "C568",
+          "C1358",
+          "C558"
+        ]
+      }
+    }
+  ]
+}

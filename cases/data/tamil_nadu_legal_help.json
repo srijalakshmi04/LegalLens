@@ -1,0 +1,1171 @@
+{
+  "state": "Tamil Nadu",
+  "total_districts": 38,
+  "last_updated": "August 2026",
+  "districts": [
+    {
+      "district": "Ariyalur",
+      "district_headquarters": "Ariyalur",
+      "official_district_website": "https://ariyalur.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Ariyalur",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Jayankondam Road, Ariyalur 621704",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "District Court, Ariyalur",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/ariyalur",
+        "district_court_url": "https://districts.ecourts.gov.in/ariyalur",
+        "address": "Combined Court Buildings Complex, Ariyalur 621704",
+        "verification_url": "https://districts.ecourts.gov.in/ariyalur"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Chengalpattu",
+      "district_headquarters": "Chengalpattu",
+      "official_district_website": "https://chengalpattu.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Chengalpattu",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "District Court Buildings, GST Road, Chengalpattu 603001",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Chengalpattu",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/chengalpattu",
+        "district_court_url": "https://districts.ecourts.gov.in/chengalpattu",
+        "address": "GST Road, Chengalpattu 603001",
+        "verification_url": "https://districts.ecourts.gov.in/chengalpattu"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Chennai",
+      "district_headquarters": "Chennai",
+      "official_district_website": "https://chennai.nic.in/",
+      "legal_services": {
+        "authority_name": "Tamil Nadu State Legal Services Authority / DLSA Chennai",
+        "authority_type": "TNSLSA & DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "North Fort Road, High Court Campus, Chennai 600104",
+        "phone": "044-25342834",
+        "email": "tnslsa@yahoo.in",
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "City Civil Court & District Judiciary, Chennai",
+        "official_ecourts_url": "https://chennai.dcourts.gov.in/",
+        "district_court_url": "https://chennai.dcourts.gov.in/",
+        "address": "High Court Buildings Campus, Chennai 600104",
+        "verification_url": "https://chennai.dcourts.gov.in/"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "High Court Legal Services",
+        "Lok Adalat",
+        "Mediation & Conciliation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Coimbatore",
+      "district_headquarters": "Coimbatore",
+      "official_district_website": "https://coimbatore.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Coimbatore",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Arts College Road, Coimbatore 641018",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District Court, Coimbatore",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/coimbatore",
+        "district_court_url": "https://districts.ecourts.gov.in/coimbatore",
+        "address": "Arts College Road, Gopalapuram, Coimbatore 641018",
+        "verification_url": "https://districts.ecourts.gov.in/coimbatore"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Cuddalore",
+      "district_headquarters": "Cuddalore",
+      "official_district_website": "https://cuddalore.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Cuddalore",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "District Court Buildings, Beach Road, Cuddalore 607001",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Cuddalore",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/cuddalore",
+        "district_court_url": "https://districts.ecourts.gov.in/cuddalore",
+        "address": "Beach Road, Cuddalore 607001",
+        "verification_url": "https://districts.ecourts.gov.in/cuddalore"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Dharmapuri",
+      "district_headquarters": "Dharmapuri",
+      "official_district_website": "https://dharmapuri.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Dharmapuri",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Dharmapuri 636701",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "District Court, Dharmapuri",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/dharmapuri",
+        "district_court_url": "https://districts.ecourts.gov.in/dharmapuri",
+        "address": "Combined Court Complex, Nethaji Bypass Road, Dharmapuri 636701",
+        "verification_url": "https://districts.ecourts.gov.in/dharmapuri"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Dindigul",
+      "district_headquarters": "Dindigul",
+      "official_district_website": "https://dindigul.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Dindigul",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings, Sub Collector Office Road, Dindigul 624001",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Dindigul",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/dindigul",
+        "district_court_url": "https://districts.ecourts.gov.in/dindigul",
+        "address": "Court Road, Dindigul 624001",
+        "verification_url": "https://districts.ecourts.gov.in/dindigul"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Erode",
+      "district_headquarters": "Erode",
+      "official_district_website": "https://erode.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Erode",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings, Sampath Nagar, Erode 638011",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District Court, Erode",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/erode",
+        "district_court_url": "https://districts.ecourts.gov.in/erode",
+        "address": "Sampath Nagar, Erode 638011",
+        "verification_url": "https://districts.ecourts.gov.in/erode"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Kallakurichi",
+      "district_headquarters": "Kallakurichi",
+      "official_district_website": "https://kallakurichi.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Kallakurichi",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "District Court Buildings, Salem Main Road, Kallakurichi 606202",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "District Court, Kallakurichi",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/kallakurichi",
+        "district_court_url": "https://districts.ecourts.gov.in/kallakurichi",
+        "address": "Salem Main Road, Kallakurichi 606202",
+        "verification_url": "https://districts.ecourts.gov.in/kallakurichi"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Kancheepuram",
+      "district_headquarters": "Kancheepuram",
+      "official_district_website": "https://kancheepuram.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Kancheepuram",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Collectorate Campus, Kancheepuram 631501",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Kancheepuram",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/kancheepuram",
+        "district_court_url": "https://districts.ecourts.gov.in/kancheepuram",
+        "address": "Combined Court Complex, Kancheepuram 631501",
+        "verification_url": "https://districts.ecourts.gov.in/kancheepuram"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Kanyakumari",
+      "district_headquarters": "Nagercoil",
+      "official_district_website": "https://kanniyakumari.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Kanyakumari at Nagercoil",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "District Court Buildings, Court Road, Nagercoil 629001",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Nagercoil",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/kanniyakumari",
+        "district_court_url": "https://districts.ecourts.gov.in/kanniyakumari",
+        "address": "Court Road, Nagercoil, Kanyakumari District 629001",
+        "verification_url": "https://districts.ecourts.gov.in/kanniyakumari"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Karur",
+      "district_headquarters": "Karur",
+      "official_district_website": "https://karur.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Karur",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Thanthonimalai, Karur 639007",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District Court, Karur",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/karur",
+        "district_court_url": "https://districts.ecourts.gov.in/karur",
+        "address": "Combined Court Complex, Thanthonimalai, Karur 639007",
+        "verification_url": "https://districts.ecourts.gov.in/karur"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Krishnagiri",
+      "district_headquarters": "Krishnagiri",
+      "official_district_website": "https://krishnagiri.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Krishnagiri",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Rayakottai Road, Krishnagiri 635001",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Krishnagiri",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/krishnagiri",
+        "district_court_url": "https://districts.ecourts.gov.in/krishnagiri",
+        "address": "Rayakottai Road, Krishnagiri 635001",
+        "verification_url": "https://districts.ecourts.gov.in/krishnagiri"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Madurai",
+      "district_headquarters": "Madurai",
+      "official_district_website": "https://madurai.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Madurai",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "District Court Buildings Complex, Melur Road, KK Nagar, Madurai 625020",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District Court & High Court Bench, Madurai",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/madurai",
+        "district_court_url": "https://districts.ecourts.gov.in/madurai",
+        "address": "Melur Road, Court Campus, Madurai 625020",
+        "verification_url": "https://districts.ecourts.gov.in/madurai"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Madras High Court Bench Legal Services",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Mayiladuthurai",
+      "district_headquarters": "Mayiladuthurai",
+      "official_district_website": "https://mayiladuthurai.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Mayiladuthurai",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Mayiladuthurai 609001",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "District Court, Mayiladuthurai",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/mayiladuthurai",
+        "district_court_url": "https://districts.ecourts.gov.in/mayiladuthurai",
+        "address": "Court Complex, Mayiladuthurai 609001",
+        "verification_url": "https://districts.ecourts.gov.in/mayiladuthurai"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Nagapattinam",
+      "district_headquarters": "Nagapattinam",
+      "official_district_website": "https://nagapattinam.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Nagapattinam",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "District Court Complex, Collectorate Road, Nagapattinam 611003",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Nagapattinam",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/nagapattinam",
+        "district_court_url": "https://districts.ecourts.gov.in/nagapattinam",
+        "address": "Public Office Road, Nagapattinam 611001",
+        "verification_url": "https://districts.ecourts.gov.in/nagapattinam"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Namakkal",
+      "district_headquarters": "Namakkal",
+      "official_district_website": "https://namakkal.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Namakkal",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Mohanur Road, Namakkal 637001",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District Court, Namakkal",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/namakkal",
+        "district_court_url": "https://districts.ecourts.gov.in/namakkal",
+        "address": "Mohanur Road, Namakkal 637001",
+        "verification_url": "https://districts.ecourts.gov.in/namakkal"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Perambalur",
+      "district_headquarters": "Perambalur",
+      "official_district_website": "https://perambalur.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Perambalur",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings, Elambalur Road, Perambalur 621212",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "District Court, Perambalur",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/perambalur",
+        "district_court_url": "https://districts.ecourts.gov.in/perambalur",
+        "address": "Elambalur Road, Perambalur 621212",
+        "verification_url": "https://districts.ecourts.gov.in/perambalur"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Pudukkottai",
+      "district_headquarters": "Pudukkottai",
+      "official_district_website": "https://pudukkottai.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Pudukkottai",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Complex, Court Road, Pudukkottai 622001",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Pudukkottai",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/pudukkottai",
+        "district_court_url": "https://districts.ecourts.gov.in/pudukkottai",
+        "address": "Court Campus, Pudukkottai 622001",
+        "verification_url": "https://districts.ecourts.gov.in/pudukkottai"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Ramanathapuram",
+      "district_headquarters": "Ramanathapuram",
+      "official_district_website": "https://ramanathapuram.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Ramanathapuram",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "District Court Buildings Complex, Ramanathapuram 623503",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Ramanathapuram",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/ramanathapuram",
+        "district_court_url": "https://districts.ecourts.gov.in/ramanathapuram",
+        "address": "Court Complex, Ramanathapuram 623503",
+        "verification_url": "https://districts.ecourts.gov.in/ramanathapuram"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Ranipet",
+      "district_headquarters": "Ranipet",
+      "official_district_website": "https://ranipet.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Ranipet",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "District Court Buildings Complex, Ranipet 632401",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "District Court, Ranipet",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/ranipet",
+        "district_court_url": "https://districts.ecourts.gov.in/ranipet",
+        "address": "Court Complex, Ranipet 632401",
+        "verification_url": "https://districts.ecourts.gov.in/ranipet"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Salem",
+      "district_headquarters": "Salem",
+      "official_district_website": "https://salem.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Salem",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Hasthampatti, Salem 636007",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Salem",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/salem",
+        "district_court_url": "https://districts.ecourts.gov.in/salem",
+        "address": "Hasthampatti, Salem 636007",
+        "verification_url": "https://districts.ecourts.gov.in/salem"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Sivaganga",
+      "district_headquarters": "Sivaganga",
+      "official_district_website": "https://sivaganga.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Sivaganga",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "District Court Buildings Complex, Sivaganga 630561",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Sivaganga",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/sivaganga",
+        "district_court_url": "https://districts.ecourts.gov.in/sivaganga",
+        "address": "Court Complex, Sivaganga 630561",
+        "verification_url": "https://districts.ecourts.gov.in/sivaganga"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Tenkasi",
+      "district_headquarters": "Tenkasi",
+      "official_district_website": "https://tenkasi.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Tenkasi",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "District Court Complex, Tenkasi 627811",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "District Court, Tenkasi",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/tenkasi",
+        "district_court_url": "https://districts.ecourts.gov.in/tenkasi",
+        "address": "Court Buildings, Tenkasi 627811",
+        "verification_url": "https://districts.ecourts.gov.in/tenkasi"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Thanjavur",
+      "district_headquarters": "Thanjavur",
+      "official_district_website": "https://thanjavur.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Thanjavur",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "District Court Buildings Complex, Court Road, Thanjavur 613001",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Thanjavur",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/thanjavur",
+        "district_court_url": "https://districts.ecourts.gov.in/thanjavur",
+        "address": "Court Road, Thanjavur 613001",
+        "verification_url": "https://districts.ecourts.gov.in/thanjavur"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Theni",
+      "district_headquarters": "Theni",
+      "official_district_website": "https://theni.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Theni",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Lakshmipuram, Theni 625523",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Theni",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/theni",
+        "district_court_url": "https://districts.ecourts.gov.in/theni",
+        "address": "Lakshmipuram, Theni 625523",
+        "verification_url": "https://districts.ecourts.gov.in/theni"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "The Nilgiris",
+      "district_headquarters": "Udhagamandalam (Ooty)",
+      "official_district_website": "https://nilgiris.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, The Nilgiris at Udhagamandalam",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "District Court Complex, Udhagamandalam, The Nilgiris 643001",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District Court, Udhagamandalam",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/nilgiris",
+        "district_court_url": "https://districts.ecourts.gov.in/nilgiris",
+        "address": "Court Buildings, Udhagamandalam, The Nilgiris 643001",
+        "verification_url": "https://districts.ecourts.gov.in/nilgiris"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Thiruvallur",
+      "district_headquarters": "Tiruvallur",
+      "official_district_website": "https://tiruvallur.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Thiruvallur",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Tiruvallur 602001",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Thiruvallur",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/tiruvallur",
+        "district_court_url": "https://districts.ecourts.gov.in/tiruvallur",
+        "address": "Court Complex, Tiruvallur 602001",
+        "verification_url": "https://districts.ecourts.gov.in/tiruvallur"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Thiruvarur",
+      "district_headquarters": "Thiruvarur",
+      "official_district_website": "https://thiruvarur.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Thiruvarur",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Thiruvarur 610004",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Thiruvarur",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/thiruvarur",
+        "district_court_url": "https://districts.ecourts.gov.in/thiruvarur",
+        "address": "Court Campus, Thiruvarur 610004",
+        "verification_url": "https://districts.ecourts.gov.in/thiruvarur"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Thoothukudi",
+      "district_headquarters": "Thoothukudi",
+      "official_district_website": "https://thoothukudi.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Thoothukudi",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "District Court Buildings Complex, Ettayapuram Road, Thoothukudi 628002",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Thoothukudi",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/thoothukudi",
+        "district_court_url": "https://districts.ecourts.gov.in/thoothukudi",
+        "address": "Ettayapuram Road, Thoothukudi 628002",
+        "verification_url": "https://districts.ecourts.gov.in/thoothukudi"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Tiruchirappalli",
+      "district_headquarters": "Tiruchirappalli",
+      "official_district_website": "https://tiruchirappalli.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Tiruchirappalli",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Cantonment, Tiruchirappalli 620001",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District Court, Tiruchirappalli",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/tiruchirappalli",
+        "district_court_url": "https://districts.ecourts.gov.in/tiruchirappalli",
+        "address": "Cantonment, Tiruchirappalli 620001",
+        "verification_url": "https://districts.ecourts.gov.in/tiruchirappalli"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Tirunelveli",
+      "district_headquarters": "Tirunelveli",
+      "official_district_website": "https://tirunelveli.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Tirunelveli",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Palayamkottai, Tirunelveli 627002",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Tirunelveli",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/tirunelveli",
+        "district_court_url": "https://districts.ecourts.gov.in/tirunelveli",
+        "address": "Palayamkottai, Tirunelveli 627002",
+        "verification_url": "https://districts.ecourts.gov.in/tirunelveli"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Tirupathur",
+      "district_headquarters": "Tirupathur",
+      "official_district_website": "https://tirupathur.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Tirupathur",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "District Court Buildings Complex, Tirupathur 635601",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "District Court, Tirupathur",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/tirupathur",
+        "district_court_url": "https://districts.ecourts.gov.in/tirupathur",
+        "address": "Court Complex, Tirupathur 635601",
+        "verification_url": "https://districts.ecourts.gov.in/tirupathur"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Tiruppur",
+      "district_headquarters": "Tiruppur",
+      "official_district_website": "https://tiruppur.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Tiruppur",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Palladam Road, Tiruppur 641604",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Tiruppur",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/tiruppur",
+        "district_court_url": "https://districts.ecourts.gov.in/tiruppur",
+        "address": "Palladam Road, Tiruppur 641604",
+        "verification_url": "https://districts.ecourts.gov.in/tiruppur"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Tiruvannamalai",
+      "district_headquarters": "Tiruvannamalai",
+      "official_district_website": "https://tiruvannamalai.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Tiruvannamalai",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Vengikal, Tiruvannamalai 606604",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Tiruvannamalai",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/tiruvannamalai",
+        "district_court_url": "https://districts.ecourts.gov.in/tiruvannamalai",
+        "address": "Vengikal, Tiruvannamalai 606604",
+        "verification_url": "https://districts.ecourts.gov.in/tiruvannamalai"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Vellore",
+      "district_headquarters": "Vellore",
+      "official_district_website": "https://vellore.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Vellore",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Sathuvachari, Vellore 632009",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District Court, Vellore",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/vellore",
+        "district_court_url": "https://districts.ecourts.gov.in/vellore",
+        "address": "Sathuvachari, Vellore 632009",
+        "verification_url": "https://districts.ecourts.gov.in/vellore"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Viluppuram",
+      "district_headquarters": "Viluppuram",
+      "official_district_website": "https://viluppuram.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Viluppuram",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "Combined Court Buildings Complex, Collectorate Master Plan Complex, Viluppuram 605602",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Viluppuram",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/villupuram",
+        "district_court_url": "https://districts.ecourts.gov.in/villupuram",
+        "address": "Master Plan Complex, Viluppuram 605602",
+        "verification_url": "https://districts.ecourts.gov.in/villupuram"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    },
+    {
+      "district": "Virudhunagar",
+      "district_headquarters": "Srivilliputhur",
+      "official_district_website": "https://virudhunagar.nic.in/",
+      "legal_services": {
+        "authority_name": "District Legal Services Authority, Virudhunagar at Srivilliputhur",
+        "authority_type": "DLSA",
+        "official_source_url": "https://tamilnadu.nalsa.gov.in/directory/",
+        "address": "District Court Campus, Srivilliputhur, Virudhunagar District 626125",
+        "phone": null,
+        "email": null,
+        "verification_url": "https://tamilnadu.nalsa.gov.in/directory/"
+      },
+      "court_information": {
+        "district_judiciary_name": "Principal District & Sessions Court, Srivilliputhur",
+        "official_ecourts_url": "https://districts.ecourts.gov.in/virudhunagar",
+        "district_court_url": "https://districts.ecourts.gov.in/virudhunagar",
+        "address": "Court Campus, Srivilliputhur 626125",
+        "verification_url": "https://districts.ecourts.gov.in/virudhunagar"
+      },
+      "available_services": [
+        "Free Legal Aid",
+        "Lok Adalat",
+        "Mediation",
+        "Legal Aid Defense Counsel"
+      ],
+      "data_source": "Tamil Nadu State Legal Services Authority & eCourts Services",
+      "last_verified": "August 2026"
+    }
+  ],
+  "demo_lawyers": [
+    {
+      "name": "Demo Advocate CBE-01",
+      "district": "Coimbatore",
+      "locality": "Gandhipuram",
+      "pincode": "641012",
+      "specializations": [
+        "criminal",
+        "civil"
+      ],
+      "specialization_labels": [
+        "Criminal law",
+        "Civil law"
+      ],
+      "languages": [
+        "Tamil",
+        "English"
+      ]
+    },
+    {
+      "name": "Demo Advocate CHE-01",
+      "district": "Chennai",
+      "locality": "High Court",
+      "pincode": "600104",
+      "specializations": [
+        "criminal",
+        "civil",
+        "property"
+      ],
+      "specialization_labels": [
+        "Criminal law",
+        "Civil law",
+        "Property law"
+      ],
+      "languages": [
+        "Tamil",
+        "English"
+      ]
+    },
+    {
+      "name": "Demo Advocate MDU-01",
+      "district": "Madurai",
+      "locality": "KK Nagar",
+      "pincode": "625020",
+      "specializations": [
+        "family",
+        "consumer",
+        "employment"
+      ],
+      "specialization_labels": [
+        "Family law",
+        "Consumer law",
+        "Employment law"
+      ],
+      "languages": [
+        "Tamil",
+        "English"
+      ]
+    }
+  ]
+}

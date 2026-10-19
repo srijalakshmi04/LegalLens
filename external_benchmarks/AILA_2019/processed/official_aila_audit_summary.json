@@ -1,0 +1,22 @@
+{
+  "raw_files_present": false,
+  "object_casedocs": {
+    "total_parsed_cases": 0,
+    "unique_case_ids_count": 0,
+    "duplicate_ids_count": 0,
+    "unreadable_docs_count": 0,
+    "official_benchmark_scale_target": "2,914 case documents"
+  },
+  "relevance_judgments": {
+    "total_qrels_parsed": 0,
+    "duplicate_qrels_count": 0,
+    "label_format": "Binary relevance (1 = Relevant, 0 = Irrelevant)"
+  },
+  "queries": {
+    "total_queries_parsed": 0,
+    "official_dev_queries": [],
+    "official_eval_queries": [],
+    "dev_count": 0,
+    "eval_count": 0
+  }
+}

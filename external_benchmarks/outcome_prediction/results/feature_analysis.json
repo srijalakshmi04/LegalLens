@@ -1,0 +1,20 @@
+{
+  "total_word_ngrams": 45000,
+  "total_char_ngrams": 15000,
+  "metadata_categories": [
+    "x0_Civil Appeal",
+    "x0_Criminal Appeal",
+    "x0_General Litigation",
+    "x0_Special Leave Petition",
+    "x0_Writ Petition",
+    "x1_2000-2010",
+    "x1_2011-2020",
+    "x1_2021+",
+    "x1_Pre-2000",
+    "x2_Direct Appellate",
+    "x2_High Court Review",
+    "x2_Sessions/Subordinate Court"
+  ],
+  "retrieval_k_neighbors": 20,
+  "feature_importance_summary": "Word (1-3) n-grams + Metadata One-Hot + Filter-Aware Precedent Consensus provide maximum linear separation."
+}

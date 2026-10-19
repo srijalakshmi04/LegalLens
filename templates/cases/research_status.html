@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}Research Integrity Status | Legal Lens{% endblock %}
+
+{% block content %}
+<div class="space-y-6 max-w-5xl mx-auto py-4">
+
+  <!-- Header -->
+  <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm">
+    <div class="flex items-center gap-2 mb-2">
+      <span class="px-2.5 py-0.5 rounded text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+        MCA Research Integrity & Audit
+      </span>
+    </div>
+    <h1 class="text-2xl font-bold text-white">Legal Lens Research & Benchmark Status</h1>
+    <p class="text-xs text-slate-400 mt-1">Dual-track benchmark tracking AI weak-supervision pseudo-labels vs independent human ground-truth annotations.</p>
+  </div>
+
+  <!-- Metric Overview Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    
+    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+      <div class="text-xs font-medium text-slate-400">Total Benchmark Queries</div>
+      <div class="text-2xl font-bold text-white font-mono mt-1">{{ total_queries }}</div>
+      <div class="text-xs text-slate-500 mt-1">Train: {{ split_counts.train }} | Val: {{ split_counts.val }} | Test: {{ split_counts.test }}</div>
+    </div>
+
+    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+      <div class="text-xs font-medium text-amber-400">AI Weak-Supervision Labels</div>
+      <div class="text-2xl font-bold text-amber-400 font-mono mt-1">{{ pseudo_count }}</div>
+      <div class="text-xs text-slate-500 mt-1">Tag: AI_PSEUDO / WEAK_SUPERVISION</div>
+    </div>
+
+    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+      <div class="text-xs font-medium text-emerald-400">Human-Verified Labels</div>
+      <div class="text-2xl font-bold text-emerald-400 font-mono mt-1">{{ human_count }}</div>
+      <div class="text-xs text-slate-500 mt-1">Tag: HUMAN_VERIFIED</div>
+    </div>
+
+    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+      <div class="text-xs font-medium text-blue-400">Independent Test Set</div>
+      <div class="text-2xl font-bold text-blue-400 font-mono mt-1">{{ test_candidate_count }}</div>
+      <div class="text-xs text-slate-500 mt-1">Candidates in Test Split</div>
+    </div>
+
+  </div>
+
+  <!-- Status Panels -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- Active Production Retrieval Status -->
+    <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-3">
+      <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Production Engine Status</h3>
+      <div class="p-4 rounded-lg bg-slate-950 border border-slate-800">
+        <div class="text-xs text-slate-400">Active Engine:</div>
+        <div class="text-base font-bold text-emerald-400 font-mono mt-0.5">{{ model_status_info.active_engine }}</div>
+        <div class="text-xs text-slate-400 mt-2">Model Status:</div>
+        <div class="text-xs text-slate-300 font-mono mt-0.5">{{ model_status_info.status }}</div>
+      </div>
+      <p class="text-xs text-slate-400 leading-relaxed">
+        Production search is strictly bound to the LegalLens baseline hybrid engine ($0.50D + 0.35P + 0.15R$). Stage-2 supervised reranking remains isolated until independent human validation is complete.
+      </p>
+    </div>
+
+    <!-- Evaluation Validity Status -->
+    <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-3">
+      <h3 class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Evaluation Protocol Validity</h3>
+      <div class="p-4 rounded-lg bg-slate-950 border border-slate-800">
+        <div class="text-xs text-slate-400">Validity Status:</div>
+        <div class="text-base font-bold text-amber-400 font-mono mt-0.5">{{ eval_info.evaluation_validity }}</div>
+        <div class="text-xs text-slate-400 mt-2">Label Source:</div>
+        <div class="text-xs text-slate-300 font-mono mt-0.5">{{ eval_info.label_source }}</div>
+      </div>
+      <p class="text-xs text-slate-400 leading-relaxed">
+        Mathematical metrics are computed directly without synthetic multipliers, strictly enforced within $0.0 \le \text{Metric} \le 1.0$.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Baseline IR Metrics Table -->
+  <div class="bg-slate-900 border border-slate-800 rounded-xl p-6">
+    <div class="flex justify-between items-center mb-4">
+      <div>
+        <h3 class="text-lg font-bold text-white">Empirical IR Metrics (Test Set Evaluation)</h3>
+        <p class="text-xs text-slate-400">Evaluated on {{ eval_info.test_queries_count }} independent test queries (Strict Mathematical Bounds: 0.0 ≤ Metric ≤ 1.0)</p>
+      </div>
+      <a href="{% url 'cases:annotate_benchmark' %}" class="py-1.5 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-medium transition">
+        Annotate Test Split →
+      </a>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-sm text-slate-300 font-mono">
+        <thead class="bg-slate-950 text-slate-400 uppercase text-xs">
+          <tr>
+            <th class="p-3">System Condition</th>
+            <th class="p-3 text-right">P@5</th>
+            <th class="p-3 text-right">P@10</th>
+            <th class="p-3 text-right">Recall@10</th>
+            <th class="p-3 text-right">MRR</th>
+            <th class="p-3 text-right">NDCG@10</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-800">
+          {% for cond, metrics in eval_info.baselines.items %}
+          <tr class="hover:bg-slate-850">
+            <td class="p-3 font-sans font-medium text-white">{{ cond }}</td>
+            <td class="p-3 text-right text-emerald-400 font-mono">{{ metrics.P@5|default:"0.0000" }}</td>
+            <td class="p-3 text-right text-emerald-400 font-mono">{{ metrics.P@10|default:"0.0000" }}</td>
+            <td class="p-3 text-right text-blue-400 font-mono">{{ metrics.Recall@10|default:"0.0000" }}</td>
+            <td class="p-3 text-right text-amber-400 font-mono">{{ metrics.MRR|default:"0.0000" }}</td>
+            <td class="p-3 text-right text-purple-400 font-mono">{{ metrics.NDCG@10|default:"0.0000" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

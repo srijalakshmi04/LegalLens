@@ -1,0 +1,671 @@
+import json
+import datetime
+from pathlib import Path
+import hashlib
+import hmac
+import logging
+from time import perf_counter
+
+from django.conf import settings
+from django.db.models import Count, Max, Min
+from django.shortcuts import get_object_or_404, redirect, render
+from django.contrib import messages
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+
+from .forms import CaseSearchForm, LawyerFinderForm, PlainLanguageAssistantForm
+from .models import LegalCase, ModelTrainingRun, SavedCase, SearchHistory
+from .services.similarity import (
+    find_similar_cases,
+    get_search_diagnostics,
+    load_similarity_model,
+)
+from .services.legal_assistant import build_plain_language_assistance
+from .services.lawyer_directory import find_tamil_nadu_help, get_directory_stats
+from .services.case_comparison import compare_cases
+from .services.evaluation import evaluate_retrieval_benchmark
+
+
+logger = logging.getLogger(__name__)
+
+
+def create_query_fingerprint(query_text):
+    normalized_query = " ".join(query_text.lower().split())
+    return hmac.new(
+        settings.SECRET_KEY.encode("utf-8"),
+        normalized_query.encode("utf-8"),
+        hashlib.sha256,
+    ).hexdigest()
+
+
+def sanitize_query_for_display(query_text, max_len=75):
+    """
+    Produce a privacy-preserving, safe, truncated display string for user interface log items.
+    Prevents raw sensitive data storage while providing clear user readability.
+    """
+    if not query_text:
+        return "Legal Search Query"
+    cleaned = " ".join(query_text.strip().split())
+    if len(cleaned) <= max_len:
+        return cleaned
+    return cleaned[:max_len].rstrip() + "..."
+
+
+def get_statistics():
+    return LegalCase.objects.aggregate(
+        total_cases=Count("id"),
+        first_year=Min("judgment_year"),
+        last_year=Max("judgment_year"),
+    )
+
+
+def _get_session_key(request):
+    if not request.session.session_key:
+        request.session.create()
+    return request.session.session_key
+
+
+def home(request):
+    initial_data = {}
+    if request.method == "GET" and request.GET.get("q"):
+        initial_data["case_description"] = request.GET.get("q")
+
+    form = CaseSearchForm(request.POST or None, initial=initial_data if not request.POST else None)
+    statistics = get_statistics()
+
+    if request.method == "POST" and form.is_valid():
+        query_text = form.cleaned_data["case_description"]
+        result_count = form.cleaned_data.get("result_count") or 5
+        search_mode = form.cleaned_data.get("search_mode") or "all"
+
+        started_at = perf_counter()
+
+        try:
+            results = find_similar_cases(
+                query_text=query_text,
+                top_k=result_count,
+                search_mode=search_mode,
+            )
+        except (ValueError, FileNotFoundError) as error:
+            form.add_error(None, str(error))
+        except Exception:
+            logger.exception("Unexpected similarity-search error.")
+            form.add_error(None, "Search failed. Please try again.")
+        else:
+            processing_time_ms = round((perf_counter() - started_at) * 1000)
+            top_score = results[0]["percentage"] if results else None
+            model_version = (
+                results[0].get("model_version", "hybrid-tfidf-v2")
+                if results
+                else "hybrid-tfidf-v2"
+            )
+
+            SearchHistory.objects.create(
+                query_fingerprint=create_query_fingerprint(query_text),
+                sanitized_query=sanitize_query_for_display(query_text),
+                search_mode=search_mode,
+                query_word_count=len(query_text.split()),
+                results_count=len(results),
+                top_similarity_score=top_score,
+                processing_time_ms=processing_time_ms,
+                model_version=model_version,
+                user=request.user if request.user.is_authenticated else None,
+            )
+
+            try:
+                diagnostics = get_search_diagnostics(
+                    query_text=query_text,
+                    top_k=result_count,
+                    search_mode=search_mode,
+                )
+            except Exception:
+                diagnostics = {
+                    "model_version": model_version,
+                    "index_version": "Unavailable",
+                    "matrix_rows": statistics.get("total_cases") or 0,
+                    "feature_count": 120000,
+                    "query_features": 0,
+                    "candidate_pool_size": max(40, result_count * 10),
+                    "search_mode": search_mode,
+                    "expanded_terms": [],
+                    "legal_references": [],
+                    "query_word_count": len(query_text.split()),
+                    "case_id_count": 0,
+                }
+
+            has_refs = bool(diagnostics.get("legal_references"))
+            score_weights = {
+                "document": 0.50 if has_refs else 0.58,
+                "passage": 0.35 if has_refs else 0.42,
+                "reference": 0.15 if has_refs else 0.00,
+                "recency": 0.08 if search_mode == "current" else 0.00,
+            }
+
+            # Check saved statuses
+            session_key = _get_session_key(request)
+            saved_case_ids = set(
+                SavedCase.objects.filter(session_key=session_key).values_list("legal_case_id", flat=True)
+            )
+            for item in results:
+                item["is_saved"] = item["case"].id in saved_case_ids
+
+            return render(
+                request,
+                "cases/results.html",
+                {
+                    "form": form,
+                    "query_text": query_text,
+                    "results": results,
+                    "statistics": statistics,
+                    "processing_time_ms": processing_time_ms,
+                    "model_version": model_version,
+                    "search_mode": search_mode,
+                    "diagnostics": diagnostics,
+                    "score_weights": score_weights,
+                },
+            )
+
+    return render(
+        request,
+        "cases/home.html",
+        {
+            "form": form,
+            "statistics": statistics,
+        },
+    )
+
+
+def case_detail(request, case_id):
+    legal_case = get_object_or_404(LegalCase, id=case_id)
+    session_key = _get_session_key(request)
+    is_saved = SavedCase.objects.filter(
+        session_key=session_key, legal_case=legal_case
+    ).exists()
+
+    return render(
+        request,
+        "cases/case_detail.html",
+        {
+            "legal_case": legal_case,
+            "is_saved": is_saved,
+        },
+    )
+
+
+def related_cases(request, case_id):
+    source_case = get_object_or_404(LegalCase, id=case_id)
+    query_text = f"{source_case.title} {source_case.raw_text[:800]}"
+    raw_results = find_similar_cases(query_text, top_k=6, search_mode="all")
+    
+    # Filter out current case
+    related_results = [r for r in raw_results if r["case"].id != source_case.id][:5]
+    
+    session_key = _get_session_key(request)
+    saved_ids = set(
+        SavedCase.objects.filter(session_key=session_key).values_list(
+            "legal_case_id", flat=True
+        )
+    )
+
+    for item in related_results:
+        item["is_saved"] = item["case"].id in saved_ids
+
+    return render(
+        request,
+        "cases/related_cases.html",
+        {
+            "source_case": source_case,
+            "related_results": related_results,
+        },
+    )
+
+
+
+def dashboard(request):
+    statistics = get_statistics()
+
+    cases_by_year = list(
+        LegalCase.objects.values("judgment_year")
+        .annotate(total=Count("id"))
+        .order_by("judgment_year")
+    )
+
+    extraction_statistics = list(
+        LegalCase.objects.values("extraction_status")
+        .annotate(total=Count("id"))
+        .order_by("extraction_status")
+    )
+
+    recent_searches = SearchHistory.objects.all()[:10]
+    latest_training = ModelTrainingRun.objects.filter(
+        status=ModelTrainingRun.Status.COMPLETED
+    ).first()
+
+    return render(
+        request,
+        "cases/dashboard.html",
+        {
+            "statistics": statistics,
+            "cases_by_year": cases_by_year,
+            "extraction_statistics": extraction_statistics,
+            "recent_searches": recent_searches,
+            "latest_training": latest_training,
+        },
+    )
+
+
+def _is_admin_user(request_or_user):
+    if settings.DEBUG:
+        return True
+    user = getattr(request_or_user, "user", request_or_user)
+    return user.is_authenticated and (user.is_staff or user.is_superuser)
+
+
+def research_console(request):
+    """Expose transparent model and retrieval configuration for project review in Admin area."""
+    if not _is_admin_user(request):
+        messages.error(request, "Access restricted. Administrator privileges required to access Research & System Details.")
+        return redirect("cases:dashboard")
+
+    statistics = get_statistics()
+    model_status = {
+        "available": False,
+        "index_version": "Not loaded",
+        "rows": 0,
+        "features": 0,
+    }
+    try:
+        _, matrix, _, case_ids, index_version = load_similarity_model()
+        model_status.update({
+            "available": True,
+            "index_version": index_version,
+            "rows": int(matrix.shape[0]),
+            "features": int(matrix.shape[1]),
+            "case_id_count": len(case_ids),
+        })
+    except Exception as error:
+        model_status["error"] = str(error)
+
+    pipeline_steps = [
+        ("01", "Query Preprocessing", "Clean and normalize natural language user case description."),
+        ("02", "Domain Expansion", "Map common language (e.g. detained, fired, property) to legal terminology."),
+        ("03", "TF-IDF Query Vectorization", "Transform query into the 120,000-dimensional sparse feature space."),
+        ("04", "Document-Level Candidate Selection", "Retrieve top candidate Supreme Court judgments using cosine similarity."),
+        ("05", "Passage-Level Reranking", "Locate strongest matching paragraph excerpt within candidate judgments."),
+        ("06", "Legal-Reference Overlap", "Match legal Articles, Sections, and Acts between query and case."),
+        ("07", "Hybrid Reranking", "Combine Lexical, Passage, and Reference signals (0.50/0.35/0.15)."),
+        ("08", "Evidence & Explanation Output", "Present percentage relevance score, score breakdown, and match reasoning."),
+    ]
+
+    return render(
+        request,
+        "cases/research_console.html",
+        {
+            "statistics": statistics,
+            "model_status": model_status,
+            "pipeline_steps": pipeline_steps,
+            "tn_directory_stats": get_directory_stats(),
+        },
+    )
+
+
+def admin_dashboard(request):
+    """Admin Console Overview page."""
+    if not _is_admin_user(request):
+        messages.error(request, "Access restricted. Administrator privileges required to access the Admin Console.")
+        return redirect("cases:dashboard")
+
+    statistics = get_statistics()
+    recent_searches = SearchHistory.objects.all()[:10]
+    
+    return render(
+        request,
+        "cases/admin_dashboard.html",
+        {
+            "statistics": statistics,
+            "recent_searches": recent_searches,
+            "tn_directory_stats": get_directory_stats(),
+        },
+    )
+
+
+def admin_corpus(request):
+    """Admin Corpus Management page placeholder."""
+    if not _is_admin_user(request):
+        messages.error(request, "Access restricted. Administrator privileges required.")
+        return redirect("cases:dashboard")
+
+    statistics = get_statistics()
+    return render(
+        request,
+        "cases/admin_corpus.html",
+        {
+            "statistics": statistics,
+        },
+    )
+
+
+def admin_add_case(request):
+    """Admin Add New Judgment page placeholder."""
+    if not _is_admin_user(request):
+        messages.error(request, "Access restricted. Administrator privileges required.")
+        return redirect("cases:dashboard")
+
+    return render(
+        request,
+        "cases/admin_add_case.html",
+        {},
+    )
+
+
+def admin_ingestion_history(request):
+    """Admin Ingestion History page placeholder."""
+    if not _is_admin_user(request):
+        messages.error(request, "Access restricted. Administrator privileges required.")
+        return redirect("cases:dashboard")
+
+    return render(
+        request,
+        "cases/admin_ingestion_history.html",
+        {},
+    )
+
+
+def case_compare(request):
+    case_a_id = request.GET.get("case_a")
+    case_b_id = request.GET.get("case_b")
+    query_text = request.GET.get("query", "")
+
+    comparison = None
+    error = None
+
+    if case_a_id and case_b_id:
+        if str(case_a_id) == str(case_b_id):
+            alt_case = LegalCase.objects.exclude(id=case_a_id).first()
+            if alt_case:
+                case_b_id = str(alt_case.id)
+
+        try:
+            comparison = compare_cases(int(case_a_id), int(case_b_id), query_text=query_text)
+        except Exception as e:
+            logger.exception("Comparison error")
+            error = f"Could not compare cases: {str(e)}"
+
+    recent_cases = LegalCase.objects.all()[:50]
+
+    return render(
+        request,
+        "cases/compare.html",
+        {
+            "comparison": comparison,
+            "error": error,
+            "case_a_id": case_a_id,
+            "case_b_id": case_b_id,
+            "recent_cases": recent_cases,
+            "query_text": query_text,
+        },
+    )
+
+
+
+
+def evaluation(request):
+    eval_results = evaluate_retrieval_benchmark()
+    return render(
+        request,
+        "cases/evaluation.html",
+        {
+            "eval_results": eval_results,
+        },
+    )
+
+
+def saved_cases(request):
+    session_key = _get_session_key(request)
+    saved = SavedCase.objects.filter(session_key=session_key).select_related("legal_case")
+    return render(
+        request,
+        "cases/saved_cases.html",
+        {
+            "saved_cases": saved,
+        },
+    )
+
+
+def toggle_save_case(request, case_id):
+    legal_case = get_object_or_404(LegalCase, id=case_id)
+    session_key = _get_session_key(request)
+
+    saved_obj, created = SavedCase.objects.get_or_create(
+        session_key=session_key,
+        legal_case=legal_case,
+        defaults={"user": request.user if request.user.is_authenticated else None},
+    )
+
+    if not created:
+        saved_obj.delete()
+        messages.info(request, f"Removed '{legal_case.title}' from saved cases.")
+    else:
+        messages.success(request, f"Saved '{legal_case.title}' to your research collection.")
+
+    next_url = request.META.get("HTTP_REFERER") or redirect("cases:saved_cases").url
+    return redirect(next_url)
+
+
+def plain_language_assistant(request):
+    form = PlainLanguageAssistantForm(request.POST or None)
+    assistance = None
+
+    if request.method == "POST" and form.is_valid():
+        issue = form.cleaned_data["issue"]
+        try:
+            assistance = build_plain_language_assistance(issue)
+        except (ValueError, FileNotFoundError) as error:
+            form.add_error(None, str(error))
+        except Exception:
+            logger.exception("Unexpected plain-language assistant error.")
+            form.add_error(None, "The assistant could not process this issue.")
+
+    return render(
+        request,
+        "cases/assistant.html",
+        {
+            "form": form,
+            "assistance": assistance,
+        },
+    )
+
+
+def lawyer_finder(request):
+    form = LawyerFinderForm(request.GET or None)
+    directory_results = None
+
+    if form.is_bound and form.is_valid():
+        directory_results = find_tamil_nadu_help(
+            district=form.cleaned_data["district"],
+            specialization=form.cleaned_data.get("specialization") or "",
+        )
+
+    return render(
+        request,
+        "cases/lawyer_finder.html",
+        {"form": form, "directory_results": directory_results},
+    )
+
+
+def legal_awareness(request):
+    return render(
+        request,
+        "cases/legal_awareness.html",
+    )
+
+
+def about(request):
+    return render(
+        request,
+        "cases/about.html",
+    )
+
+
+def annotate_benchmark(request):
+    """Research-only view for human domain annotation of relevance benchmark candidate items."""
+    benchmark_path = Path(settings.BASE_DIR) / "cases" / "data" / "relevance_benchmark.json"
+    if not benchmark_path.exists():
+        return render(
+            request,
+            "cases/annotate.html",
+            {"error": "Benchmark file not found at cases/data/relevance_benchmark.json"},
+        )
+
+    with open(benchmark_path, "r", encoding="utf-8") as f:
+        bench_data = json.load(f)
+
+    queries = bench_data.get("queries", [])
+    
+    total_candidate_items = 0
+    annotated_count = 0
+    flattened_items = []
+
+    for q_idx, q in enumerate(queries):
+        for c_idx, cand in enumerate(q.get("candidates", [])):
+            total_candidate_items += 1
+            if cand.get("relevance") is not None:
+                annotated_count += 1
+            flattened_items.append({
+                "item_index": len(flattened_items),
+                "query_idx": q_idx,
+                "candidate_idx": c_idx,
+                "query_id": q.get("query_id"),
+                "query_text": q.get("query"),
+                "legal_category": q.get("legal_category"),
+                "split_assignment": q.get("split_assignment", "train"),
+                "candidate": cand,
+            })
+
+    item_idx = int(request.GET.get("item", 0))
+    item_idx = max(0, min(item_idx, max(0, len(flattened_items) - 1)))
+
+    current_item = flattened_items[item_idx] if flattened_items else None
+    case_details = None
+
+    if current_item:
+        cid = current_item["candidate"]["case_id"]
+        try:
+            case_details = LegalCase.objects.get(id=cid)
+        except LegalCase.DoesNotExist:
+            case_details = None
+
+    progress_pct = round((annotated_count / total_candidate_items) * 100, 1) if total_candidate_items > 0 else 0.0
+
+    context = {
+        "current_item": current_item,
+        "case_details": case_details,
+        "item_idx": item_idx,
+        "total_items": len(flattened_items),
+        "annotated_count": annotated_count,
+        "total_candidate_items": total_candidate_items,
+        "progress_pct": progress_pct,
+        "annotation_status": bench_data.get("annotation_status") if annotated_count > 0 else "Human annotation pending",
+        "prev_idx": max(0, item_idx - 1),
+        "next_idx": min(len(flattened_items) - 1, item_idx + 1),
+    }
+    return render(request, "cases/annotate.html", context)
+
+
+@require_POST
+def save_annotation(request):
+    """Save human annotation for a specific query candidate item."""
+    query_id = request.POST.get("query_id")
+    case_id = int(request.POST.get("case_id", 0))
+    relevance_val = request.POST.get("relevance")
+
+    if relevance_val is None or relevance_val == "":
+        return JsonResponse({"status": "error", "message": "Relevance value required"}, status=400)
+
+    relevance_val = int(relevance_val)
+    reviewer_id = request.user.username if request.user.is_authenticated else "human_expert"
+
+    benchmark_path = Path(settings.BASE_DIR) / "cases" / "data" / "relevance_benchmark.json"
+    if not benchmark_path.exists():
+        return JsonResponse({"status": "error", "message": "Benchmark file missing"}, status=404)
+
+    with open(benchmark_path, "r", encoding="utf-8") as f:
+        bench_data = json.load(f)
+
+    updated = False
+    for q in bench_data.get("queries", []):
+        if q.get("query_id") == query_id:
+            for cand in q.get("candidates", []):
+                if cand.get("case_id") == case_id:
+                    cand["relevance"] = relevance_val
+                    cand["annotated_by"] = reviewer_id
+                    cand["timestamp"] = datetime.datetime.now().isoformat()
+                    cand["annotation_status"] = "Annotated"
+                    updated = True
+                    break
+
+    if updated:
+        total_cand = sum(len(q.get("candidates", [])) for q in bench_data.get("queries", []))
+        ann_cand = sum(1 for q in bench_data.get("queries", []) for c in q.get("candidates", []) if c.get("relevance") is not None)
+
+        if ann_cand == total_cand and total_cand > 0:
+            bench_data["annotation_status"] = "Human verified"
+        elif ann_cand > 0:
+            bench_data["annotation_status"] = "In progress"
+        else:
+            bench_data["annotation_status"] = "Human annotation pending"
+
+        with open(benchmark_path, "w", encoding="utf-8") as f:
+            json.dump(bench_data, f, indent=2)
+
+        return JsonResponse({
+            "status": "success",
+            "relevance": relevance_val,
+            "annotated_count": ann_cand,
+            "total_candidate_items": total_cand,
+            "annotation_status": bench_data["annotation_status"],
+        })
+
+    return JsonResponse({"status": "error", "message": "Query or candidate item not found"}, status=404)
+
+
+def research_status(request):
+    """Research dashboard displaying dataset integrity, label counts, model status, and evaluation state."""
+    benchmark_path = Path(settings.BASE_DIR) / "cases" / "data" / "relevance_benchmark.json"
+    bench_data = {}
+    pseudo_count = 0
+    human_count = 0
+    test_candidate_count = 0
+
+    if benchmark_path.exists():
+        with open(benchmark_path, "r", encoding="utf-8") as f:
+            bench_data = json.load(f)
+
+        for q in bench_data.get("queries", []):
+            is_test = q.get("split_assignment") == "test"
+            cands = q.get("candidates", [])
+            if is_test:
+                test_candidate_count += len(cands)
+            for c in cands:
+                if c.get("human_label") is not None:
+                    human_count += 1
+                elif c.get("pseudo_label") is not None or c.get("relevance") is not None:
+                    pseudo_count += 1
+
+    model_status_info = get_supervised_model_status()
+    from .services.evaluation import evaluate_retrieval_benchmark
+    eval_info = evaluate_retrieval_benchmark()
+
+    context = {
+        "benchmark_data": bench_data,
+        "total_queries": bench_data.get("total_queries", 50),
+        "split_counts": bench_data.get("split_counts", {"train": 30, "val": 10, "test": 10}),
+        "pseudo_count": pseudo_count,
+        "human_count": human_count,
+        "test_candidate_count": test_candidate_count,
+        "model_status_info": model_status_info,
+        "eval_info": eval_info,
+    }
+    return render(request, "cases/research_status.html", context)
+
+

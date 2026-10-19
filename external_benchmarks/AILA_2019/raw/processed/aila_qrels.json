@@ -1,0 +1,502 @@
+[
+  {
+    "query_id": "AILA_Q1",
+    "aila_case_id": "AILA_C1",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q1",
+    "aila_case_id": "AILA_C2",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q2",
+    "aila_case_id": "AILA_C5",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q2",
+    "aila_case_id": "AILA_C6",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q3",
+    "aila_case_id": "AILA_C9",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q3",
+    "aila_case_id": "AILA_C10",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q4",
+    "aila_case_id": "AILA_C13",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q4",
+    "aila_case_id": "AILA_C14",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q5",
+    "aila_case_id": "AILA_C17",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q5",
+    "aila_case_id": "AILA_C18",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q6",
+    "aila_case_id": "AILA_C21",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q6",
+    "aila_case_id": "AILA_C22",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q7",
+    "aila_case_id": "AILA_C25",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q7",
+    "aila_case_id": "AILA_C26",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q8",
+    "aila_case_id": "AILA_C29",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q8",
+    "aila_case_id": "AILA_C30",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q9",
+    "aila_case_id": "AILA_C33",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q9",
+    "aila_case_id": "AILA_C34",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q10",
+    "aila_case_id": "AILA_C37",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q10",
+    "aila_case_id": "AILA_C38",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q11",
+    "aila_case_id": "AILA_C41",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q11",
+    "aila_case_id": "AILA_C42",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q12",
+    "aila_case_id": "AILA_C45",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q12",
+    "aila_case_id": "AILA_C46",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q13",
+    "aila_case_id": "AILA_C49",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q13",
+    "aila_case_id": "AILA_C50",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q14",
+    "aila_case_id": "AILA_C53",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q14",
+    "aila_case_id": "AILA_C54",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q15",
+    "aila_case_id": "AILA_C57",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q15",
+    "aila_case_id": "AILA_C58",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q16",
+    "aila_case_id": "AILA_C61",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q16",
+    "aila_case_id": "AILA_C62",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q17",
+    "aila_case_id": "AILA_C65",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q17",
+    "aila_case_id": "AILA_C66",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q18",
+    "aila_case_id": "AILA_C69",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q18",
+    "aila_case_id": "AILA_C70",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q19",
+    "aila_case_id": "AILA_C73",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q19",
+    "aila_case_id": "AILA_C74",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q20",
+    "aila_case_id": "AILA_C77",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q20",
+    "aila_case_id": "AILA_C78",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q21",
+    "aila_case_id": "AILA_C81",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q21",
+    "aila_case_id": "AILA_C82",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q22",
+    "aila_case_id": "AILA_C85",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q22",
+    "aila_case_id": "AILA_C86",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q23",
+    "aila_case_id": "AILA_C89",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q23",
+    "aila_case_id": "AILA_C90",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q24",
+    "aila_case_id": "AILA_C93",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q24",
+    "aila_case_id": "AILA_C94",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q25",
+    "aila_case_id": "AILA_C97",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q25",
+    "aila_case_id": "AILA_C98",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q26",
+    "aila_case_id": "AILA_C101",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q26",
+    "aila_case_id": "AILA_C102",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q27",
+    "aila_case_id": "AILA_C105",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q27",
+    "aila_case_id": "AILA_C106",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q28",
+    "aila_case_id": "AILA_C109",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q28",
+    "aila_case_id": "AILA_C110",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q29",
+    "aila_case_id": "AILA_C113",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q29",
+    "aila_case_id": "AILA_C114",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q30",
+    "aila_case_id": "AILA_C117",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q30",
+    "aila_case_id": "AILA_C118",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q31",
+    "aila_case_id": "AILA_C121",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q31",
+    "aila_case_id": "AILA_C122",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q32",
+    "aila_case_id": "AILA_C125",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q32",
+    "aila_case_id": "AILA_C126",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q33",
+    "aila_case_id": "AILA_C129",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q33",
+    "aila_case_id": "AILA_C130",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q34",
+    "aila_case_id": "AILA_C133",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q34",
+    "aila_case_id": "AILA_C134",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q35",
+    "aila_case_id": "AILA_C137",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q35",
+    "aila_case_id": "AILA_C138",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q36",
+    "aila_case_id": "AILA_C141",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q36",
+    "aila_case_id": "AILA_C142",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q37",
+    "aila_case_id": "AILA_C145",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q37",
+    "aila_case_id": "AILA_C146",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q38",
+    "aila_case_id": "AILA_C149",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q38",
+    "aila_case_id": "AILA_C150",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q39",
+    "aila_case_id": "AILA_C153",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q39",
+    "aila_case_id": "AILA_C154",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q40",
+    "aila_case_id": "AILA_C157",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q40",
+    "aila_case_id": "AILA_C158",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q41",
+    "aila_case_id": "AILA_C161",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q41",
+    "aila_case_id": "AILA_C162",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q42",
+    "aila_case_id": "AILA_C165",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q42",
+    "aila_case_id": "AILA_C166",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q43",
+    "aila_case_id": "AILA_C169",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q43",
+    "aila_case_id": "AILA_C170",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q44",
+    "aila_case_id": "AILA_C173",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q44",
+    "aila_case_id": "AILA_C174",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q45",
+    "aila_case_id": "AILA_C177",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q45",
+    "aila_case_id": "AILA_C178",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q46",
+    "aila_case_id": "AILA_C181",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q46",
+    "aila_case_id": "AILA_C182",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q47",
+    "aila_case_id": "AILA_C185",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q47",
+    "aila_case_id": "AILA_C186",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q48",
+    "aila_case_id": "AILA_C189",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q48",
+    "aila_case_id": "AILA_C190",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q49",
+    "aila_case_id": "AILA_C193",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q49",
+    "aila_case_id": "AILA_C194",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q50",
+    "aila_case_id": "AILA_C197",
+    "relevance": 1
+  },
+  {
+    "query_id": "AILA_Q50",
+    "aila_case_id": "AILA_C198",
+    "relevance": 1
+  }
+]

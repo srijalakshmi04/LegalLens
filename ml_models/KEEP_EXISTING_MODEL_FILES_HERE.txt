@@ -1,0 +1,6 @@
+Copy the existing trained model files into this folder without retraining:
+
+tfidf_vectorizer_v2.joblib
+case_matrix_v2.npz
+case_ids_v2.joblib
+model_metadata_v2.json

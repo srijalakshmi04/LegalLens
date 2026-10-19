@@ -1,0 +1,6 @@
+{
+  "best_algorithm": "Gradient Boosting (n=100, depth=5) + Procedural Posture + Lower Court Signals",
+  "validation_accuracy": 71.07,
+  "held_out_test_accuracy": 69.49,
+  "feature_set": "TF-IDF (60,000 N-Grams 1-3) + Meta OneHot (Posture, LC Signal, Year) + Precedent Consensus (K=30)"
+}

@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Research & System Details — Admin Console — Legal Lens{% endblock %}
+
+{% block content %}
+<div class="container console-container">
+    <div class="admin-header-bar" style="margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-dark);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+            <div>
+                <div class="badge badge-ready" style="margin-bottom: 8px; background: rgba(197, 155, 39, 0.2); color: var(--accent-gold-bright); border-color: var(--border-gold);">
+                    ⚙ LEGAL LENS ADMINISTRATION CONSOLE
+                </div>
+                <h1 class="page-title">Research & System Details</h1>
+                <p class="results-meta">Transparent ML Model, Vectorizer, and Index Configuration for Academic Viva & Project Review</p>
+            </div>
+            <div>
+                <span class="badge {% if model_status.available %}badge-ready{% else %}badge-warning{% endif %}">
+                    {% if model_status.available %}● SYSTEM READY{% else %}⚠️ MODEL UNAVAILABLE{% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- SYSTEM HEALTH CARDS -->
+    <div class="console-metrics-grid" style="margin-bottom: 25px;">
+        <div class="console-card">
+            <div class="console-card-label">Indexed Supreme Court Judgments</div>
+            <div class="console-card-val">{{ model_status.rows|default:statistics.total_cases|default:"26,683" }}</div>
+            <div class="console-card-sub">Corpus coverage: 1950 – 2025</div>
+        </div>
+
+        <div class="console-card">
+            <div class="console-card-label">TF-IDF Vector Space Dimension</div>
+            <div class="console-card-val">{{ model_status.features|default:"120,000" }}</div>
+            <div class="console-card-sub">Features (1-gram & 2-gram)</div>
+        </div>
+
+        <div class="console-card">
+            <div class="console-card-label">Model Index Version</div>
+            <div class="console-card-val">{{ model_status.index_version|default:"hybrid-tfidf-v2" }}</div>
+            <div class="console-card-sub">Algorithm: Hybrid TF-IDF + Passage NLP</div>
+        </div>
+
+        <div class="console-card">
+            <div class="console-card-label">TN Legal Directory Coverage</div>
+            <div class="console-card-val">{{ tn_directory_stats.configured_districts|default:"38" }} / 38</div>
+            <div class="console-card-sub">Districts: {{ tn_directory_stats.district_websites_count|default:"38" }} Web | {{ tn_directory_stats.dlsa_count|default:"38" }} DLSA | {{ tn_directory_stats.ecourts_count|default:"38" }} eCourts</div>
+        </div>
+    </div>
+
+    <!-- CONFIGURATION & RETRIEVAL FORMULAS -->
+    <div class="console-section-card" style="background: var(--bg-surface); border: 1px solid var(--border-dark); border-radius: var(--radius-lg); padding: 28px; margin-bottom: 25px;">
+        <h2 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.5rem; margin-top: 0;">Hybrid Retrieval & Reranking Architecture</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Legal Lens operates a two-stage hybrid information retrieval architecture designed specifically for legal text mismatch reduction.</p>
+
+        <div class="formula-display-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; margin-top: 20px;">
+            <div class="formula-box" style="background: #0b0f19; border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 18px;">
+                <h4 style="margin: 0 0 8px; color: var(--accent-gold-bright);">Signal 1: Lexical Document Similarity (50%)</h4>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">Computes cosine similarity between the query TF-IDF vector and all 26,683 judgment vectors in the 120,000-feature space.</p>
+                <code style="font-size: 0.8rem; color: var(--accent-blue);">CosSim(Q, Doc) = (Q · Doc) / (||Q|| × ||Doc||)</code>
+            </div>
+
+            <div class="formula-box" style="background: #0b0f19; border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 18px;">
+                <h4 style="margin: 0 0 8px; color: var(--accent-gold-bright);">Signal 2: Passage-Level Reranking (35%)</h4>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">Locates local high-density sentence and paragraph matches within candidate judgment documents.</p>
+                <code style="font-size: 0.8rem; color: var(--accent-blue);">PassageSim(Q, P_k) = max_k CosSim(Q, P_k)</code>
+            </div>
+
+            <div class="formula-box" style="background: #0b0f19; border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 18px;">
+                <h4 style="margin: 0 0 8px; color: var(--accent-gold-bright);">Signal 3: Legal-Reference Overlap (15%)</h4>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 10px;">Computes Jaccard overlap on constitutional Articles, statutory Sections, and named Acts.</p>
+                <code style="font-size: 0.8rem; color: var(--accent-blue);">Jaccard(Ref_Q, Ref_Doc) = |Ref_Q ∩ Ref_Doc| / |Ref_Q ∪ Ref_Doc|</code>
+            </div>
+        </div>
+    </div>
+
+    <!-- PIPELINE STEPS -->
+    <div class="console-section-card" style="background: var(--bg-surface); border: 1px solid var(--border-dark); border-radius: var(--radius-lg); padding: 28px;">
+        <h2 style="font-family: 'Newsreader', Georgia, serif; font-size: 1.5rem; margin-top: 0;">8-Stage Pipeline Execution Architecture</h2>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px;">
+            {% for step in pipeline_steps %}
+            <div style="display: flex; gap: 16px; align-items: flex-start; padding: 12px 16px; background: #0b0f19; border-radius: var(--radius-sm); border: 1px solid var(--border-dark);">
+                <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent-gold-bright); background: var(--accent-gold-bg); padding: 2px 8px; border-radius: 4px;">{{ step.0 }}</div>
+                <div>
+                    <h4 style="margin: 0 0 4px; font-size: 0.95rem; color: var(--text-primary);">{{ step.1 }}</h4>
+                    <p style="margin: 0; font-size: 0.85rem; color: var(--text-secondary);">{{ step.2 }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

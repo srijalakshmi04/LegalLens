@@ -1,0 +1,26 @@
+{
+  "old_test_accuracy": 0.6815,
+  "new_validation_accuracy": 0.6786,
+  "new_held_out_test_accuracy": 0.692,
+  "balanced_accuracy": 0.6886,
+  "macro_precision": 0.6883,
+  "macro_recall": 0.6886,
+  "macro_f1": 0.6884,
+  "weighted_f1": 0.6921,
+  "confusion_matrix": [
+    [
+      721,
+      375
+    ],
+    [
+      384,
+      984
+    ]
+  ],
+  "selected_algorithm": "Logistic Regression (C=2.5) + Specialized Sub-Predictors",
+  "critical_success_check": {
+    "achieved_95_pct": false,
+    "is_fabricated": false,
+    "display_statement": "BEST VALID HELD-OUT TEST ACCURACY: 69.20%"
+  }
+}

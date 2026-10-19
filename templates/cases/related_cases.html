@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Related Judgments for {{ source_case.title }} — Legal Lens{% endblock %}
+
+{% block content %}
+<div class="container results-container">
+    <div class="results-header-bar">
+        <div>
+            <div class="badge badge-mode" style="margin-bottom: 8px;">PRECEDENT EXPLORER</div>
+            <h1 class="page-title">Related Judgments</h1>
+            <p class="results-meta">
+                Showing <strong>{{ related_results|length }}</strong> Supreme Court precedent{{ related_results|length|pluralize }} related to source case: <strong style="color: var(--accent-gold-bright);">{{ source_case.title }}</strong>
+            </p>
+        </div>
+        <div>
+            <a href="{% url 'cases:case_detail' source_case.id %}" class="btn btn-outline">← Back to Source Judgment</a>
+        </div>
+    </div>
+
+    <!-- SOURCE CASE ANCHOR CARD -->
+    <div class="diagnostic-panel" style="border-left: 4px solid var(--accent-gold);">
+        <div class="diagnostic-header">
+            <h3 style="margin: 0 0 6px; font-size: 1.1rem; color: var(--text-primary);">
+                Anchor Judgment: {{ source_case.title }} ({{ source_case.judgment_year }})
+            </h3>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">
+                {% if source_meta.citations and source_meta.citations != 'Not available' %}Citation: {{ source_meta.citations }} | {% endif %}
+                Acts: {{ source_meta.acts }}
+            </p>
+        </div>
+    </div>
+
+    <!-- RELATED RESULTS LIST -->
+    {% if related_results %}
+    <div class="results-list">
+        {% for item in related_results %}
+        <div class="result-card">
+            <div class="result-card-header">
+                <div class="case-main-info">
+                    <span class="case-year-tag">{{ item.case.judgment_year }}</span>
+                    {% if item.relevance_tier == 'HIGH' %}
+                    <span class="badge badge-tier-high">HIGH RELEVANCE</span>
+                    {% elif item.relevance_tier == 'MEDIUM' %}
+                    <span class="badge badge-tier-medium">MEDIUM RELEVANCE</span>
+                    {% else %}
+                    <span class="badge badge-tier-low">LOW RELEVANCE</span>
+                    {% endif %}
+
+                    <h2 class="case-title">
+                        <a href="{% url 'cases:case_detail' item.case.id %}">{{ item.case.title }}</a>
+                    </h2>
+                    {% if item.case.citations %}
+                    <div class="case-citation">Citation: {{ item.case.citations }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="score-badge-box">
+                    <div class="score-percentage">{{ item.percentage }}%</div>
+                    <div class="score-label">CALIBRATED RELEVANCE SCORE</div>
+                </div>
+            </div>
+
+            <!-- WHY THIS CASE MATCHES -->
+            <div class="evidence-box">
+                <strong>WHY THIS CASE MATCHES SOURCE JUDGMENT:</strong>
+                <p>{{ item.why_matched }}</p>
+
+                {% if item.matched_references %}
+                <div class="matched-refs-list">
+                    <strong>Matching Legal Provisions:</strong>
+                    {% for ref in item.matched_references %}
+                    <span class="badge badge-shared-ref">{{ ref }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- RELEVANT PASSAGE EXCERPT -->
+            {% if item.relevant_passage %}
+            <div class="passage-box">
+                <div class="passage-header">
+                    <strong>📌 RELEVANT PASSAGE EXCERPT:</strong>
+                </div>
+                <blockquote class="passage-text">
+                    "{{ item.relevant_passage|truncatewords:120 }}"
+                </blockquote>
+            </div>
+            {% endif %}
+
+            <!-- CARD FOOTER ACTIONS -->
+            <div class="result-card-footer">
+                <a href="{% url 'cases:case_detail' item.case.id %}" class="btn btn-sm btn-primary">
+                    VIEW JUDGMENT
+                </a>
+
+                <a href="{% url 'cases:toggle_save_case' item.case.id %}" class="btn btn-sm {% if item.is_saved %}btn-saved{% else %}btn-outline{% endif %}">
+                    {% if item.is_saved %}★ Saved in Collection{% else %}☆ SAVE CASE{% endif %}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-warning">
+        No closely related judgments found for this Supreme Court case in the database.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

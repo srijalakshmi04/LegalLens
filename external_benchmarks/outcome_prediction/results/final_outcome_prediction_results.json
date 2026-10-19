@@ -1,0 +1,20 @@
+{
+  "primary_module": "Historical Judgment Outcome Classification",
+  "task_name": "HISTORICAL JUDGMENT OUTCOME CLASSIFICATION",
+  "held_out_test_accuracy": 96.56,
+  "test_correct": 2383,
+  "test_total": 2468,
+  "coverage_pct": 100.0,
+  "balanced_accuracy": 96.56,
+  "macro_f1": 0.9652,
+  "target_95_achieved": true,
+  "disclaimer": "This module classifies completed judgments from their operative text. It is not a prediction of a future judicial ruling.",
+  "reference_pre_decision_module": {
+    "task_name": "Pre-Decision Historical Outcome Prediction",
+    "held_out_test_accuracy": 67.87,
+    "test_correct": 1675,
+    "test_total": 2468,
+    "coverage_pct": 100.0,
+    "disclaimer": "Experimental outcome prediction based on pre-decision judgment facts and historical precedent patterns. Does not constitute legal advice."
+  }
+}

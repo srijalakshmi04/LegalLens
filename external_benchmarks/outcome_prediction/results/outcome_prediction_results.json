@@ -1,0 +1,18 @@
+{
+  "mode1_pre_decision": {
+    "task": "Pre-Decision Historical Outcome Prediction",
+    "validation_accuracy": 68.35,
+    "held_out_test_accuracy": 67.87,
+    "test_correct": 1675,
+    "test_total": 2468,
+    "coverage": "100%"
+  },
+  "mode2_completed_judgment": {
+    "task": "Historical Judgment Outcome Classification",
+    "validation_accuracy": 96.76,
+    "held_out_test_accuracy": 96.56,
+    "test_correct": 2383,
+    "test_total": 2468,
+    "coverage": "100%"
+  }
+}

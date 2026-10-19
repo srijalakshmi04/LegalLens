@@ -1,0 +1,6 @@
+Copy your unchanged legal_cases.sqlite3 file into this folder.
+
+Expected path:
+data\legal_cases.sqlite3
+
+Do not create a new database and do not re-import the judgment dataset for this upgrade.

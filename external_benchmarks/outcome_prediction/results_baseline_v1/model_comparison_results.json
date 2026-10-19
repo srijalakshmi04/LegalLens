@@ -1,0 +1,17 @@
+{
+  "Logistic Regression (C=2.5)": {
+    "val_accuracy": 0.6786
+  },
+  "Linear SVM (C=1.0)": {
+    "val_accuracy": 0.6756
+  },
+  "Calibrated Linear SVM": {
+    "val_accuracy": 0.6736
+  },
+  "KNN Classifier (K=15)": {
+    "val_accuracy": 0.6086
+  },
+  "Retrieval Consensus (K=20)": {
+    "val_accuracy": 0.6252
+  }
+}
